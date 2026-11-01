@@ -1,0 +1,6 @@
+werkzeug/*.log
+werkzeug/old.css
+werkzeug/neu.css
+werkzeug/p_de.js
+werkzeug/p_en.js
+werkzeug/f.js

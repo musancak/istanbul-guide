@@ -1,0 +1,964 @@
+{
+"Fatih|Olden 1772": [
+41.0149277,
+28.9741036
+],
+"Fatih|Lokanta 1741": [
+41.0106686,
+28.9753548
+],
+"Fatih|Tarhan Uygur Restoranı": [
+41.0127272,
+28.9452587
+],
+"Fatih|Baran Et": [
+41.0174606,
+28.9548506
+],
+"Fatih|Ciğeristan": [
+41.0117262,
+28.9494832
+],
+"Fatih|Hadramout": [
+41.006381,
+28.9758715
+],
+"Fatih|Mazaj": [
+41.0199226,
+28.941109
+],
+"Fatih|Zafer Uygur Restaurant": [
+41.0134872,
+28.9376529
+],
+"Fatih|Kroren": [
+41.0174858,
+28.9297112
+],
+"Fatih|Diver Karadeniz Mutfağı": [
+41.0928784,
+29.1067312
+],
+"Beyoğlu|Dürümcü Mehmet Usta": [
+41.0484516,
+28.9582526
+],
+"Beyoğlu|Resto Galata Terrace": [
+41.0264507,
+28.9783222
+],
+"Beyoğlu|Moise Karaköy": [
+41.0228645,
+28.9740393
+],
+"Beyoğlu|Galata Frida House": [
+41.0273156,
+28.9735027
+],
+"Beyoğlu|Cihangir Mantıcısı": [
+41.031726,
+28.9821621
+],
+"Beyoğlu|Cihangir Doyum Mantı": [
+41.031726,
+28.9821621
+],
+"Beyoğlu|Emily’s Garden": [
+41.0306451,
+28.9853963
+],
+"Beyoğlu|Pad Thai": [
+41.0299798,
+28.9821171
+],
+"Beyoğlu|Kara Lounge Restaurant": [
+41.0258258,
+28.979956
+],
+"Beyoğlu|Cecconi’s": [
+41.0378331,
+28.9850165
+],
+"Beyoğlu|Barnathan": [
+41.0267743,
+28.9743987
+],
+"Beyoğlu|Ala Rasi Restaurant": [
+41.0083043,
+28.9754064
+],
+"Beyoğlu|Shamse Restaurant": [
+41.032036,
+28.9766443
+],
+"Beyoğlu|Eniştenin Yeri": [
+41.0425544,
+28.9852726
+],
+"Şişli|Hacıbaşar Kebap Katmer": [
+41.06611,
+29.0030047
+],
+"Şişli|Tas Ramen & Sushi Bar": [
+40.9608267,
+28.8361274
+],
+"Şişli|Bizim Lokanta": [
+40.9925628,
+29.1052735
+],
+"Şişli|Sushico": [
+41.0785134,
+29.011646
+],
+"Şişli|Güzelburç Antakya": [
+41.0430845,
+28.9854747
+],
+"Şişli|Smash House": [
+41.0512807,
+28.9902436
+],
+"Şişli|Mahir Lokantası": [
+41.0528842,
+28.9870944
+],
+"Şişli|Healin": [
+41.0637891,
+28.9831642
+],
+"Şişli|Zoya’s House": [
+41.0496135,
+28.9924271
+],
+"Beşiktaş|Sushi & Spice": [
+41.0425685,
+29.0028523
+],
+"Beşiktaş|Konoha": [
+41.0428465,
+29.0075283
+],
+"Beşiktaş|Luppen Fried Chicken": [
+41.0443465,
+29.0009528
+],
+"Beşiktaş|Wingo Fried Chicken": [
+41.0443465,
+29.0009528
+],
+"Beşiktaş|Really Fried Chicken": [
+41.0443465,
+29.0009528
+],
+"Beşiktaş|Hungry Birds": [
+41.0446677,
+29.0075296
+],
+"Beşiktaş|51 Wings": [
+40.8994505,
+29.1822035
+],
+"Beşiktaş|Bcante": [
+41.0428465,
+29.0075283
+],
+"Beşiktaş|The Smashy": [
+41.0421969,
+29.0027379
+],
+"Beşiktaş|Balta Burger": [
+41.0431711,
+29.0057184
+],
+"Beşiktaş|The Grungy": [
+41.0479516,
+28.9959835
+],
+"Beşiktaş|Just BBQ": [
+41.0437145,
+29.0035389
+],
+"Beşiktaş|Choys Fried Chicken & Pizza": null,
+"Beşiktaş|Authentic French Tacos": null,
+"Beşiktaş|Pasta la Vista": [
+41.0666806,
+29.0417961
+],
+"Beşiktaş|Say Cheese": [
+41.0405622,
+29.0029501
+],
+"Beşiktaş|Ravenna": [
+41.0428465,
+29.0075283
+],
+"Beşiktaş|Makana": [
+41.0435653,
+29.0061373
+],
+"Beşiktaş|İskender Kuruluş 1867": [
+41.0521767,
+28.992922
+],
+"Beşiktaş|Coni & Co.": [
+41.0620943,
+29.0094761
+],
+"Beşiktaş|Eataly": [
+41.0657237,
+29.0170481
+],
+"Beşiktaş|Çıtır Pide": [
+41.0479361,
+29.0023532
+],
+"Beşiktaş|Kroken": [
+41.0428465,
+29.0075283
+],
+"Beşiktaş|Inari Sushi": [
+41.0475205,
+29.0000147
+],
+"Sarıyer|Gazebo": [
+41.1185624,
+29.0674448
+],
+"Sarıyer|Tepe Restaurant Lounge": [
+41.0036146,
+28.9792661
+],
+"Sarıyer|Zeytin Garden Breakfast": null,
+"Sarıyer|Yıldız Hisar Tesisleri": [
+41.0903237,
+29.0542837
+],
+"Sarıyer|Nefes Vadi Restaurant & Cafe": null,
+"Sarıyer|Pomoot": [
+41.1685803,
+29.0572623
+],
+"Kadıköy|Ethem Efendi": [
+40.9769963,
+29.0764933
+],
+"Kadıköy|Brekkie Breakfast Club": [
+40.9862693,
+29.0330628
+],
+"Kadıköy|Snug": [
+40.9912955,
+29.0245631
+],
+"Kadıköy|Strada": [
+40.9585963,
+29.0848885
+],
+"Kadıköy|Ferida": [
+40.9641153,
+29.0756707
+],
+"Kadıköy|Artois Cadde": [
+40.9672686,
+29.0651504
+],
+"Kadıköy|Nom": [
+40.9857662,
+29.022968
+],
+"Kadıköy|Magnus": [
+40.9888238,
+29.0275513
+],
+"Kadıköy|Catchy BBQ": [
+40.9874676,
+29.0253142
+],
+"Kadıköy|Carbo Smash": [
+40.9945837,
+29.0292878
+],
+"Kadıköy|Gaam Burger": [
+40.9875103,
+29.0261856
+],
+"Kadıköy|Balta Burger": [
+40.9875103,
+29.0261856
+],
+"Kadıköy|Fred Dinosaurs": [
+40.987158,
+29.027725
+],
+"Kadıköy|Mustobarq Sokak Lezzetleri": [
+40.992024,
+29.0331152
+],
+"Kadıköy|Nitz Schnitzel & More": null,
+"Kadıköy|Tacoroll": [
+40.9912955,
+29.0245631
+],
+"Kadıköy|Paitan Ramen and Gyoza House": null,
+"Kadıköy|Bento Noodles": [
+40.9932577,
+29.0268015
+],
+"Kadıköy|The Wokshop": [
+40.9925299,
+29.0252108
+],
+"Kadıköy|Apartman": [
+41.0074178,
+29.03287
+],
+"Kadıköy|CM Noodle": [
+40.9932577,
+29.0268015
+],
+"Kadıköy|Le Perre": [
+40.9899304,
+29.0261844
+],
+"Kadıköy|Sliceguy": [
+40.9865531,
+29.0266676
+],
+"Kadıköy|Döner Zamanı": [
+40.9747951,
+29.0922051
+],
+"Kadıköy|Agahoğlu": [
+40.9912955,
+29.0245631
+],
+"Kadıköy|Çilingir Sofrası": [
+40.9675518,
+29.0661339
+],
+"Kadıköy|Günay Konyalı": [
+40.9555285,
+29.0899796
+],
+"Kadıköy|Manhattan Cafe": [
+40.9905872,
+29.0220448
+],
+"Kadıköy|Sinop Mantı": [
+40.9738896,
+29.0557756
+],
+"Kadıköy|Pilav Arabası": [
+40.9887208,
+29.0274086
+],
+"Üsküdar|Fethi Paşa Sosyal Tesisi": [
+41.0299039,
+29.0177862
+],
+"Üsküdar|Limon": [
+41.0254284,
+29.0168118
+],
+"Üsküdar|Hünkar Pide & Börek": [
+41.024797,
+29.0176201
+],
+"Üsküdar|Arada Blue": [
+41.0302976,
+29.0193269
+],
+"Üsküdar|DasHan the Uyghur": null,
+"Üsküdar|Nevmekan Sahil": [
+41.0251496,
+29.0100439
+],
+"Üsküdar|Saklı Kubbe": [
+41.0388114,
+29.0818541
+],
+"Üsküdar|Hangry 21 Burger Cafe": null,
+"Üsküdar|Yuzu Fried Chicken": [
+41.0258313,
+28.9803196
+],
+"Üsküdar|Kudüs Han": [
+41.0157318,
+29.0127452
+],
+"Üsküdar|Mr Dumpling": [
+40.9938304,
+29.1232181
+],
+"Üsküdar|Pastafarian": [
+41.0265498,
+29.0151321
+],
+"Üsküdar|Pasta Al Dente": [
+41.0277382,
+29.0298842
+],
+"Üsküdar|Bartos Burger Place": [
+41.0361813,
+28.9845569
+],
+"Üsküdar|Paşalimanı": [
+41.033608,
+29.025204
+],
+"Üsküdar|Nilhan Sultan Köşkü": [
+41.0335212,
+29.0255651
+],
+"Üsküdar|Şeker Döner": [
+41.016298,
+29.0727304
+],
+"Üsküdar|Zeynel Kebap": [
+41.0252471,
+29.0136247
+],
+"Üsküdar|Adıyaman Semsür Çiğköfte": [
+41.0242983,
+29.0123122
+],
+"Beykoz|Liçi House": [
+41.1100143,
+29.2099873
+],
+"Beykoz|Bayramoğlu Döner": [
+41.0950032,
+29.0996374
+],
+"Beykoz|İntiba Döner": [
+41.0950481,
+29.0978305
+],
+"Beykoz|Sabancı Öğretmen Evi": [
+41.0805606,
+29.0657032
+],
+"Beykoz|Gümüşsuyu Restoran": [
+41.1277915,
+29.0990783
+],
+"Zeytinburnu|Fişekhane": [
+40.9833517,
+28.9054599
+],
+"Zeytinburnu|Zennup 1844": [
+40.9822533,
+28.904785
+],
+"Zeytinburnu|Doğuhan Kebap": [
+41.0103065,
+28.9128654
+],
+"Zeytinburnu|Palude Restaurant": [
+41.011287,
+28.9069875
+],
+"Zeytinburnu|Meşhur Dönerci Hacı Osman’ın Yeri": [
+41.0127106,
+28.9660715
+],
+"Beylikdüzü|Türk Pak Saray": [
+41.006421,
+28.661552
+],
+"Beylikdüzü|Koz Döner": [
+41.0030023,
+28.6312139
+],
+"Beylikdüzü|Maroll": [
+41.0038148,
+28.6372878
+],
+"Başakşehir|Saraylı Restoran": [
+41.1173872,
+28.7982892
+],
+"Başakşehir|Kuzubeyi": [
+41.1075794,
+28.7950711
+],
+"Bakırköy|Mahsun Usta": [
+40.9770543,
+28.7758336
+],
+"Bakırköy|Marna": [
+40.9966029,
+28.8753941
+],
+"Bakırköy|Havuş": [
+40.9966029,
+28.8753941
+],
+"Bakırköy|Şazeli": [
+40.9680513,
+28.7958983
+],
+"Fatih|Fluffy Dip & Fly": [
+40.956484,
+29.089685
+],
+"Fatih|Evvelâ": [
+41.006381,
+28.9758715
+],
+"Beyoğlu|Gallant": [
+41.0257117,
+28.9738722
+],
+"Beyoğlu|Viyana Kahvesi": [
+41.0293533,
+28.9748961
+],
+"Beyoğlu|Choco Zuma": [
+41.019579,
+28.7918295
+],
+"Beyoğlu|Karabatak": [
+41.0252972,
+28.9792698
+],
+"Beyoğlu|Cocodema": [
+41.0284233,
+28.9736808
+],
+"Beyoğlu|Books & Coffee": [
+41.0229134,
+28.9742706
+],
+"Beyoğlu|Fil Books": [
+41.0251729,
+28.9788399
+],
+"Beyoğlu|Minoa Pera": [
+41.0299603,
+28.9732967
+],
+"Beyoğlu|Türkisch-Deutsche Buchhandlung": [
+41.0291276,
+28.9752841
+],
+"Beyoğlu|Cafe Da Giovanni": [
+41.0317654,
+28.9786642
+],
+"Şişli|Filosofia Pastry": [
+41.0481202,
+28.9933198
+],
+"Şişli|Poco Coffee": [
+41.0541915,
+28.9952373
+],
+"Şişli|Hümaliva": [
+41.0531978,
+28.9934675
+],
+"Beşiktaş|Suflör": [
+41.0432199,
+29.0064268
+],
+"Beşiktaş|La Vie Praline": [
+41.0446097,
+29.0009047
+],
+"Beşiktaş|Chocolate Sarayı": [
+41.0475606,
+29.0020935
+],
+"Beşiktaş|Death by Chocolate": null,
+"Beşiktaş|Are You Chocolate": [
+41.0258608,
+28.981188
+],
+"Beşiktaş|Minoa Beşiktaş": [
+41.0424215,
+29.0004334
+],
+"Beşiktaş|The Qadayıf": [
+41.0421969,
+29.0027379
+],
+"Beşiktaş|Lokmata": [
+41.0427194,
+29.0007724
+],
+"Beşiktaş|The Churrol": [
+41.0421969,
+29.0027379
+],
+"Beşiktaş|Pier Habib": [
+41.0442497,
+29.0011773
+],
+"Beşiktaş|Machi Machi": [
+41.0588754,
+29.0244368
+],
+"Beşiktaş|Pardon": [
+41.0428465,
+29.0075283
+],
+"Beşiktaş|Season Artisan Bakery": [
+41.0795494,
+29.0448684
+],
+"Beşiktaş|Poco Coffee": [
+41.0424249,
+29.0090472
+],
+"Sarıyer|Espressolab": [
+41.1141031,
+29.0540434
+],
+"Kadıköy|Grandma": [
+40.9613286,
+29.0778744
+],
+"Kadıköy|Ilyu": [
+40.9912955,
+29.0245631
+],
+"Kadıköy|Küff": [
+40.9957162,
+29.0293601
+],
+"Kadıköy|Happy Croissants": [
+40.988153,
+29.0282951
+],
+"Kadıköy|Boac Soft Serve": [
+40.9845394,
+29.02776
+],
+"Kadıköy|Swivel Cafe & Bakery": [
+40.961887,
+29.0843899
+],
+"Kadıköy|Choco Port": [
+41.0355109,
+28.9941626
+],
+"Kadıköy|Meet Lab": [
+40.9807914,
+29.0902779
+],
+"Kadıköy|Amata": [
+40.9912955,
+29.0245631
+],
+"Kadıköy|Flare": [
+40.9856506,
+29.0249814
+],
+"Kadıköy|Chromia": [
+40.9844473,
+29.0281683
+],
+"Kadıköy|Beige Cafe": [
+40.9905872,
+29.0220448
+],
+"Kadıköy|Lavinya Dessert & Coffee": [
+40.9860417,
+29.025436
+],
+"Kadıköy|Books & Coffee": [
+40.9816582,
+29.0228951
+],
+"Kadıköy|Cha’ya": [
+40.8820082,
+29.2586903
+],
+"Kadıköy|Hümaliva": [
+40.9858604,
+29.0229333
+],
+"Kadıköy|Moda İskelesi Kütüphanesi": [
+40.9789898,
+29.0251042
+],
+"Kadıköy|The Churrol": [
+40.9846281,
+29.0269084
+],
+"Kadıköy|Noxus Chocolate & Cafe": [
+40.954379,
+29.0976778
+],
+"Kadıköy|Grön Hus": [
+40.9600048,
+29.0790282
+],
+"Kadıköy|Zeyn Chocolate": [
+40.9888844,
+29.0224031
+],
+"Kadıköy|Comfy": [
+40.9912955,
+29.0245631
+],
+"Kadıköy|Perla": [
+40.976614,
+29.0885876
+],
+"Kadıköy|Melly": [
+40.9650736,
+29.0773583
+],
+"Kadıköy|Bella Bakery & Coffee": [
+40.9649623,
+29.0766019
+],
+"Üsküdar|Cappadocia": [
+41.0265498,
+29.0151321
+],
+"Üsküdar|Qubish": [
+41.0265498,
+29.0151321
+],
+"Üsküdar|Leticia": [
+41.0265498,
+29.0151321
+],
+"Üsküdar|İra Bakery": [
+41.0107741,
+29.0165571
+],
+"Üsküdar|Moc": [
+41.0265498,
+29.0151321
+],
+"Üsküdar|Sedir Kitap Kahve": [
+41.0179014,
+29.0397711
+],
+"Üsküdar|Aşiyan Books & Coffee": [
+41.0266162,
+29.0163334
+],
+"Üsküdar|Payedar Kahve": [
+41.026788,
+29.0163964
+],
+"Üsküdar|Hakkı Zade": [
+41.0245148,
+29.0159118
+],
+"Üsküdar|Cremia Cafe": [
+41.026349,
+29.016081
+],
+"Üsküdar|Veronika Çikolata": [
+41.0158057,
+28.9759473
+],
+"Üsküdar|Kaf Cafe Restaurant": [
+41.0031478,
+29.0205607
+],
+"Üsküdar|Riff Specialty Coffee": [
+40.9758167,
+29.0945925
+],
+"Üsküdar|Glow Coffee": [
+41.0366984,
+29.0301848
+],
+"Üsküdar|La Vie Praline": [
+41.0446097,
+29.0009047
+],
+"Beykoz|Telgrafhane": [
+41.1343001,
+29.0920378
+],
+"Beyoğlu|Loi Bosphorus": [
+41.0240802,
+28.9792412
+],
+"Beyoğlu|Azure Lounge": [
+41.0405242,
+28.9841949
+],
+"Beyoğlu|Zebra Lounge": [
+41.0405242,
+28.9841949
+],
+"Beyoğlu|Huqqabaz": [
+41.10687,
+28.9866322
+],
+"Beşiktaş|PS Lounge": [
+41.0798586,
+29.0328467
+],
+"Beşiktaş|Kaytan Lounge": [
+41.0485753,
+29.0277837
+],
+"Beşiktaş|Most Hookah": [
+41.0483569,
+29.0279678
+],
+"Beşiktaş|Kuruçeşme Kahvesi": [
+41.0592257,
+29.0356721
+],
+"Beşiktaş|The Market Bosphorus": [
+41.0298935,
+28.9870463
+],
+"Fatih|Moss Lounge the Bosphorus": null,
+"Fatih|Lotiz Lounge": [
+41.0118039,
+28.958389
+],
+"Fatih|La Vista Bosphorus": [
+40.9953724,
+28.9259827
+],
+"Şişli|Mayson Lounge": [
+41.067724,
+29.0018886
+],
+"Bakırköy|Seasha Lounge": [
+40.9926012,
+28.8696622
+],
+"Beykoz|Ghalia Lounge": [
+41.0807086,
+29.0661647
+],
+"Beşiktaş|Tuğra Restaurant": [
+41.0492902,
+29.0258856
+],
+"Beşiktaş|İnari Omakase": [
+41.017946,
+29.0172948
+],
+"Beşiktaş|Mezzenna": [
+41.0428465,
+29.0075283
+],
+"Beşiktaş|Hakkasan": [
+41.0428465,
+29.0075283
+],
+"Beşiktaş|Mandarin Oriental": [
+41.0570306,
+29.0356277
+],
+"Beşiktaş|Feriye": [
+41.0471328,
+29.0244571
+],
+"Beşiktaş|Visorante": [
+41.0428465,
+29.0075283
+],
+"Beşiktaş|Sakhalin": [
+41.0665394,
+29.0182511
+],
+"Beyoğlu|Roka": [
+41.0284233,
+28.9736808
+],
+"Şişli|Cipriani": [
+41.0637891,
+28.9831642
+],
+"Beykoz|Uskumru Restaurant": [
+41.1452876,
+29.0860502
+],
+"Frühstück|Çelebioğlu Sokak": [
+41.0434258,
+29.0030311
+],
+"Frühstück|Balkon": [
+41.043647,
+29.0029112
+],
+"Frühstück|Siyah Beyaz": [
+41.0841866,
+29.0133886
+],
+"Frühstück|Lusnika": [
+40.9902366,
+29.0257161
+],
+"Frühstück|Arada Beirut": [
+41.0342489,
+28.9819765
+],
+"Kebap, Döner, Lahmacun|Şehzade Cağ Kebap": [
+41.0140192,
+28.9752694
+],
+"Kebap, Döner, Lahmacun|Borsam Taşfırın": [
+40.9896288,
+29.0270148
+],
+"Kebap, Döner, Lahmacun|Bayramoğlu Döner": [
+41.0950032,
+29.0996374
+],
+"Kebap, Döner, Lahmacun|İntiba": [
+41.0166187,
+28.9480053
+],
+"Kebap, Döner, Lahmacun|Otantik": [
+41.0378331,
+28.9850165
+],
+"Burger, Pizza, Snacks|Kızılkayalar": [
+41.0361768,
+28.9846783
+],
+"Burger, Pizza, Snacks|Burger Yiyelim": [
+40.9674204,
+29.0678941
+],
+"Burger, Pizza, Snacks|Crust & Co": [
+41.0258821,
+28.9807822
+],
+"Burger, Pizza, Snacks|The Chicken Club": [
+41.050951,
+28.7700077
+],
+"Burger, Pizza, Snacks|Mr Dumpling": [
+40.9938304,
+29.1232181
+],
+"Burger, Pizza, Snacks|Pasta To Go": [
+41.0158401,
+28.9692484
+],
+"Burger, Pizza, Snacks|Esmer Chef": [
+41.0155133,
+28.9758964
+],
+"Burger, Pizza, Snacks|Nizam Pide": [
+41.0495765,
+28.9874046
+],
+"Spät in Kadıköy|Kokoreç": [
+40.9534009,
+29.0954163
+],
+"Spät in Kadıköy|Çorba": [
+40.9926672,
+29.0363148
+]
+}

@@ -1,0 +1,1496 @@
+[
+{
+"k": "r",
+"d": "Fatih",
+"n": "Olden 1772",
+"note": ""
+},
+{
+"k": "r",
+"d": "Fatih",
+"n": "Lokanta 1741",
+"note": ""
+},
+{
+"k": "r",
+"d": "Fatih",
+"n": "Tarhan Uygur Restoranı",
+"note": "uigurisch"
+},
+{
+"k": "r",
+"d": "Fatih",
+"n": "Baran Et",
+"note": ""
+},
+{
+"k": "r",
+"d": "Fatih",
+"n": "Ciğeristan",
+"note": ""
+},
+{
+"k": "r",
+"d": "Fatih",
+"n": "Hadramout",
+"note": "jemenitisch"
+},
+{
+"k": "r",
+"d": "Fatih",
+"n": "Mazaj",
+"note": "syrisch"
+},
+{
+"k": "r",
+"d": "Fatih",
+"n": "Zafer Uygur Restaurant",
+"note": "uigurisch"
+},
+{
+"k": "r",
+"d": "Fatih",
+"n": "Kroren",
+"note": "uigurisch"
+},
+{
+"k": "r",
+"d": "Fatih",
+"n": "Diver Karadeniz Mutfağı",
+"note": "Schwarzmeerküche"
+},
+{
+"k": "r",
+"d": "Beyoğlu",
+"n": "Dürümcü Mehmet Usta",
+"note": "Balık dürüm"
+},
+{
+"k": "r",
+"d": "Beyoğlu",
+"n": "Resto Galata Terrace",
+"note": ""
+},
+{
+"k": "r",
+"d": "Beyoğlu",
+"n": "Moise Karaköy",
+"note": ""
+},
+{
+"k": "r",
+"d": "Beyoğlu",
+"n": "Galata Frida House",
+"note": ""
+},
+{
+"k": "r",
+"d": "Beyoğlu",
+"n": "Cihangir Mantıcısı",
+"note": "Mantı"
+},
+{
+"k": "r",
+"d": "Beyoğlu",
+"n": "Cihangir Doyum Mantı",
+"note": "Mantı"
+},
+{
+"k": "r",
+"d": "Beyoğlu",
+"n": "Emily’s Garden",
+"note": "Cihangir"
+},
+{
+"k": "r",
+"d": "Beyoğlu",
+"n": "Pad Thai",
+"note": "Cihangir"
+},
+{
+"k": "r",
+"d": "Beyoğlu",
+"n": "Kara Lounge Restaurant",
+"note": "afrikanisch"
+},
+{
+"k": "r",
+"d": "Beyoğlu",
+"n": "Cecconi’s",
+"note": "italienisch"
+},
+{
+"k": "r",
+"d": "Beyoğlu",
+"n": "Barnathan",
+"note": ""
+},
+{
+"k": "r",
+"d": "Beyoğlu",
+"n": "Ala Rasi Restaurant",
+"note": "afghanisch, Fusion"
+},
+{
+"k": "r",
+"d": "Beyoğlu",
+"n": "Shamse Restaurant",
+"note": "persisch"
+},
+{
+"k": "r",
+"d": "Beyoğlu",
+"n": "Eniştenin Yeri",
+"note": "Kebap, Preis-Leistung, gutes Tatlı"
+},
+{
+"k": "r",
+"d": "Şişli",
+"n": "Hacıbaşar Kebap Katmer",
+"note": ""
+},
+{
+"k": "r",
+"d": "Şişli",
+"n": "Tas Ramen & Sushi Bar",
+"note": ""
+},
+{
+"k": "r",
+"d": "Şişli",
+"n": "Bizim Lokanta",
+"note": "Nişantaşı, Hausmannskost"
+},
+{
+"k": "r",
+"d": "Şişli",
+"n": "Sushico",
+"note": "Nişantaşı"
+},
+{
+"k": "r",
+"d": "Şişli",
+"n": "Güzelburç Antakya",
+"note": "Nişantaşı"
+},
+{
+"k": "r",
+"d": "Şişli",
+"n": "Smash House",
+"note": "Burger"
+},
+{
+"k": "r",
+"d": "Şişli",
+"n": "Mahir Lokantası",
+"note": "einer der besten"
+},
+{
+"k": "r",
+"d": "Şişli",
+"n": "Healin",
+"note": ""
+},
+{
+"k": "r",
+"d": "Şişli",
+"n": "Zoya’s House",
+"note": ""
+},
+{
+"k": "r",
+"d": "Beşiktaş",
+"n": "Sushi & Spice",
+"note": ""
+},
+{
+"k": "r",
+"d": "Beşiktaş",
+"n": "Konoha",
+"note": ""
+},
+{
+"k": "r",
+"d": "Beşiktaş",
+"n": "Luppen Fried Chicken",
+"note": ""
+},
+{
+"k": "r",
+"d": "Beşiktaş",
+"n": "Wingo Fried Chicken",
+"note": ""
+},
+{
+"k": "r",
+"d": "Beşiktaş",
+"n": "Really Fried Chicken",
+"note": ""
+},
+{
+"k": "r",
+"d": "Beşiktaş",
+"n": "Hungry Birds",
+"note": ""
+},
+{
+"k": "r",
+"d": "Beşiktaş",
+"n": "51 Wings",
+"note": ""
+},
+{
+"k": "r",
+"d": "Beşiktaş",
+"n": "Bcante",
+"note": "Burger"
+},
+{
+"k": "r",
+"d": "Beşiktaş",
+"n": "The Smashy",
+"note": "Burger"
+},
+{
+"k": "r",
+"d": "Beşiktaş",
+"n": "Balta Burger",
+"note": "Burger"
+},
+{
+"k": "r",
+"d": "Beşiktaş",
+"n": "The Grungy",
+"note": "Burger"
+},
+{
+"k": "r",
+"d": "Beşiktaş",
+"n": "Just BBQ",
+"note": ""
+},
+{
+"k": "r",
+"d": "Beşiktaş",
+"n": "Choys Fried Chicken & Pizza",
+"note": ""
+},
+{
+"k": "r",
+"d": "Beşiktaş",
+"n": "Authentic French Tacos",
+"note": ""
+},
+{
+"k": "r",
+"d": "Beşiktaş",
+"n": "Pasta la Vista",
+"note": "Mac and Cheese, Akaretler"
+},
+{
+"k": "r",
+"d": "Beşiktaş",
+"n": "Say Cheese",
+"note": ""
+},
+{
+"k": "r",
+"d": "Beşiktaş",
+"n": "Ravenna",
+"note": "Lasagne"
+},
+{
+"k": "r",
+"d": "Beşiktaş",
+"n": "Makana",
+"note": "uigurisch"
+},
+{
+"k": "r",
+"d": "Beşiktaş",
+"n": "İskender Kuruluş 1867",
+"note": "İskender"
+},
+{
+"k": "r",
+"d": "Beşiktaş",
+"n": "Coni & Co.",
+"note": "Zorlu Center, Chicken Bowl"
+},
+{
+"k": "r",
+"d": "Beşiktaş",
+"n": "Eataly",
+"note": "Zorlu Center"
+},
+{
+"k": "r",
+"d": "Beşiktaş",
+"n": "Çıtır Pide",
+"note": "Malatya-Lahmacun bestellen"
+},
+{
+"k": "r",
+"d": "Beşiktaş",
+"n": "Kroken",
+"note": "Levent, asiatisch"
+},
+{
+"k": "r",
+"d": "Beşiktaş",
+"n": "Inari Sushi",
+"note": "Etiler"
+},
+{
+"k": "r",
+"d": "Sarıyer",
+"n": "Gazebo",
+"note": "Frühstück am Wasser"
+},
+{
+"k": "r",
+"d": "Sarıyer",
+"n": "Tepe Restaurant Lounge",
+"note": ""
+},
+{
+"k": "r",
+"d": "Sarıyer",
+"n": "Zeytin Garden Breakfast",
+"note": "Frühstück"
+},
+{
+"k": "r",
+"d": "Sarıyer",
+"n": "Yıldız Hisar Tesisleri",
+"note": ""
+},
+{
+"k": "r",
+"d": "Sarıyer",
+"n": "Nefes Vadi Restaurant & Cafe",
+"note": ""
+},
+{
+"k": "r",
+"d": "Sarıyer",
+"n": "Pomoot",
+"note": "Vadistanbul"
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "Ethem Efendi",
+"note": "Frühstück"
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "Brekkie Breakfast Club",
+"note": "Moda, Frühstück"
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "Snug",
+"note": "Moda"
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "Strada",
+"note": "Suadiye"
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "Ferida",
+"note": ""
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "Artois Cadde",
+"note": "Tantuni-Taco"
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "Nom",
+"note": "Burger"
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "Magnus",
+"note": "Burger"
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "Catchy BBQ",
+"note": "Burger"
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "Carbo Smash",
+"note": "Burger"
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "Gaam Burger",
+"note": "Burger"
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "Balta Burger",
+"note": "Burger"
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "Fred Dinosaurs",
+"note": ""
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "Mustobarq Sokak Lezzetleri",
+"note": ""
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "Nitz Schnitzel & More",
+"note": ""
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "Tacoroll",
+"note": ""
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "Paitan Ramen and Gyoza House",
+"note": "authentisch"
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "Bento Noodles",
+"note": ""
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "The Wokshop",
+"note": ""
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "Apartman",
+"note": ""
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "CM Noodle",
+"note": "Sushi-Burger"
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "Le Perre",
+"note": "Çiğköfte-Sushi"
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "Sliceguy",
+"note": "Knoblauchbrot, Pizza"
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "Döner Zamanı",
+"note": "Döner"
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "Agahoğlu",
+"note": "Tepsi mantı"
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "Çilingir Sofrası",
+"note": ""
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "Günay Konyalı",
+"note": "Etli ekmek"
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "Manhattan Cafe",
+"note": ""
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "Sinop Mantı",
+"note": "Mantı"
+},
+{
+"k": "r",
+"d": "Kadıköy",
+"n": "Pilav Arabası",
+"note": ""
+},
+{
+"k": "r",
+"d": "Üsküdar",
+"n": "Fethi Paşa Sosyal Tesisi",
+"note": ""
+},
+{
+"k": "r",
+"d": "Üsküdar",
+"n": "Limon",
+"note": ""
+},
+{
+"k": "r",
+"d": "Üsküdar",
+"n": "Hünkar Pide & Börek",
+"note": ""
+},
+{
+"k": "r",
+"d": "Üsküdar",
+"n": "Arada Blue",
+"note": "libanesisch"
+},
+{
+"k": "r",
+"d": "Üsküdar",
+"n": "DasHan the Uyghur",
+"note": "uigurisch"
+},
+{
+"k": "r",
+"d": "Üsküdar",
+"n": "Nevmekan Sahil",
+"note": ""
+},
+{
+"k": "r",
+"d": "Üsküdar",
+"n": "Saklı Kubbe",
+"note": ""
+},
+{
+"k": "r",
+"d": "Üsküdar",
+"n": "Hangry 21 Burger Cafe",
+"note": "Burger"
+},
+{
+"k": "r",
+"d": "Üsküdar",
+"n": "Yuzu Fried Chicken",
+"note": ""
+},
+{
+"k": "r",
+"d": "Üsküdar",
+"n": "Kudüs Han",
+"note": ""
+},
+{
+"k": "r",
+"d": "Üsküdar",
+"n": "Mr Dumpling",
+"note": ""
+},
+{
+"k": "r",
+"d": "Üsküdar",
+"n": "Pastafarian",
+"note": "Kuzguncuk"
+},
+{
+"k": "r",
+"d": "Üsküdar",
+"n": "Pasta Al Dente",
+"note": "Çengelköy"
+},
+{
+"k": "r",
+"d": "Üsküdar",
+"n": "Bartos Burger Place",
+"note": "Çengelköy"
+},
+{
+"k": "r",
+"d": "Üsküdar",
+"n": "Paşalimanı",
+"note": ""
+},
+{
+"k": "r",
+"d": "Üsküdar",
+"n": "Nilhan Sultan Köşkü",
+"note": ""
+},
+{
+"k": "r",
+"d": "Üsküdar",
+"n": "Şeker Döner",
+"note": "Döner"
+},
+{
+"k": "r",
+"d": "Üsküdar",
+"n": "Zeynel Kebap",
+"note": ""
+},
+{
+"k": "r",
+"d": "Üsküdar",
+"n": "Adıyaman Semsür Çiğköfte",
+"note": "Çiğköfte"
+},
+{
+"k": "r",
+"d": "Beykoz",
+"n": "Liçi House",
+"note": "Kavacık"
+},
+{
+"k": "r",
+"d": "Beykoz",
+"n": "Bayramoğlu Döner",
+"note": "laut Gruppe der beste Döner"
+},
+{
+"k": "r",
+"d": "Beykoz",
+"n": "İntiba Döner",
+"note": "İskender"
+},
+{
+"k": "r",
+"d": "Beykoz",
+"n": "Sabancı Öğretmen Evi",
+"note": ""
+},
+{
+"k": "r",
+"d": "Beykoz",
+"n": "Gümüşsuyu Restoran",
+"note": ""
+},
+{
+"k": "r",
+"d": "Zeytinburnu",
+"n": "Fişekhane",
+"note": "viele Cafés und Lokale"
+},
+{
+"k": "r",
+"d": "Zeytinburnu",
+"n": "Zennup 1844",
+"note": ""
+},
+{
+"k": "r",
+"d": "Zeytinburnu",
+"n": "Doğuhan Kebap",
+"note": ""
+},
+{
+"k": "r",
+"d": "Zeytinburnu",
+"n": "Palude Restaurant",
+"note": ""
+},
+{
+"k": "r",
+"d": "Zeytinburnu",
+"n": "Meşhur Dönerci Hacı Osman’ın Yeri",
+"note": "Döner"
+},
+{
+"k": "r",
+"d": "Beylikdüzü",
+"n": "Türk Pak Saray",
+"note": "pakistanisch"
+},
+{
+"k": "r",
+"d": "Beylikdüzü",
+"n": "Koz Döner",
+"note": "Döner"
+},
+{
+"k": "r",
+"d": "Beylikdüzü",
+"n": "Maroll",
+"note": "Çiğköfte"
+},
+{
+"k": "r",
+"d": "Başakşehir",
+"n": "Saraylı Restoran",
+"note": "Sıra gecesi"
+},
+{
+"k": "r",
+"d": "Başakşehir",
+"n": "Kuzubeyi",
+"note": ""
+},
+{
+"k": "r",
+"d": "Bakırköy",
+"n": "Mahsun Usta",
+"note": ""
+},
+{
+"k": "r",
+"d": "Bakırköy",
+"n": "Marna",
+"note": ""
+},
+{
+"k": "r",
+"d": "Bakırköy",
+"n": "Havuş",
+"note": ""
+},
+{
+"k": "r",
+"d": "Bakırköy",
+"n": "Şazeli",
+"note": "Florya"
+},
+{
+"k": "c",
+"d": "Fatih",
+"n": "Fluffy Dip & Fly",
+"note": "japanischer Cheesecake"
+},
+{
+"k": "c",
+"d": "Fatih",
+"n": "Evvelâ",
+"note": ""
+},
+{
+"k": "c",
+"d": "Beyoğlu",
+"n": "Gallant",
+"note": "Galata, Dubai Ball"
+},
+{
+"k": "c",
+"d": "Beyoğlu",
+"n": "Viyana Kahvesi",
+"note": ""
+},
+{
+"k": "c",
+"d": "Beyoğlu",
+"n": "Choco Zuma",
+"note": "Karaköy"
+},
+{
+"k": "c",
+"d": "Beyoğlu",
+"n": "Karabatak",
+"note": "Karaköy"
+},
+{
+"k": "c",
+"d": "Beyoğlu",
+"n": "Cocodema",
+"note": "Karaköy"
+},
+{
+"k": "c",
+"d": "Beyoğlu",
+"n": "Books & Coffee",
+"note": "Karaköy"
+},
+{
+"k": "c",
+"d": "Beyoğlu",
+"n": "Fil Books",
+"note": "Karaköy"
+},
+{
+"k": "c",
+"d": "Beyoğlu",
+"n": "Minoa Pera",
+"note": "Taksim, Buchcafé"
+},
+{
+"k": "c",
+"d": "Beyoğlu",
+"n": "Türkisch-Deutsche Buchhandlung",
+"note": "Taksim, Buchcafé"
+},
+{
+"k": "c",
+"d": "Beyoğlu",
+"n": "Cafe Da Giovanni",
+"note": ""
+},
+{
+"k": "c",
+"d": "Şişli",
+"n": "Filosofia Pastry",
+"note": ""
+},
+{
+"k": "c",
+"d": "Şişli",
+"n": "Poco Coffee",
+"note": "Matcha"
+},
+{
+"k": "c",
+"d": "Şişli",
+"n": "Hümaliva",
+"note": "Schokolade, Kaffee"
+},
+{
+"k": "c",
+"d": "Şişli",
+"n": "Zoya’s House",
+"note": ""
+},
+{
+"k": "c",
+"d": "Beşiktaş",
+"n": "Suflör",
+"note": ""
+},
+{
+"k": "c",
+"d": "Beşiktaş",
+"n": "La Vie Praline",
+"note": ""
+},
+{
+"k": "c",
+"d": "Beşiktaş",
+"n": "Chocolate Sarayı",
+"note": ""
+},
+{
+"k": "c",
+"d": "Beşiktaş",
+"n": "Death by Chocolate",
+"note": "San Sebastián, warme Cookies"
+},
+{
+"k": "c",
+"d": "Beşiktaş",
+"n": "Are You Chocolate",
+"note": ""
+},
+{
+"k": "c",
+"d": "Beşiktaş",
+"n": "Minoa Beşiktaş",
+"note": "Buchcafé"
+},
+{
+"k": "c",
+"d": "Beşiktaş",
+"n": "The Qadayıf",
+"note": ""
+},
+{
+"k": "c",
+"d": "Beşiktaş",
+"n": "Lokmata",
+"note": "Dubai-Lokma"
+},
+{
+"k": "c",
+"d": "Beşiktaş",
+"n": "The Churrol",
+"note": ""
+},
+{
+"k": "c",
+"d": "Beşiktaş",
+"n": "Pier Habib",
+"note": "kalte Baklava"
+},
+{
+"k": "c",
+"d": "Beşiktaş",
+"n": "Machi Machi",
+"note": ""
+},
+{
+"k": "c",
+"d": "Beşiktaş",
+"n": "Pardon",
+"note": "Rumeli Hisarı"
+},
+{
+"k": "c",
+"d": "Beşiktaş",
+"n": "Season Artisan Bakery",
+"note": "Bebek"
+},
+{
+"k": "c",
+"d": "Beşiktaş",
+"n": "Poco Coffee",
+"note": "Bebek, Matcha"
+},
+{
+"k": "c",
+"d": "Sarıyer",
+"n": "Espressolab",
+"note": "Eski Büyükdere İskelesi"
+},
+{
+"k": "c",
+"d": "Kadıköy",
+"n": "Grandma",
+"note": ""
+},
+{
+"k": "c",
+"d": "Kadıköy",
+"n": "Ilyu",
+"note": ""
+},
+{
+"k": "c",
+"d": "Kadıköy",
+"n": "Küff",
+"note": ""
+},
+{
+"k": "c",
+"d": "Kadıköy",
+"n": "Happy Croissants",
+"note": ""
+},
+{
+"k": "c",
+"d": "Kadıköy",
+"n": "Boac Soft Serve",
+"note": ""
+},
+{
+"k": "c",
+"d": "Kadıköy",
+"n": "Swivel Cafe & Bakery",
+"note": ""
+},
+{
+"k": "c",
+"d": "Kadıköy",
+"n": "Choco Port",
+"note": ""
+},
+{
+"k": "c",
+"d": "Kadıköy",
+"n": "Meet Lab",
+"note": ""
+},
+{
+"k": "c",
+"d": "Kadıköy",
+"n": "Amata",
+"note": ""
+},
+{
+"k": "c",
+"d": "Kadıköy",
+"n": "Flare",
+"note": ""
+},
+{
+"k": "c",
+"d": "Kadıköy",
+"n": "Chromia",
+"note": ""
+},
+{
+"k": "c",
+"d": "Kadıköy",
+"n": "Beige Cafe",
+"note": ""
+},
+{
+"k": "c",
+"d": "Kadıköy",
+"n": "Lavinya Dessert & Coffee",
+"note": ""
+},
+{
+"k": "c",
+"d": "Kadıköy",
+"n": "Books & Coffee",
+"note": ""
+},
+{
+"k": "c",
+"d": "Kadıköy",
+"n": "Cha’ya",
+"note": "Moda, Baklava-Cheesecake"
+},
+{
+"k": "c",
+"d": "Kadıköy",
+"n": "Hümaliva",
+"note": "Moda"
+},
+{
+"k": "c",
+"d": "Kadıköy",
+"n": "Moda İskelesi Kütüphanesi",
+"note": "Bibliothekscafé"
+},
+{
+"k": "c",
+"d": "Kadıköy",
+"n": "The Churrol",
+"note": ""
+},
+{
+"k": "c",
+"d": "Kadıköy",
+"n": "Noxus Chocolate & Cafe",
+"note": ""
+},
+{
+"k": "c",
+"d": "Kadıköy",
+"n": "Grön Hus",
+"note": "Bağdat Cd."
+},
+{
+"k": "c",
+"d": "Kadıköy",
+"n": "Zeyn Chocolate",
+"note": "Bağdat Cd., Dubai-Crêpe"
+},
+{
+"k": "c",
+"d": "Kadıköy",
+"n": "Comfy",
+"note": "Bağdat Cd."
+},
+{
+"k": "c",
+"d": "Kadıköy",
+"n": "Perla",
+"note": "Bağdat Cd."
+},
+{
+"k": "c",
+"d": "Kadıköy",
+"n": "Melly",
+"note": "Bağdat Cd."
+},
+{
+"k": "c",
+"d": "Kadıköy",
+"n": "Bella Bakery & Coffee",
+"note": "Bağdat Cd., Tiramisu Latte"
+},
+{
+"k": "c",
+"d": "Üsküdar",
+"n": "Cappadocia",
+"note": ""
+},
+{
+"k": "c",
+"d": "Üsküdar",
+"n": "Qubish",
+"note": ""
+},
+{
+"k": "c",
+"d": "Üsküdar",
+"n": "Leticia",
+"note": ""
+},
+{
+"k": "c",
+"d": "Üsküdar",
+"n": "İra Bakery",
+"note": ""
+},
+{
+"k": "c",
+"d": "Üsküdar",
+"n": "Moc",
+"note": ""
+},
+{
+"k": "c",
+"d": "Üsküdar",
+"n": "Sedir Kitap Kahve",
+"note": "Buchcafé"
+},
+{
+"k": "c",
+"d": "Üsküdar",
+"n": "Aşiyan Books & Coffee",
+"note": ""
+},
+{
+"k": "c",
+"d": "Üsküdar",
+"n": "Payedar Kahve",
+"note": ""
+},
+{
+"k": "c",
+"d": "Üsküdar",
+"n": "Hakkı Zade",
+"note": ""
+},
+{
+"k": "c",
+"d": "Üsküdar",
+"n": "Cremia Cafe",
+"note": ""
+},
+{
+"k": "c",
+"d": "Üsküdar",
+"n": "Veronika Çikolata",
+"note": ""
+},
+{
+"k": "c",
+"d": "Üsküdar",
+"n": "Kaf Cafe Restaurant",
+"note": ""
+},
+{
+"k": "c",
+"d": "Üsküdar",
+"n": "Riff Specialty Coffee",
+"note": ""
+},
+{
+"k": "c",
+"d": "Üsküdar",
+"n": "Glow Coffee",
+"note": "Kuzguncuk, Crackle Coffee"
+},
+{
+"k": "c",
+"d": "Üsküdar",
+"n": "La Vie Praline",
+"note": "Çengelköy"
+},
+{
+"k": "c",
+"d": "Beykoz",
+"n": "Telgrafhane",
+"note": ""
+},
+{
+"k": "s",
+"d": "Beyoğlu",
+"n": "Loi Bosphorus",
+"note": "neben Galataport"
+},
+{
+"k": "s",
+"d": "Beyoğlu",
+"n": "Azure Lounge",
+"note": ""
+},
+{
+"k": "s",
+"d": "Beyoğlu",
+"n": "Zebra Lounge",
+"note": ""
+},
+{
+"k": "s",
+"d": "Beyoğlu",
+"n": "Huqqabaz",
+"note": "auch Taksim, Vadistanbul"
+},
+{
+"k": "s",
+"d": "Beşiktaş",
+"n": "PS Lounge",
+"note": "Etiler"
+},
+{
+"k": "s",
+"d": "Beşiktaş",
+"n": "Kaytan Lounge",
+"note": "Ortaköy"
+},
+{
+"k": "s",
+"d": "Beşiktaş",
+"n": "Most Hookah",
+"note": "Ortaköy"
+},
+{
+"k": "s",
+"d": "Beşiktaş",
+"n": "Kuruçeşme Kahvesi",
+"note": "Kuruçeşme"
+},
+{
+"k": "s",
+"d": "Beşiktaş",
+"n": "The Market Bosphorus",
+"note": "Kuruçeşme"
+},
+{
+"k": "s",
+"d": "Fatih",
+"n": "Moss Lounge the Bosphorus",
+"note": ""
+},
+{
+"k": "s",
+"d": "Fatih",
+"n": "Lotiz Lounge",
+"note": ""
+},
+{
+"k": "s",
+"d": "Fatih",
+"n": "La Vista Bosphorus",
+"note": ""
+},
+{
+"k": "s",
+"d": "Şişli",
+"n": "Mayson Lounge",
+"note": ""
+},
+{
+"k": "s",
+"d": "Bakırköy",
+"n": "Seasha Lounge",
+"note": ""
+},
+{
+"k": "s",
+"d": "Beykoz",
+"n": "Ghalia Lounge",
+"note": ""
+},
+{
+"k": "g",
+"d": "Beşiktaş",
+"n": "Tuğra Restaurant",
+"note": "Çırağan-Palast"
+},
+{
+"k": "g",
+"d": "Beşiktaş",
+"n": "İnari Omakase",
+"note": "Kuruçeşme"
+},
+{
+"k": "g",
+"d": "Beşiktaş",
+"n": "Mezzenna",
+"note": "Kuruçeşme"
+},
+{
+"k": "g",
+"d": "Beşiktaş",
+"n": "Hakkasan",
+"note": "Kuruçeşme"
+},
+{
+"k": "g",
+"d": "Beşiktaş",
+"n": "Mandarin Oriental",
+"note": "Kuruçeşme"
+},
+{
+"k": "g",
+"d": "Beşiktaş",
+"n": "Feriye",
+"note": "Ortaköy"
+},
+{
+"k": "g",
+"d": "Beşiktaş",
+"n": "Visorante",
+"note": "Ortaköy"
+},
+{
+"k": "g",
+"d": "Beşiktaş",
+"n": "Sakhalin",
+"note": ""
+},
+{
+"k": "g",
+"d": "Beyoğlu",
+"n": "Roka",
+"note": "Galataport"
+},
+{
+"k": "g",
+"d": "Şişli",
+"n": "Cipriani",
+"note": "Harbiye"
+},
+{
+"k": "g",
+"d": "Beykoz",
+"n": "Uskumru Restaurant",
+"note": ""
+},
+{
+"k": "t",
+"d": "Frühstück",
+"n": "Çelebioğlu Sokak",
+"note": "Beşiktaş, eine Straße voller Frühstücksläden"
+},
+{
+"k": "t",
+"d": "Frühstück",
+"n": "Balkon",
+"note": "Beşiktaş"
+},
+{
+"k": "t",
+"d": "Frühstück",
+"n": "Siyah Beyaz",
+"note": "Beşiktaş"
+},
+{
+"k": "t",
+"d": "Frühstück",
+"n": "Lusnika",
+"note": "Kadıköy"
+},
+{
+"k": "t",
+"d": "Frühstück",
+"n": "Arada Beirut",
+"note": "Frühstück"
+},
+{
+"k": "t",
+"d": "Kebap, Döner, Lahmacun",
+"n": "Şehzade Cağ Kebap",
+"note": "Sirkeci"
+},
+{
+"k": "t",
+"d": "Kebap, Döner, Lahmacun",
+"n": "Borsam Taşfırın",
+"note": "Kadıköy, Lahmacun"
+},
+{
+"k": "t",
+"d": "Kebap, Döner, Lahmacun",
+"n": "Bayramoğlu Döner",
+"note": "Beykoz"
+},
+{
+"k": "t",
+"d": "Kebap, Döner, Lahmacun",
+"n": "İntiba",
+"note": "İskender"
+},
+{
+"k": "t",
+"d": "Kebap, Döner, Lahmacun",
+"n": "Otantik",
+"note": "Taksim"
+},
+{
+"k": "t",
+"d": "Burger, Pizza, Snacks",
+"n": "Kızılkayalar",
+"note": "Taksim, Islak Burger"
+},
+{
+"k": "t",
+"d": "Burger, Pizza, Snacks",
+"n": "Burger Yiyelim",
+"note": "günstige Kette"
+},
+{
+"k": "t",
+"d": "Burger, Pizza, Snacks",
+"n": "Crust & Co",
+"note": "Karaköy, Pizza"
+},
+{
+"k": "t",
+"d": "Burger, Pizza, Snacks",
+"n": "The Chicken Club",
+"note": ""
+},
+{
+"k": "t",
+"d": "Burger, Pizza, Snacks",
+"n": "Mr Dumpling",
+"note": ""
+},
+{
+"k": "t",
+"d": "Burger, Pizza, Snacks",
+"n": "Pasta To Go",
+"note": ""
+},
+{
+"k": "t",
+"d": "Burger, Pizza, Snacks",
+"n": "Esmer Chef",
+"note": "Taksim, Nudeln"
+},
+{
+"k": "t",
+"d": "Burger, Pizza, Snacks",
+"n": "Nizam Pide",
+"note": "Taksim"
+},
+{
+"k": "t",
+"d": "Spät in Kadıköy",
+"n": "Kokoreç",
+"note": "Kadıköy, nachts"
+},
+{
+"k": "t",
+"d": "Spät in Kadıköy",
+"n": "Çorba",
+"note": "Kadıköy, Söğütlüçeşme"
+}
+]

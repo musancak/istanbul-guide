@@ -3,13 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Istanbul Studentenguide</title>
+<meta name="description" content="Istanbul für Studierende: Istanbulkart, SIM, e-İkamet, Food-Spots mit Karte und Bewertung.">
+<meta name="theme-color" content="#F2F2F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<title>Istanbul Studentenguide</title>
-<meta name="claude:viewport-fit-sides" content="cover">
-<meta name="theme-color" content="#F2F2F7">
-<style>:root{padding-top:env(safe-area-inset-top);padding-bottom:0}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
-</head><body>
+<meta name="apple-mobile-web-app-title" content="Istanbul">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" crossorigin="anonymous">
+<style>:root{padding-top:env(safe-area-inset-top)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <style>
 /* Layout: iOS-artige Tab-App. Große Titel, gruppierte Listen, Detailseiten schieben sich von rechts rein. */
 :root{
@@ -159,349 +164,79 @@ mark{background:var(--accent-soft);color:inherit;border-radius:3px;padding:0 1px
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
 }
+
+/* Ergänzungen: Karte, Abstimmen, Formulare, Rechner */
+.navr{position:absolute;right:max(12px,env(safe-area-inset-right,0px));top:0;height:44px;display:flex;align-items:center;color:var(--accent);font-size:15px;font-weight:600;padding:0 4px}
+.navr:active{opacity:.4}
+.tile{text-align:left}
+.mapbox{position:relative;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);margin:2px 0 12px;background:var(--fill);isolation:isolate}
+#map{height:clamp(220px,34vh,380px);width:100%}
+#map.nomap{height:0}
+.locbtn{position:absolute;right:10px;top:10px;z-index:500;width:38px;height:38px;border-radius:10px;background:var(--card);display:grid;place-items:center;box-shadow:0 2px 10px rgba(0,0,0,.15);transition:transform .2s var(--ease)}
+.locbtn:active{transform:scale(.9)}
+.locbtn svg{width:20px;height:20px;stroke:var(--accent);stroke-width:2;fill:none}
+.mapcount{position:absolute;left:10px;top:10px;z-index:500;font-size:12px;font-weight:600;background:var(--card);color:var(--fg2);border-radius:8px;padding:5px 8px;box-shadow:0 2px 10px rgba(0,0,0,.12);font-variant-numeric:tabular-nums}
+.leaflet-popup-content-wrapper{border-radius:12px;background:var(--card);color:var(--fg);box-shadow:0 6px 24px rgba(0,0,0,.18)}
+.leaflet-popup-tip{background:var(--card)}
+.leaflet-popup-content{margin:10px 14px;font:14px/1.4 var(--font)}
+.leaflet-popup-content span{color:var(--fg2);font-size:13px}
+.leaflet-popup-content a{color:var(--accent);font-weight:600}
+.leaflet-container{background:var(--fill);font-family:var(--font)}
+.leaflet-control-attribution{font-size:10px;background:var(--bar)!important;color:var(--fg2)}
+.leaflet-control-attribution a{color:var(--fg2)}
+.sortrow{margin:2px 0 0}
+.seg.sm{margin:0 0 10px}
+.seg.sm button{height:28px;font-size:12.5px}
+
+.row.spot{padding:6px 8px 6px 16px;gap:8px}
+.row.spot>a.l{padding:5px 0;display:block}
+.row.spot>a.l:active{opacity:.55}
+.vote{display:flex;flex-direction:column;align-items:center;flex:none;width:40px}
+.vote button{width:40px;height:26px;display:grid;place-items:center;border-radius:8px;color:var(--fg3);transition:color .15s,background .15s,transform .2s var(--ease)}
+.vote button:active{transform:scale(.85);background:var(--press)}
+.vote svg{width:20px;height:20px;stroke:currentColor;stroke-width:2.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.vote .up[aria-pressed="true"]{color:var(--c2)}
+.vote .dn[aria-pressed="true"]{color:var(--c1)}
+.vote b{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--fg2);line-height:1;min-height:13px}
+.vote b.pos{color:var(--c2)} .vote b.neg{color:var(--c1)}
+
+.form .row{display:flex;flex-direction:column;align-items:stretch;gap:4px;padding:10px 16px}
+.fl{font-size:12.5px;color:var(--fg2)}
+.form input,.form select,.form textarea{font:inherit;font-size:16px;color:var(--fg);background:transparent;border:0;outline:none;padding:2px 0;width:100%;resize:vertical}
+.form select{-webkit-appearance:none;appearance:none;background:transparent}
+.form input::placeholder,.form textarea::placeholder{color:var(--fg3)}
+.cta{display:block;width:100%;height:50px;margin-top:16px;border-radius:13px;background:var(--accent);color:#fff;font-size:17px;font-weight:600;transition:transform .2s var(--ease),opacity .2s}
+.cta:active{transform:scale(.97)}
+.cta:disabled{opacity:.5}
+.d.cr{color:var(--accent);font-weight:500}
+
+.calc .row.slide{padding:2px 16px 12px}
+.calc .row.slide::before{display:none}
+.cv{font-size:17px;font-variant-numeric:tabular-nums;color:var(--accent)}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.switch{-webkit-appearance:none;appearance:none;width:51px;height:31px;border-radius:16px;background:var(--fill);position:relative;flex:none;transition:background .25s;cursor:pointer}
+.switch::after{content:"";position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.2);transition:transform .3s var(--ease)}
+.switch:checked{background:var(--c3)}
+.switch:checked::after{transform:translateX(20px)}
+label.row{cursor:pointer}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.box{background:var(--card);border-radius:14px;padding:14px;box-shadow:var(--shadow);border:2px solid transparent;transition:border-color .3s,transform .3s var(--ease)}
+.box span{display:block;font-size:13px;color:var(--fg2)}
+.box b{display:block;font:700 24px/1.2 var(--font-d);font-variant-numeric:tabular-nums;margin-top:4px}
+.box.win{border-color:var(--c3);transform:translateY(-2px)}
+.verdict{font-size:16px;font-weight:600;margin:14px 16px 0}
+
+#toast{position:fixed;left:50%;bottom:calc(72px + env(safe-area-inset-bottom,0px));z-index:80;transform:translate(-50%,20px);opacity:0;pointer-events:none;
+  background:var(--fg);color:var(--bg);font-size:14px;font-weight:500;border-radius:14px;padding:10px 16px;max-width:calc(100% - 32px);text-align:center;transition:opacity .25s,transform .35s var(--ease)}
+#toast.on{opacity:1;transform:translate(-50%,0)}
 </style>
-
+</head>
+<body>
 <div id="main"></div>
-<section id="pane" class="pane" aria-label="Detailseite"></section>
+<section id="pane" class="pane" aria-label="Detail"></section>
 <nav class="tabbar" aria-label="Bereiche"><div class="wrap" id="tabs"></div></nav>
-
-<script>
-const I={
-home:'<path d="M4 11 12 4l8 7v9H4z"/><path d="M10 20v-5h4v5"/>',
-train:'<rect x="6" y="3" width="12" height="14" rx="3"/><path d="M6 11h12M9 17l-2 4M15 17l2 4"/>',
-fork:'<path d="M7 3v7a2 2 0 0 0 4 0V3M9 12v9M16.5 3C15 4 14 6 14 9s1 4 2.5 4v8"/>',
-bag:'<path d="M5 8h14l-1 13H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>',
-compass:'<circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/>',
-card:'<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h4"/>',
-plane:'<path d="M2.5 13.5 21 6l-4 13-4.5-4.5-3 3V13l8-5.5"/>',
-sim:'<path d="M7 3h7l4 4v14H7z"/><rect x="10" y="11" width="5" height="6" rx="1"/>',
-phone:'<rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/>',
-car:'<path d="M4 15l1.5-5a2 2 0 0 1 1.9-1.5h9.2a2 2 0 0 1 1.9 1.5L20 15v3H4z"/><path d="M7 18v2M17 18v2M4 15h16"/>',
-bus:'<rect x="5" y="3" width="14" height="15" rx="3"/><path d="M5 11h14M8 18v2M16 18v2"/>',
-moon:'<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
-boat:'<path d="M3 18c2 1.7 4 1.7 6 0 2 1.7 4 1.7 6 0 2 1.7 4 1.7 6 0"/><path d="M5 14.5 4 10h16l-1 4.5M8 10V6h8v4"/>',
-link:'<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
-money:'<rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/>',
-cart:'<path d="M3 4h2l2.5 11h10L20 8H6.5"/><circle cx="9" cy="19" r="1.3"/><circle cx="17" cy="19" r="1.3"/>',
-market:'<path d="M3 9l2-5h14l2 5"/><path d="M3 9h18M5 9v11h14V9M10 20v-6h4v6"/>',
-wifi:'<path d="M2.5 9a14 14 0 0 1 19 0M5.5 12.5a9.5 9.5 0 0 1 13 0M8.5 16a5 5 0 0 1 7 0"/><path d="M12 19.5h.01"/>',
-house:'<path d="M3 11 12 3l9 8"/><path d="M5 9.5V20h14V9.5M10 20v-5h4v5"/>',
-doc:'<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/>',
-plus:'<path d="M12 5v14M5 12h14"/>',
-dome:'<path d="M4 20h16M6 20v-7M18 20v-7M6 13a6 6 0 0 1 12 0"/><path d="M12 3v4M10 20v-4h4v4"/>',
-ticket:'<path d="M4 6h16v4a2 2 0 0 0 0 4v4H4v-4a2 2 0 0 0 0-4z"/><path d="M14 6v12"/>',
-pin:'<path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z"/><circle cx="12" cy="10" r="2"/>',
-people:'<circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.2a5 5 0 0 1 5 5.8"/>',
-quake:'<path d="M2 12h4l2-5 3 10 3-12 2.5 7H22"/>',
-chev:'<path d="m9 5 7 7-7 7"/>', backc:'<path d="m15 5-7 7 7 7"/>', ext:'<path d="M7 17 17 7M9 7h8v8"/>',
-search:'<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>', check:'<path d="m5 12.5 4.5 4.5L19 7.5"/>'
-};
-const svg=(k,c="")=>`<svg viewBox="0 0 24 24" class="${c}" aria-hidden="true">${I[k]}</svg>`;
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const norm=s=>String(s).toLowerCase().replace(/ı/g,"i").normalize("NFD").replace(/[̀-ͯ]/g,"");
-
-/* ---------- Inhalte ---------- */
-/* Zeilen: [Bezeichnung, Wert] · "Text" · {l,u,d} Link · {s:[Schritte]} · {tb:{h,r}} */
-const P={
-flughafen:{t:"Vom Flughafen in die Stadt",i:"plane",c:"--c1",s:"IST und SAW",g:[
- {h:"Istanbul Airport (IST)",r:[["Metro","M11, dann M2 · 45–70 Min"],["Havaist-Bus","Taksim, Beşiktaş, Kadıköy · gut mit Gepäck"],["Taxi","24/7, nur mit Taxameter"],["WLAN","IGA WiFi, unbegrenzt · Code per SMS oder Pass am Kiosk scannen"]]},
- {h:"Sabiha Gökçen (SAW)",r:[["Metro","M4 nach Kadıköy · 60–80 Min"],["Havabus","Kadıköy und Taksim"],["Nachts","Bus E-10 nach Kadıköy · Sa-Nacht UM73"],["WLAN","60 Min gratis, PIN per SMS"]]},
- {h:"Tipps",r:["Istanbulkart direkt am Automaten im Flughafen kaufen.","Niemanden mitnehmen, der in der Halle „privates Taxi“ anbietet.","Mit Gepäck sind Bus oder Metro meist besser als Taxi.","Ziel als Screenshot aus Google Maps zeigen."]}]},
-sim:{t:"SIM-Karte und Internet",i:"sim",c:"--c3",s:"Anbieter, Preise, eSIM",g:[
- {h:"Anbieter",r:[["Turkcell","Bestes Netz, schnellstes Internet"],["Vodafone","Bestes Angebot für Neukunden"],["Türk Telekom","Günstig, schwächeres Netz, aber stabil in der Metro"],["BİMcell","Sehr günstig, nur in BİM-Filialen, Netz von Türk Telekom"]]},
- {h:"Neue SIM ohne Paket",r:[["Turkcell","850–1.350 TL"],["Türk Telekom","900–1.100 TL"],["Vodafone","950–1.200 TL"],["BİMcell","820–1.050 TL"]],f:"In Taksim-Nebenstraßen teils schon ab 800 TL. Am Flughafen bis 2.000–3.000 TL."},
- {h:"Pakete",r:[["Vodafone Willkommen","25 GB · 1000 Min · 175 TL / 28 Tage"],["Turkcell","20 GB · 1000 Min · 175 TL / 4 Wochen"],["Turkcell","50 GB · 1000 Min · 350 TL / 4 Wochen"],["Türk Telekom","25 GB · 1000 Min · 465 TL / 28 Tage"],["BİMcell","15 GB · 750 Min · 290 TL"],["BİMcell","20 GB · 750 Min · 310 TL"]]},
- {h:"Gut zu wissen",r:[["Reisepass","Pflicht beim Kauf"],["Eigene Nummer","*101# wählen"],["IMEI anzeigen","*#06# wählen"],["APN","„internet“ (falls Daten nicht gehen)"],["Gratis-GB","Wöchentlich in der App: Salla Kazan (Turkcell), Hediye Çarkı (Vodafone), Sil Süpür (Türk Telekom)"]]},
- {h:"eSIM",r:["Turkcell, Vodafone und Türk Telekom bieten eSIM.","Globale eSIMs (Airalo, Holafly, Saily …) sind in der Türkei oft gesperrt. Vor der Ankunft kaufen und aktivieren.","Eine türkische Nummer brauchst du oft für Apps und Lieferdienste."]}]},
-imei:{t:"Handy-Frist",i:"phone",c:"--c2",s:"120 Tage mit türkischer SIM",g:[
- {r:[["Frist","120 Tage mit türkischer SIM"],["Danach","Gerät wird für türkische SIMs gesperrt"],["Registrieren 2026","54.258 TL (ca. 1.056 €)"],["Nicht betroffen","Ausländische SIM, Roaming, internationale eSIM"]]},
- {h:"Praktisch",r:["Bei Dual-SIM läuft die ausländische Karte weiter.","Die Sperre gilt für das Gerät, nicht für die SIM-Karte."]}]},
-istanbulkart:{t:"Istanbulkart",i:"card",c:"--c1",s:"Karten, Preise, Studentenkarte",g:[
- {h:"Karten",r:[["Anonym","165 TL"],["Personalisiert","140 TL"],["Student","140 TL"]]},
- {h:"Fahrpreise (Stand Aug. 2026)",r:[["Einzelfahrt","46,20 TL"],["Einzelfahrt Student","22,55 TL"],["Monat voll","3.628 TL · 180 Fahrten"],["Monat Student","653 TL · 200 Fahrten"],["Prinzeninseln","151,23 TL · Student 75,64 TL"]],f:"Metrobüs, Marmaray und manche Fähren rechnen nach Strecke. Dort beim Aussteigen erneut antippen."},
- {h:"Studentenkarte beantragen",r:[{s:["Aktuelle Studienbescheinigung beim Student Affairs Office holen","Beim International Office deiner Uni melden","Pass, Bescheinigung und eventuell Passfoto mitnehmen","In einem Istanbulkart-Center (İBM) beantragen","140 TL zahlen, Karte ist sofort nutzbar"]}],f:"Nicht berechtigt: Erasmus-Praktikant:innen, ESC-Freiwillige, Austausch ohne Einschreibung."},
- {h:"İBM-Center · Mo–Fr 8:30–19, Sa 8:30–17:30",r:[["Europa","Gayrettepe, Karaköy, Topkapı, Yenibosna, Avcılar"],["Asien","Kadıköy, Üsküdar, Kartal, Ümraniye, Sultanbeyli"]]},
- {h:"Bezahlen",r:[["Karte","Am Gerät antippen, Signalton abwarten"],["Bankkarte","Kontaktlos geht auch"],["QR","In der Istanbulkart-App"],["Aufladen","Biletmatik-Automat, App, Kiosk „Dolum“"]]},
- {h:"Auch nutzbar für",r:["Öffentliche Toiletten, İSBİKE-Leihräder, BELTUR-Cafés, Strände Caddebostan und Florya, Kassen bei BİM, A101, Şok, Migros, Carrefour."]},
- {h:"Achtung",r:["Zweimal im selben Bus tippen: die zweite Fahrt kostet voll und zählt nicht zum Monatslimit.","Rückerstattung: am Automaten „İade“ wählen.","Dolmuş-Minibusse nehmen keine Istanbulkart."]}]},
-taxi:{t:"Taxi und Apps",i:"car",c:"--c4",s:"Preise, lizenzierte Apps",g:[
- {h:"Gelbes Taxi",r:[["Mindestpreis","230 TL"],["Grundgebühr","63,50 TL"],["Pro km","41,30 TL"]],f:"Brücken, Tunnel und Wartezeit kosten extra. Immer Taxameter verlangen."},
- {h:"Großraum",r:[["Türkis 8+1","ab 270 TL · 51,74 TL/km"],["Gelb 8-Sitzer","ab 385 TL · 57,19 TL/km"]]},
- {h:"Lizenzierte Apps",r:["BiTaksi, Uber, BinBin, inDrive, Valo, Yandex Go"]},
- {h:"Günstiger",r:[["MartıTAG","ca. 68 TL pro km · nicht von İBB lizenziert"],["Martı Scooter","Minutenpreis in der App"]]},
- {h:"Seetaxi",r:[["Start","500 TL"],["Pro Seemeile","750 TL"]]}]},
-dolmus:{t:"Dolmuş und Minibus",i:"bus",c:"--c6",s:"Preise nach Strecke",g:[
- {h:"Minibus",r:[["0–4 km","32,50 TL"],["4–7 km","34 TL"],["7–11 km","35 TL"],["11–15 km","36 TL"],["15–20 km","39 TL"],["Student","ca. 32,50 TL"]],f:"Keine Istanbulkart. Nur bar oder per QR."},
- {h:"Dolmuş-Beispiele",r:[["Beşiktaş – Taksim","40 TL"],["Eminönü – Taksim","40 TL"],["Üsküdar – Kadıköy","40 TL"],["Beşiktaş – Bebek – Etiler","50 TL"],["Kadıköy – Taksim","100 TL inkl. Maut"]]}]},
-nacht:{t:"Nachts unterwegs",i:"moon",c:"--c5",s:"Nachtmetro, Busse, Fähre",g:[
- {h:"Nachtmetro",r:[["Wann","Fr früh bis So 24 Uhr durchgehend"],["Linien","M1A, M1B, M2, M4, M5, M6, M7"],["Preis","00:30–05:30 doppelter Tarif"]]},
- {h:"Metrobüs",r:[["24/7","Söğütlüçeşme – Beylikdüzü"],["Nachts","alle 20 Min"]]},
- {h:"Nachtbusse",r:[["25G","Sarıyer – Levent – Mecidiyeköy – Taksim"],["15F","Beykoz – Kadıköy"],["19S","Sancaktepe – Kadıköy"],["55G","Gaziosmanpaşa – Beşiktaş"],["E-10","Sabiha Gökçen – Kadıköy"],["H-2","Mecidiyeköy – Istanbul Airport"]]},
- {h:"Nachtfähre · Fr/Sa und Sa/So",r:[{tb:{h:["Ab","Karaköy","An"],r:[["23:45","direkt","00:15"],["00:15","direkt","00:45"],["00:45","direkt","01:15"],["01:15","direkt","01:45"],["01:30","01:50","02:05"],["02:35","02:55","03:10"],["03:45","04:05","04:20"],["04:55","05:15","05:30"]]}}],f:"Gleiche Zeiten in beide Richtungen: Kadıköy → Beşiktaş und Beşiktaş → Kadıköy. Bis 01:15 alte Anlegestelle (Eski İskele), danach neue (Yeni İskele). An Feiertagen kann es anders sein."}]},
-links:{t:"Karten und Planer",i:"link",c:"--c7",s:"Offizielle Seiten",g:[
- {r:[{l:"Routenplaner",d:"İstanbul Senin · nasıl giderim",u:"https://istanbulsenin.istanbul/nasil-giderim/"},{l:"Metro-Netzplan",d:"metro.istanbul",u:"https://www.metro.istanbul/en/YolcuHizmetleri/AgHaritalari"},{l:"Fähren-Linienkarte",d:"Şehir Hatları, PDF",u:"https://files.sehirhatlari.istanbul/Sefer-Haritasi-Line-Map.pdf"},{l:"Marmaray auf der Karte",d:"Google My Maps",u:"https://www.google.com/maps/d/viewer?mid=1P1GUsGI-jz2c6oUssfgK6_M_mno49365"},{l:"Istanbulkart-Center",d:"Alle Standorte",u:"https://www.istanbulkart.istanbul/applicationCenters"},{l:"Istanbulkart online",d:"istanbulkart.istanbul",u:"https://istanbulkart.istanbul/en"}]},
- {h:"Tipps",r:["Stoßzeiten 7–9 und 17–19 Uhr meiden.","An Bayram-Feiertagen fährt man in Istanbul oft gratis."]}]},
-ausfluege:{t:"Fähren und Ausflüge",i:"boat",c:"--c6",s:"Inseln, Bursa, Schnellzug",g:[
- {h:"Fähren",r:[["Prinzeninseln","151,23 TL · Student 75,64 TL · ab Kabataş oder Kadıköy"],["Bursa","450 TL · Student 340 TL"],["Yalova","255 TL"]]},
- {h:"Schnellzug (13–26 Jahre)",r:[["Ankara","678 TL"],["Eskişehir","439 TL"],["Konya","991 TL"],["Edirne","285 TL"]]},
- {h:"Auf Büyükada essen",r:["Profiterol und kremalı börek, Tipp aus der Gruppe."]}]},
-geld:{t:"Geld",i:"money",c:"--c3",s:"Abheben, wechseln, empfangen",g:[
- {h:"Abheben",r:[["Währung","Immer TRY, „Heimatwährung“ ablehnen"],["Wenig Gebühren","Ziraat, Halkbank, Vakıfbank, HSBC, PTT"],["Taktik","Selten, dafür größere Beträge"]],f:"Deine Heimatbank kann zusätzlich 1–3 % nehmen."},
- {h:"Wechseln",r:[["Großer Basar","Beste Kurse, mehrere vergleichen"],["Laleli","Sehr gut für größere Beträge"],["Çemberlitaş, Sirkeci","Schneller, etwas schlechter"]],f:"Immer nach dem Endkurs fragen."},
- {h:"Karten",r:[["Revolut, Wise","In der Gruppe am meisten empfohlen"],["Türkisches Konto","z. B. İş Bankası, Vakıfbank · Eröffnung aufwendig"]]},
- {h:"Geld empfangen",r:[["RIA, KoronaPay","Meist am günstigsten"],["MoneyGram","Mittel"],["Western Union","Am schnellsten, teuer · Pass und MTCN"]]}]},
-einkaufen:{t:"Einkaufen",i:"cart",c:"--c4",s:"Supermärkte, Brot, Lieferung",g:[
- {r:[["Günstig","BİM, ŞOK, A101, Hakmar, Bizim, Tarım Kredi"],["Große Auswahl","Migros, CarrefourSA, Metro"],["Gourmet","Macrocenter, Eataly, File"],["Halk Ekmek","250 g Brot 15 TL am Kiosk"],["Lieferung","Getir, Yemeksepeti, Trendyol Go"],["Obst, Gemüse","Wochenmarkt (Pazar)"]]}]},
-pazar:{t:"Wochenmärkte",i:"market",c:"--c8",s:"Pazar nach Wochentag",g:[
- {r:[["Dienstag","Kadıköy Salı Pazarı, der größte"],["Mittwoch","Fatih und Umgebung"],["Donnerstag","Beşiktaş Ulus, Beyoğlu Piyalepaşa"],["Freitag","Kadıköy, Kozyatağı, Fikirtepe"],["Samstag","Beşiktaş (gegenüber Ihlamur-Pavillon), Feriköy Bio-Markt"],["Sonntag","Feriköy Antikmarkt, Märkte in Şişli, Beyoğlu, Üsküdar"]],f:"Meist ab 8–9 Uhr bis nachmittags. Bargeld und eigene Tasche mitnehmen. Früh hingehen."}]},
-wlan:{t:"Gratis-WLAN",i:"wifi",c:"--c1",s:"İBB Wi-Fi und mehr",g:[
- {h:"İBB Wi-Fi",r:[{s:["App „İstanbul Senin“ laden","Standort einschalten, registrieren","„Featured Apps“ → İBB Wi-Fi","Hotspot antippen, kein Passwort nötig"]}],f:"Auf Plätzen, in Parks, Bussen, Fähren und den Metrolinien M4, M7, M8."},
- {h:"Sonst",r:[["Cafés","Starbucks, Caffè Nero, Gloria Jean’s, fast alle kleinen Cafés"],["Malls","Zorlu, Kanyon, İstinye Park, Akmerkez"],["Ruhig lernen","Kadıköy-Bibliothek, SALT Galata"],["Netz in der Metro","Türk Telekom am stabilsten"]]}]},
-wohnen:{t:"Wohnen",i:"house",c:"--c4",s:"Suche, Vertrag, Erdbeben",g:[
- {h:"Suche",r:[["Portale","Sahibinden, Hepsi Emlak, Emlakjet, Zingat"],["Kurzzeit","Airbnb"],["WG","Facebook-Gruppen „Sharing Flats in Istanbul“"],["Wohnheime","KYK, İBB (günstig, wenig Plätze)"]]},
- {h:"Vertrag",r:["Immer schriftlich: Miete, Fälligkeit, Kaution, Laufzeit, Kündigung.","Klären, wer Wasser, Strom, Gas, Internet und Aidat zahlt.","Für die Aufenthaltserlaubnis oft notariell (Noter) nötig.","Miete per Überweisung mit Verwendungszweck.","Beim Einzug Fotos mit Datum machen.","Grundbuch (Tapu) zeigen lassen."]},
- {h:"Betrug",r:["Nie Geld vor Besichtigung und Vertrag.","Zu billig oder „dringend“ heißt: Vorsicht."]},
- {h:"Erdbebenrisiko",r:[["Geringer","Sarıyer, Beykoz, Çekmeköy, Kağıthane (oben), Ümraniye (innen)"],["Mittel","Beşiktaş, Şişli, Beyoğlu, Fatih, Üsküdar (Hang)"],["Höher","Avcılar, Küçükçekmece, Esenyurt, Beylikdüzü, Küste von Bakırköy, Kadıköy, Maltepe, Kartal, Pendik, Prinzeninseln"]]},
- {h:"Gebäude prüfen",r:[["Baujahr","Nach 2000 besser, nach 2018 am besten"],["Höhe","Höchstens 5 Stockwerke"],["Versicherung","DASK vorhanden"],["Erdgeschoss","Kein Laden oder Parkplatz darunter"]],f:"Das Risiko wechselt von Straße zu Straße. Das Gebäude zählt mehr als der Bezirk."}]},
-aufenthalt:{t:"Aufenthaltserlaubnis",i:"doc",c:"--c5",s:"e-İkamet für Erasmus",g:[
- {r:[["Wer","Alle, die länger als 90 Tage bleiben"],["Frist","30 Tage nach Ankunft"],["Karte","1–2 Wochen nach dem Termin"]]},
- {h:"Ablauf",r:[{s:["Konto auf e-ikamet.goc.gov.tr anlegen","Antrag ausfüllen: Daten, Adresse, Zweck","Dokumente hochladen","Gebühr online zahlen","Termin bei der Göç İdaresi buchen","Mit allen Originalen hingehen"]}]},
- {h:"Dokumente",r:["Pass mit Kopie","Zulassungsbrief der Gastuni","Mietvertrag oder Wohnheimbestätigung","Krankenversicherung für die ganze Zeit","4 biometrische Passfotos"]},
- {h:"Ämter",r:[["Fatih (Vatan)","Hauptamt · Mo–Fr 9–17 · sehr voll"],["Kumkapı","Kleiner, weniger los"],["Pendik","Für Kadıköy, Maltepe, Kartal · Mo–Fr 9–12:30"],["Esenyurt","Äußere Europa-Seite, oft schneller"],["Ümraniye","Asien-Seite, vormittags"]]},
- {h:"Tipps",r:["30–45 Min vor dem Termin da sein, Originale und Farbkopien mit.","Im Februar und März sind Termine schnell weg.","Umzug? Adresse sofort im e-İkamet ändern.","Keine Antwort nach 40 Tagen: 157 anrufen.","Türkische Wurzeln: Blaue Karte (Mavi Kart) beim Konsulat ist eine Alternative."]}]},
-notfall:{t:"Notfall",i:"plus",c:"--c2",s:"Nummern und was zu tun ist",g:[
- {h:"Nummern",r:[["112","Alle Notdienste, Englisch möglich"],["155","Polizei"],["110","Feuerwehr"],["114","Giftnotruf"],["157","Touristenpolizei, auch Migrationshotline"]]},
- {h:"Im Ernstfall",r:["Immer zuerst 112, nicht nur Messenger.","„English please“ sagen.","Notaufnahme heißt „Acil Servis“, staatliche Krankenhäuser sind 24/7 offen.","Foto vom Pass aufs Handy, Live-Standort teilen.","Unsicher? In einen Laden oder ein Café gehen und um Hilfe bitten."]}]},
-sehen:{t:"Top 10 Sehenswürdigkeiten",i:"dome",c:"--c8",s:"Mit kurzem Tipp",g:[
- {r:[["Hagia Sophia","Früh morgens hin"],["Topkapı-Palast","2–3 Std. einplanen, Schatzkammer nicht verpassen"],["Blaue Moschee","Bedeckte Kleidung, nicht zur Gebetszeit"],["Basilika-Zisterne","Nachmittags schönstes Licht"],["Großer Basar","Handeln, bei etwa der Hälfte anfangen"],["Ägyptischer Basar","Geröstete Nüsse probieren"],["Galataturm","Zum Sonnenuntergang"],["İstiklal und Taksim","Bequeme Schuhe"],["Bosporus-Fahrt","Nachmittags oder zum Sonnenuntergang"],["Prinzeninseln","Fähre ab Kabataş oder Kadıköy, Büyükada ist die größte"]]}]},
-muzekart:{t:"Müzekart",i:"ticket",c:"--c4",s:"Museumskarte für Studierende",g:[
- {h:"Preise",r:[["Student","100 TL (Stand 2025)"],["Mit 99er-Aufenthalt","500 TL"],["Hagia Sophia mit Karte","425 TL"]]},
- {h:"Regeln",r:["Jedes Museum zweimal im Jahr.","Mit Foto auf der Karte 1 Jahr gültig, ohne nur 1 Woche.","In der Müzekart-App per QR-Code rein (GPS und Bluetooth an)."]},
- {h:"In Istanbul dabei",r:["Topkapı (ohne Harem, dienstags zu), Galataturm, Dolmabahçe (ohne Selamlık), Archäologische Museen, Museum für Türkische und Islamische Kunst, Rumeli Hisarı, Yıldız, Beylerbeyi, Mosaikmuseum, Galata Mevlevihanesi."]},
- {h:"Aus der Gruppe",r:["Dolmabahçe: Der schönste Teil (Selamlık) ist nicht drin. Lieber normales Ticket vor Ort."]},
- {r:[{l:"Verkaufsstellen",d:"muze.gov.tr",u:"https://muze.gov.tr/satis-noktasi?CatalogNo=KRT-MZA01-08-008"}]}]},
-viertel:{t:"Viertel für Studierende",i:"pin",c:"--c1",s:"Wo man sich trifft",g:[
- {r:[["Beşiktaş","Jung, viele Cafés, Frühstücksstraße, Markt"],["Kadıköy und Moda","Street-Art, Vintage, Sonnenuntergang an der Küste"],["Beyoğlu und Taksim","Abends, Bars, Galerien, Galata"],["Şişli und Mecidiyeköy","Praktisch, Metro, Malls"],["Fatih und Sultanahmet","Geschichte, ruhige Cafés"],["Balat und Karaköy","Bunte Straßen für Fotos"]]}]}
-};
-const TABS=[
- {id:"start",t:"Start",i:"home"},
- {id:"verkehr",t:"Verkehr",i:"train",s:"Istanbulkart, Taxi, Nacht",g:[{r:["istanbulkart","flughafen","taxi","dolmus","nacht","ausfluege"]},{h:"Planen",r:["links"]}]},
- {id:"essen",t:"Essen",i:"fork"},
- {id:"alltag",t:"Alltag",i:"bag",s:"Alles für die ersten Wochen",g:[{h:"Ankommen",r:["sim","imei","aufenthalt","wohnen"]},{h:"Jeden Tag",r:["geld","einkaufen","pazar","wlan"]},{h:"Sicherheit",r:["notfall"]}]},
- {id:"entdecken",t:"Entdecken",i:"compass",s:"Sehen, Museen, Viertel",g:[{r:["sehen","muzekart","viertel","ausfluege"]}]}
-];
-
-/* Food-Spots: Liste der Gruppe (Google Doc) + Tipps aus den Chats. "Name|Notiz" · * = Top */
-const F={
-r:{t:"Essen",d:{
- "Fatih":["Olden 1772","Lokanta 1741","Tarhan Uygur Restoranı|uigurisch","Baran Et","Ciğeristan","Hadramout|jemenitisch","Mazaj|syrisch","Zafer Uygur Restaurant|uigurisch","Kroren|uigurisch","Diver Karadeniz Mutfağı|Schwarzmeerküche"],
- "Beyoğlu":["*Dürümcü Mehmet Usta|Balık dürüm","Resto Galata Terrace","Moise Karaköy","Galata Frida House","Cihangir Mantıcısı|Mantı","Cihangir Doyum Mantı|Mantı","Emily’s Garden|Cihangir","Pad Thai|Cihangir","Kara Lounge Restaurant|afrikanisch","Cecconi’s|italienisch","Barnathan","Ala Rasi Restaurant|afghanisch, Fusion","Shamse Restaurant|persisch","Eniştenin Yeri|Kebap, Preis-Leistung, gutes Tatlı"],
- "Şişli":["Hacıbaşar Kebap Katmer","Tas Ramen & Sushi Bar","Bizim Lokanta|Nişantaşı, Hausmannskost","Sushico|Nişantaşı","Güzelburç Antakya|Nişantaşı","Smash House|Burger","Mahir Lokantası|einer der besten","Healin","Zoya’s House"],
- "Beşiktaş":["Sushi & Spice","Konoha","Luppen Fried Chicken","Wingo Fried Chicken","Really Fried Chicken","Hungry Birds","51 Wings","*Bcante|Burger","The Smashy|Burger","Balta Burger|Burger","The Grungy|Burger","Just BBQ","Choys Fried Chicken & Pizza","Authentic French Tacos","Pasta la Vista|Mac and Cheese, Akaretler","Say Cheese","Ravenna|Lasagne","Makana|uigurisch","İskender Kuruluş 1867|İskender","Coni & Co.|Zorlu Center, Chicken Bowl","Eataly|Zorlu Center","*Çıtır Pide|Malatya-Lahmacun bestellen","Kroken|Levent, asiatisch","Inari Sushi|Etiler"],
- "Sarıyer":["*Gazebo|Frühstück am Wasser","Tepe Restaurant Lounge","Zeytin Garden Breakfast|Frühstück","Yıldız Hisar Tesisleri","Nefes Vadi Restaurant & Cafe","Pomoot|Vadistanbul"],
- "Kadıköy":["*Ethem Efendi|Frühstück","Brekkie Breakfast Club|Moda, Frühstück","Snug|Moda","Strada|Suadiye","Ferida","Artois Cadde|Tantuni-Taco","Nom|Burger","Magnus|Burger","Catchy BBQ|Burger","Carbo Smash|Burger","Gaam Burger|Burger","Balta Burger|Burger","Fred Dinosaurs","Mustobarq Sokak Lezzetleri","Nitz Schnitzel & More","Tacoroll","Paitan Ramen and Gyoza House|authentisch","Bento Noodles","The Wokshop","Apartman","CM Noodle|Sushi-Burger","Le Perre|Çiğköfte-Sushi","Sliceguy|Knoblauchbrot, Pizza","Döner Zamanı|Döner","Agahoğlu|Tepsi mantı","Çilingir Sofrası","Günay Konyalı|Etli ekmek","Manhattan Cafe","Sinop Mantı|Mantı","Pilav Arabası"],
- "Üsküdar":["Fethi Paşa Sosyal Tesisi","Limon","Hünkar Pide & Börek","Arada Blue|libanesisch","DasHan the Uyghur|uigurisch","Nevmekan Sahil","Saklı Kubbe","Hangry 21 Burger Cafe|Burger","Yuzu Fried Chicken","Kudüs Han","Mr Dumpling","Pastafarian|Kuzguncuk","Pasta Al Dente|Çengelköy","Bartos Burger Place|Çengelköy","Paşalimanı","Nilhan Sultan Köşkü","Şeker Döner|Döner","Zeynel Kebap","Adıyaman Semsür Çiğköfte|Çiğköfte"],
- "Beykoz":["Liçi House|Kavacık","Bayramoğlu Döner|laut Gruppe der beste Döner","İntiba Döner|İskender","Sabancı Öğretmen Evi","Gümüşsuyu Restoran"],
- "Zeytinburnu":["Fişekhane|viele Cafés und Lokale","Zennup 1844","Doğuhan Kebap","Palude Restaurant","Meşhur Dönerci Hacı Osman’ın Yeri|Döner"],
- "Beylikdüzü":["Türk Pak Saray|pakistanisch","Koz Döner|Döner","Maroll|Çiğköfte"],
- "Başakşehir":["Saraylı Restoran|Sıra gecesi","Kuzubeyi"],
- "Bakırköy":["Mahsun Usta","Marna","Havuş","Şazeli|Florya"]}},
-c:{t:"Cafés",d:{
- "Fatih":["*Fluffy Dip & Fly|japanischer Cheesecake","Evvelâ"],
- "Beyoğlu":["Gallant|Galata, Dubai Ball","Viyana Kahvesi","Choco Zuma|Karaköy","Karabatak|Karaköy","Cocodema|Karaköy","Books & Coffee|Karaköy","Fil Books|Karaköy","Minoa Pera|Taksim, Buchcafé","Türkisch-Deutsche Buchhandlung|Taksim, Buchcafé","Cafe Da Giovanni"],
- "Şişli":["Filosofia Pastry","Poco Coffee|Matcha","Hümaliva|Schokolade, Kaffee","Zoya’s House"],
- "Beşiktaş":["Suflör","La Vie Praline","Chocolate Sarayı","Death by Chocolate|San Sebastián, warme Cookies","Are You Chocolate","Minoa Beşiktaş|Buchcafé","The Qadayıf","*Lokmata|Dubai-Lokma","The Churrol","Pier Habib|kalte Baklava","Machi Machi","Pardon|Rumeli Hisarı","Season Artisan Bakery|Bebek","Poco Coffee|Bebek, Matcha"],
- "Sarıyer":["Espressolab|Eski Büyükdere İskelesi"],
- "Kadıköy":["Grandma","Ilyu","Küff","Happy Croissants","Boac Soft Serve","Swivel Cafe & Bakery","Choco Port","Meet Lab","Amata","Flare","Chromia","Beige Cafe","Lavinya Dessert & Coffee","Books & Coffee","Cha’ya|Moda, Baklava-Cheesecake","Hümaliva|Moda","Moda İskelesi Kütüphanesi|Bibliothekscafé","The Churrol","Noxus Chocolate & Cafe","Grön Hus|Bağdat Cd.","Zeyn Chocolate|Bağdat Cd., Dubai-Crêpe","Comfy|Bağdat Cd.","Perla|Bağdat Cd.","Melly|Bağdat Cd.","Bella Bakery & Coffee|Bağdat Cd., Tiramisu Latte"],
- "Üsküdar":["Cappadocia","Qubish","Leticia","İra Bakery","Moc","Sedir Kitap Kahve|Buchcafé","Aşiyan Books & Coffee","Payedar Kahve","Hakkı Zade","Cremia Cafe","Veronika Çikolata","Kaf Cafe Restaurant","Riff Specialty Coffee","Glow Coffee|Kuzguncuk, Crackle Coffee","La Vie Praline|Çengelköy"],
- "Beykoz":["Telgrafhane"]}},
-s:{t:"Shisha",d:{
- "Beyoğlu":["Loi Bosphorus|neben Galataport","Azure Lounge","Zebra Lounge","Huqqabaz|auch Taksim, Vadistanbul"],
- "Beşiktaş":["PS Lounge|Etiler","Kaytan Lounge|Ortaköy","Most Hookah|Ortaköy","Kuruçeşme Kahvesi|Kuruçeşme","The Market Bosphorus|Kuruçeşme"],
- "Fatih":["Moss Lounge the Bosphorus","Lotiz Lounge","La Vista Bosphorus"],
- "Şişli":["Mayson Lounge"],"Bakırköy":["Seasha Lounge"],"Beykoz":["Ghalia Lounge"]}},
-g:{t:"Gehoben",d:{
- "Beşiktaş":["Tuğra Restaurant|Çırağan-Palast","İnari Omakase|Kuruçeşme","Mezzenna|Kuruçeşme","Hakkasan|Kuruçeşme","Mandarin Oriental|Kuruçeşme","Feriye|Ortaköy","Visorante|Ortaköy","Sakhalin"],
- "Beyoğlu":["Roka|Galataport"],"Şişli":["Cipriani|Harbiye"],"Beykoz":["Uskumru Restaurant"]}},
-t:{t:"Gruppe",d:{
- "Frühstück":["Çelebioğlu Sokak|Beşiktaş, eine Straße voller Frühstücksläden","Balkon|Beşiktaş","Siyah Beyaz|Beşiktaş","Lusnika|Kadıköy","Arada Beirut|Frühstück"],
- "Kebap, Döner, Lahmacun":["Şehzade Cağ Kebap|Sirkeci","Borsam Taşfırın|Kadıköy, Lahmacun","Bayramoğlu Döner|Beykoz","İntiba|İskender","Otantik|Taksim"],
- "Burger, Pizza, Snacks":["Kızılkayalar|Taksim, Islak Burger","Burger Yiyelim|günstige Kette","Crust & Co|Karaköy, Pizza","The Chicken Club","Mr Dumpling","Pasta To Go","Esmer Chef|Taksim, Nudeln","Nizam Pide|Taksim"],
- "Spät in Kadıköy":["Kokoreç|Kadıköy, nachts","Çorba|Kadıköy, Söğütlüçeşme"]}}
-};
-const FOOD_LIST="https://maps.app.goo.gl/n9GjDf6zoVrzDhsGA";
-const FOOD_DOC="https://docs.google.com/document/d/1-fcHRWwjJJ3iX50wu4ELeeuZCtuZmyi87PVhlJMdGvg/edit?usp=sharing";
-const SPOTS=[];
-for(const k in F)for(const d in F[k].d)for(const e of F[k].d[d]){
-  const top=e[0]==="*",[n,note=""]=(top?e.slice(1):e).split("|");
-  const area=k==="t"?(note.split(",")[0]):d;
-  const q=encodeURIComponent(`${n} ${/^(Frühstück|Kebap|Burger|Spät)/.test(d)?(area||""):d} Istanbul`);
-  SPOTS.push({k,d,n,note,top,u:`https://www.google.com/maps/search/?api=1&query=${q}`});
-}
-
-/* ---------- Bausteine ---------- */
-const ico=(k,c)=>`<span class="ico" style="background:var(${c})">${svg(k)}</span>`;
-function rowHTML(r){
-  if(typeof r==="string")return`<div class="row txt">${esc(r)}</div>`;
-  if(Array.isArray(r))return`<div class="row kv"><div class="l t">${esc(r[0])}</div><div class="v">${esc(r[1])}</div></div>`;
-  if(r.u)return`<a class="row" href="${esc(r.u)}" target="_blank" rel="noopener"><div class="l"><div class="t">${esc(r.l)}</div>${r.d?`<div class="d">${esc(r.d)}</div>`:""}</div>${svg("ext","ext")}</a>`;
-  if(r.s)return r.s.map((x,i)=>`<div class="row"><span class="num">${i+1}</span><div class="l t">${esc(x)}</div></div>`).join("");
-  if(r.tb)return`<div class="tbl"><table><thead><tr>${r.tb.h.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${r.tb.r.map(x=>`<tr>${x.map(c=>`<td class="${c==="direkt"?"m":""}">${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
-  return"";
-}
-const pageRow=id=>{const p=P[id];return`<button class="row ic" data-go="${id}">${ico(p.i,p.c)}<div class="l"><div class="t">${esc(p.t)}</div>${p.s?`<div class="d">${esc(p.s)}</div>`:""}</div>${svg("chev","chev")}</button>`};
-const group=(g,fn)=>`${g.h?`<div class="gh">${esc(g.h)}</div>`:'<div style="height:14px"></div>'}<div class="grp">${g.r.map(fn).join("")}</div>${g.f?`<div class="gf">${esc(g.f)}</div>`:""}`;
-const navbar=(t,back)=>`<header class="nav"><div class="wrap">${back?`<button class="back" data-back>${svg("backc")}<span>${esc(back)}</span></button>`:""}<span class="nav-t">${esc(t)}</span></div></header>`;
-
-/* ---------- Start ---------- */
-const STEPS=[["s1","Istanbulkart am Flughafen holen","flughafen"],["s2","SIM-Karte kaufen, Pass mitnehmen","sim"],["s3","e-İkamet innerhalb von 30 Tagen","aufenthalt"],["s4","Studenten-Istanbulkart beantragen","istanbulkart"],["s5","Handy-Frist von 120 Tagen notieren","imei"],["s6","Notrufnummern speichern","notfall"]];
-let done={};try{done=JSON.parse(localStorage.getItem("ist-done"))||{}}catch(e){}
-function startHTML(){
-  return`${navbar("Istanbul")}<div class="wrap view">
-  <h1 class="lt">Istanbul</h1><p class="sub">Für Studierende · Stand 2026</p>
-  <label class="search">${svg("search")}<input id="q" type="search" placeholder="Suchen: Taxi, Ramen, e-İkamet …" autocomplete="off" enterkeyhint="search"><button id="qx" hidden>Löschen</button></label>
-  <div id="res"></div>
-  <div id="home">
-  <div class="gh">Notruf</div>
-  <div class="sos"><a class="main" href="tel:112"><b>112</b><span>Alle Notdienste</span></a><a href="tel:155"><b>155</b><span>Polizei</span></a><a href="tel:110"><b>110</b><span>Feuer</span></a><a href="tel:157"><b>157</b><span>Touristen</span></a></div>
-  <div class="gf">Nummern zum Abtippen. Mehr unter <button data-go="notfall" style="color:var(--accent)">Notfall</button>.</div>
-  <div class="gh">Erste Tage</div>
-  <div class="grp">${STEPS.map(([k,t,p])=>`<div class="row${done[k]?" done":""}" data-k="${k}"><button class="chk-btn" data-chk="${k}" aria-label="Erledigt: ${esc(t)}" aria-pressed="${!!done[k]}"><span class="chk">${svg("check")}</span></button><button class="l t" data-go="${p}" style="text-align:left">${esc(t)}</button>${svg("chev","chev")}</div>`).join("")}</div>
-  <div class="gf">Abhaken wird nur auf diesem Gerät gespeichert.</div>
-  <div class="gh">Preise auf einen Blick</div>
-  <div class="tiles">
-   <button class="tile" data-go="istanbulkart" style="text-align:left"><b>22,55<small>TL</small></b><span>Fahrt mit Studentenkarte</span></button>
-   <button class="tile" data-go="istanbulkart" style="text-align:left"><b>653<small>TL</small></b><span>Monatskarte Student, 200 Fahrten</span></button>
-   <button class="tile" data-go="taxi" style="text-align:left"><b>230<small>TL</small></b><span>Taxi-Mindestpreis</span></button>
-   <button class="tile" data-go="einkaufen" style="text-align:left"><b>15<small>TL</small></b><span>Halk Ekmek, 250 g Brot</span></button>
-  </div>
-  <div class="gh">Beliebt</div>
-  <div class="grp">${["sim","nacht","geld","wohnen"].map(pageRow).join("")}
-   <button class="row ic" data-tab="essen">${ico("fork","--c2")}<div class="l"><div class="t">Food-Spots</div><div class="d">${SPOTS.length} Orte aus der Gruppe, nach Bezirk</div></div>${svg("chev","chev")}</button></div>
-  <p class="foot">Zusammengestellt aus dem ESI Istanbul Survival Guide (2025/26), den Istanbul-Gruppenchats und der Food-Spot-Liste der Gruppe. Kein offizielles Angebot. Preise ändern sich schnell, vor Ort kurz prüfen.</p>
-  </div></div>`;
-}
-function bindStart(){
-  const q=document.getElementById("q"),res=document.getElementById("res"),home=document.getElementById("home"),qx=document.getElementById("qx");
-  q.oninput=()=>{const v=q.value.trim();qx.hidden=!v;home.hidden=!!v;res.innerHTML=v?searchHTML(v):""};
-  qx.onclick=()=>{q.value="";q.oninput();q.focus()};
-  document.querySelectorAll("[data-chk]").forEach(b=>b.onclick=()=>{const k=b.dataset.chk;done[k]=!done[k];if(!done[k])delete done[k];
-    try{localStorage.setItem("ist-done",JSON.stringify(done))}catch(e){}
-    b.closest(".row").classList.toggle("done",!!done[k]);b.setAttribute("aria-pressed",!!done[k])});
-}
-/* Suchindex über alle Seiten und Spots */
-const IDX=[];
-for(const id in P)for(const g of P[id].g)for(const r of g.r){
-  let txt=typeof r==="string"?r:Array.isArray(r)?r.join(": "):r.u?r.l+" "+(r.d||""):r.s?r.s.join(" · "):"";
-  if(txt)IDX.push({id,txt,h:g.h||P[id].t});
-}
-function hl(s,v){const n=norm(s),i=n.indexOf(norm(v));if(i<0)return esc(s);return esc(s.slice(0,i))+"<mark>"+esc(s.slice(i,i+v.length))+"</mark>"+esc(s.slice(i+v.length))}
-function searchHTML(v){
-  const nv=norm(v);
-  const pages=Object.keys(P).filter(id=>norm(P[id].t+" "+P[id].s).includes(nv));
-  const hits=IDX.filter(x=>norm(x.txt).includes(nv)).slice(0,25);
-  const sp=SPOTS.filter(s=>norm(s.n+" "+s.note+" "+s.d).includes(nv)).slice(0,25);
-  if(!pages.length&&!hits.length&&!sp.length)return`<div class="gf" style="margin-top:20px">Nichts gefunden für „${esc(v)}“.</div>`;
-  let h="";
-  if(pages.length)h+=group({h:"Themen",r:pages},pageRow);
-  if(hits.length)h+=group({h:"Infos",r:hits},x=>`<button class="row" data-go="${x.id}"><div class="l"><div class="t">${hl(x.txt.length>110?x.txt.slice(0,110)+"…":x.txt,v)}</div><div class="d">${esc(P[x.id].t)}</div></div>${svg("chev","chev")}</button>`);
-  if(sp.length)h+=group({h:"Food-Spots"},null).replace('<div class="grp"></div>',"")+`<div class="grp">${sp.map(spotRow).join("")}</div>`;
-  return h;
-}
-
-/* ---------- Essen ---------- */
-let fk="r",fd="Alle",fq="";
-const spotRow=s=>`<a class="row" href="${s.u}" target="_blank" rel="noopener"><div class="l"><div class="t">${esc(s.n)}${s.top?'<span class="pill">Top</span>':""}</div>${s.note||s.k==="t"?`<div class="d">${esc(s.note||s.d)}</div>`:""}</div>${svg("ext","ext")}</a>`;
-function essenHTML(){
-  const keys=Object.keys(F);
-  return`${navbar("Essen")}<div class="wrap view">
-  <h1 class="lt">Essen</h1><p class="sub">Food-Spots aus der Gruppe. Antippen öffnet Google Maps.</p>
-  <div class="grp" style="margin-bottom:16px">
-   <a class="row ic" href="${FOOD_LIST}" target="_blank" rel="noopener">${ico("pin","--c2")}<div class="l"><div class="t">Liste mit 500 Spots</div><div class="d">Google Maps, aus der Gruppe WiSe 26/27</div></div>${svg("ext","ext")}</a>
-   <a class="row ic" href="${FOOD_DOC}" target="_blank" rel="noopener">${ico("doc","--c7")}<div class="l"><div class="t">Original-Liste</div><div class="d">Google Doc nach Bezirken</div></div>${svg("ext","ext")}</a>
-  </div>
-  <div class="seg" id="seg" role="group" aria-label="Art"><i></i>${keys.map(k=>`<button data-k="${k}" aria-pressed="${k===fk}">${F[k].t}</button>`).join("")}</div>
-  <label class="search">${svg("search")}<input id="fq" type="search" placeholder="Burger, Mantı, Moda …" value="${esc(fq)}" autocomplete="off"></label>
-  <div class="chips" id="chips"></div>
-  <div id="flist"></div></div>`;
-}
-function bindEssen(){
-  const seg=document.getElementById("seg"),pill=seg.querySelector("i"),btns=[...seg.querySelectorAll("button")];
-  const place=()=>{const i=Object.keys(F).indexOf(fk);pill.style.width=`calc((100% - 4px) / ${btns.length})`;pill.style.transform=`translateX(${i*100}%)`;btns.forEach(b=>b.setAttribute("aria-pressed",b.dataset.k===fk))};
-  btns.forEach(b=>b.onclick=()=>{fk=b.dataset.k;fd="Alle";place();chips();list()});
-  document.getElementById("fq").oninput=e=>{fq=e.target.value.trim();list()};
-  place();chips();list();
-}
-function chips(){
-  const el=document.getElementById("chips"),ds=["Alle",...Object.keys(F[fk].d)];
-  el.innerHTML=ds.map(d=>`<button class="chip" aria-pressed="${d===fd}" data-d="${esc(d)}">${esc(d)}</button>`).join("");
-  el.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{fd=c.dataset.d;el.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed",x===c));list()});
-}
-function list(){
-  const nv=norm(fq);
-  const s=SPOTS.filter(x=>x.k===fk&&(fd==="Alle"||x.d===fd)&&(!nv||norm(x.n+" "+x.note+" "+x.d).includes(nv)));
-  const by={};s.forEach(x=>(by[x.d]=by[x.d]||[]).push(x));
-  const el=document.getElementById("flist");
-  el.innerHTML=s.length?`<div class="count">${s.length} ${s.length===1?"Ort":"Orte"}</div>`+Object.keys(by).map(d=>`<div class="gh">${esc(d)}</div><div class="grp">${by[d].map(spotRow).join("")}</div>`).join(""):`<div class="gf" style="margin-top:20px">Kein Spot passt. Anderen Bezirk oder Begriff probieren.</div>`;
-  el.firstElementChild&&el.animate&&el.animate([{opacity:.4},{opacity:1}],{duration:180});
-}
-
-/* ---------- Tabs, Seiten, Navigation ---------- */
-function tabHTML(t){return`${navbar(t.t)}<div class="wrap view"><h1 class="lt">${esc(t.t)}</h1><p class="sub">${esc(t.s)}</p>${t.g.map(g=>group(g,pageRow)).join("")}<p class="foot">Angaben laut ESI Survival Guide und Gruppenchats, Stand 2025/26.</p></div>`}
-function pageHTML(id,back){const p=P[id];return`${navbar(p.t,back)}<div class="wrap body"><h1 class="lt">${esc(p.t)}</h1>${p.s?`<p class="sub">${esc(p.s)}</p>`:""}${p.g.map(g=>group(g,rowHTML)).join("")}</div>`}
-
-const main=document.getElementById("main"),pane=document.getElementById("pane"),tabsEl=document.getElementById("tabs");
-let tab="start",page=null;
-tabsEl.innerHTML=TABS.map(t=>`<button class="tab" data-tab="${t.id}">${svg(t.i)}<span>${t.t}</span></button>`).join("");
-
-function showTab(id){
-  const t=TABS.find(x=>x.id===id)||TABS[0];tab=t.id;
-  main.innerHTML=t.id==="start"?startHTML():t.id==="essen"?essenHTML():tabHTML(t);
-  if(t.id==="start")bindStart();if(t.id==="essen")bindEssen();
-  tabsEl.querySelectorAll(".tab").forEach(b=>b.setAttribute("aria-current",b.dataset.tab===tab?"page":"false"));
-  window.scrollTo(0,0);navScroll();
-}
-function openPage(id){
-  if(!P[id])return;page=id;
-  pane.innerHTML=pageHTML(id,(TABS.find(x=>x.id===tab)||TABS[0]).t);pane.scrollTop=0;
-  requestAnimationFrame(()=>{pane.classList.add("open");main.classList.add("pushed")});
-  paneScroll();
-}
-function closePage(){page=null;pane.classList.remove("open","drag");pane.style.transform="";main.classList.remove("pushed");main.style.transform=""}
-function setHash(h){try{if(location.hash.slice(1)!==h)location.hash=h}catch(e){}}
-function go(id){
-  if(P[id]){openPage(id);setHash(id)}
-  else{if(page)closePage();if(id!==tab||!main.innerHTML)showTab(id);setHash(id)}
-}
-function route(){
-  const h=decodeURIComponent((location.hash||"").slice(1));
-  if(P[h]){if(!main.innerHTML)showTab(Object.keys(P).includes(h)?parentTab(h):"start");if(page!==h)openPage(h)}
-  else if(TABS.some(t=>t.id===h)){if(page)closePage();if(h!==tab||!main.innerHTML)showTab(h)}
-  else if(!main.innerHTML)showTab("start");
-}
-const parentTab=id=>(TABS.find(t=>t.g&&t.g.some(g=>g.r.includes(id)))||TABS[0]).id;
-
-document.addEventListener("click",e=>{
-  const g=e.target.closest("[data-go]"),t=e.target.closest("[data-tab]"),b=e.target.closest("[data-back]");
-  if(b){e.preventDefault();closePage();setHash(tab);return}
-  if(g){e.preventDefault();go(g.dataset.go);return}
-  if(t){e.preventDefault();if(page)closePage();if(t.dataset.tab===tab&&!page){window.scrollTo({top:0,behavior:"smooth"})}else showTab(t.dataset.tab);setHash(t.dataset.tab)}
-});
-addEventListener("hashchange",route);
-
-function navScroll(){const n=main.querySelector(".nav");if(n)n.classList.toggle("on",scrollY>34)}
-function paneScroll(){const n=pane.querySelector(".nav");if(n)n.classList.toggle("on",pane.scrollTop>34)}
-addEventListener("scroll",navScroll,{passive:true});
-pane.addEventListener("scroll",paneScroll,{passive:true});
-
-/* Wischen vom linken Rand zurück, wie auf dem iPhone */
-let sx=null,dx=0;
-pane.addEventListener("touchstart",e=>{const x=e.touches[0].clientX;if(x<28){sx=x;dx=0;pane.classList.add("drag");main.style.transition="none"}},{passive:true});
-pane.addEventListener("touchmove",e=>{if(sx===null)return;dx=Math.max(0,e.touches[0].clientX-sx);const w=innerWidth;
-  pane.style.transform=`translateX(${dx}px)`;main.style.transform=`translateX(${-24+24*dx/w}%)`},{passive:true});
-pane.addEventListener("touchend",()=>{if(sx===null)return;sx=null;pane.classList.remove("drag");main.style.transition="";
-  if(dx>innerWidth*.3){closePage();setHash(tab)}else{pane.style.transform="";main.style.transform=""}});
-
-route();
-</script>
-</body></html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" crossorigin="anonymous"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
