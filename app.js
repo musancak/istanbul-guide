@@ -26,6 +26,10 @@ ticket:'<path d="M4 6h16v4a2 2 0 0 0 0 4v4H4v-4a2 2 0 0 0 0-4z"/><path d="M14 6v
 pin:'<path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z"/><circle cx="12" cy="10" r="2"/>',
 people:'<circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.2a5 5 0 0 1 5 5.8"/>',
 locate:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="7"/>',
+cloud:'<path d="M7 18h10a4 4 0 0 0 .5-8A6 6 0 0 0 6 9.5 4.3 4.3 0 0 0 7 18z"/>',
+rain:'<path d="M7 14h10a4 4 0 0 0 .5-8A6 6 0 0 0 6 5.5 4.3 4.3 0 0 0 7 14z"/><path d="m9 17-1 3M13 17l-1 3M17 17l-1 3"/>',
+sunset:'<path d="M4 18h16M7 21h10M6.3 14a6 6 0 0 1 11.4 0M12 4v4M4.9 8.9l1.4 1.4M19.1 8.9l-1.4 1.4"/>',
+cal:'<rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
 up:'<path d="m6 15 6-6 6 6"/>', down:'<path d="m6 9 6 6 6-6"/>',
 sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
 chev:'<path d="m9 5 7 7-7 7"/>', backc:'<path d="m15 5-7 7 7 7"/>', ext:'<path d="M7 17 17 7M9 7h8v8"/>',
@@ -57,7 +61,7 @@ en:{start:"Home",verkehr:"Transport",essen:"Food",alltag:"Daily life",entdecken:
 const u=k=>UI[LANG][k];
 const KIND_EN={r:"Food",c:"Cafés",s:"Shisha",g:"Upscale",t:"Group"};
 const GROUP_EN={"Frühstück":"Breakfast","Spät in Kadıköy":"Late in Kadıköy"};
-const NOTE_EN=[["laut Gruppe der beste Döner","best döner, says the group"],["eine Straße voller Frühstücksläden","a street full of breakfast places"],["Frühstück am Wasser","breakfast by the water"],["Frühstück","breakfast"],["uigurisch","Uyghur"],["jemenitisch","Yemeni"],["syrisch","Syrian"],["Schwarzmeerküche","Black Sea food"],["afrikanisch","African"],["italienisch","Italian"],["afghanisch","Afghan"],["persisch","Persian"],["libanesisch","Lebanese"],["pakistanisch","Pakistani"],["asiatisch","Asian"],["authentisch","authentic"],["Hausmannskost","home cooking"],["einer der besten","one of the best"],["Preis-Leistung","good value"],["gutes Tatlı","good desserts"],["bestellen","order this"],["Knoblauchbrot","garlic bread"],["viele Cafés und Lokale","lots of cafés and places"],["japanischer Cheesecake","Japanese cheesecake"],["Buchcafé","book café"],["Bibliothekscafé","library café"],["Schokolade","chocolate"],["Kaffee","coffee"],["warme Cookies","warm cookies"],["kalte Baklava","cold baklava"],["günstige Kette","cheap chain"],["nachts","late night"],["Nudeln","noodles"]];
+const NOTE_EN=[["mexikanisch","Mexican"],["Dachterrasse","rooftop"],["im Wald","in the forest"],["laut Gruppe der beste Döner","best döner, says the group"],["eine Straße voller Frühstücksläden","a street full of breakfast places"],["Frühstück am Wasser","breakfast by the water"],["Frühstück","breakfast"],["uigurisch","Uyghur"],["jemenitisch","Yemeni"],["syrisch","Syrian"],["Schwarzmeerküche","Black Sea food"],["afrikanisch","African"],["italienisch","Italian"],["afghanisch","Afghan"],["persisch","Persian"],["libanesisch","Lebanese"],["pakistanisch","Pakistani"],["asiatisch","Asian"],["authentisch","authentic"],["Hausmannskost","home cooking"],["einer der besten","one of the best"],["Preis-Leistung","good value"],["gutes Tatlı","good desserts"],["bestellen","order this"],["Knoblauchbrot","garlic bread"],["viele Cafés und Lokale","lots of cafés and places"],["japanischer Cheesecake","Japanese cheesecake"],["Buchcafé","book café"],["Bibliothekscafé","library café"],["Schokolade","chocolate"],["Kaffee","coffee"],["warme Cookies","warm cookies"],["kalte Baklava","cold baklava"],["günstige Kette","cheap chain"],["nachts","late night"],["Nudeln","noodles"]];
 const noteL=s=>{if(LANG!=="en"||!s)return s;for(const[a,b]of NOTE_EN)s=s.split(a).join(b);return s};
 const kindL=k=>LANG==="en"?KIND_EN[k]:F[k].t;
 const areaL=d=>LANG==="en"?(GROUP_EN[d]||d):d;
@@ -68,7 +72,7 @@ const TABS=[
  {id:"verkehr",i:"train",s:{de:"Istanbulkart, Taxi, Nacht",en:"Istanbulkart, taxi, night"},g:[{r:["istanbulkart","rechner","flughafen","taxi","dolmus","nacht","ausfluege"]},{h:{de:"Planen",en:"Planning"},r:["links"]}]},
  {id:"essen",i:"fork"},
  {id:"alltag",i:"bag",s:{de:"Alles für die ersten Wochen",en:"Everything for the first weeks"},g:[{h:{de:"Ankommen",en:"Arriving"},r:["sim","imei","aufenthalt","wohnen"]},{h:{de:"Jeden Tag",en:"Every day"},r:["geld","einkaufen","pazar","wlan"]},{h:{de:"Sicherheit",en:"Safety"},r:["notfall"]}]},
- {id:"entdecken",i:"compass",s:{de:"Sehen, Museen, Viertel",en:"Sights, museums, neighbourhoods"},g:[{r:["sehen","muzekart","viertel","ausfluege"]},{h:{de:"Über die Seite",en:"About"},r:["danke","datenschutz"]}]}
+ {id:"entdecken",i:"compass",s:{de:"Sehen, Museen, Viertel",en:"Sights, museums, neighbourhoods"},g:[{r:["events","sehen","muzekart","viertel","ausfluege"]},{h:{de:"Über die Seite",en:"About"},r:["danke","datenschutz"]}]}
 ];
 
 /* ---------- Food-Spots, Bewertungen ---------- */
@@ -130,14 +134,88 @@ const group=(g,fn)=>`${g.h?`<div class="gh">${esc(g.h)}</div>`:'<div style="heig
 const navbar=(t,back,extra="")=>`<header class="nav"><div class="wrap">${back?`<button class="back" data-back>${svg("backc")}<span>${esc(back)}</span></button>`:""}<span class="nav-t">${esc(t)}</span>${extra}</div></header>`;
 const langBtn=()=>`<button class="navr" data-lang>${LANG==="de"?"EN":"DE"}</button>`;
 
-/* ---------- Heute ---------- */
-function istDay(){try{const w=new Intl.DateTimeFormat("en-US",{timeZone:"Europe/Istanbul",weekday:"short"}).format(new Date());return["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].indexOf(w)}catch(e){return new Date().getDay()}}
+/* ---------- Heute: Wetter, Kurs, Hinweise, Events ---------- */
+const HT={
+de:{wx:["Klar","Heiter","Wolkig","Bewölkt","Nebel","Niesel","Regen","Schnee","Schauer","Gewitter"],tomorrow:"Morgen",rainAt:h=>`Regen wahrscheinlich ab ${h} Uhr, Schirm mitnehmen`,rainTom:"Morgen wird es wohl nass",sunset:t=>`Sonnenuntergang ${t}`,sunsetD:"Schön von Galata, Çamlıca oder der Fähre nach Kadıköy",
+ rate:r=>`1 € = ${r} TL`,rateD:(x,d)=>`100 TL ≈ ${x} € · Kurs vom ${d}`,
+ hol:n=>`Feiertag: ${n}`,holD:"Banken und Ämter zu. Öffis sind an Feiertagen oft kostenlos, kurz bei İBB prüfen.",eve:n=>`Morgen Feiertag: ${n}`,eveD:"Ämter heute nur bis mittags, abends viel Verkehr. Nachtmetro fährt.",
+ mon:"Montag: viele Museen zu",monD:"Dolmabahçe, Istanbul Modern, Pera Museum. Topkapı ist offen.",tue:"Dienstag: Topkapı-Palast zu",tueD:"Dafür sind Dolmabahçe und die meisten anderen Museen offen.",
+ fri:"Freitagsgebet: Moscheen ca. 12–14:30 Uhr voll",friD:"Besichtigungen besser vormittags oder später.",
+ ev:"Events",evMore:"Mehr Events und Ticketseiten",evNote:"Termine ohne Gewähr, vorher beim Veranstalter prüfen.",free:"kostenlos",until:d=>`bis ${d}`,runs:d=>`läuft bis ${d}`,
+ mons:["Jan","Feb","Mär","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nov","Dez"]},
+en:{wx:["Clear","Mostly clear","Partly cloudy","Cloudy","Fog","Drizzle","Rain","Snow","Showers","Thunderstorm"],tomorrow:"Tomorrow",rainAt:h=>`Rain likely from ${h}:00, take an umbrella`,rainTom:"Tomorrow looks wet",sunset:t=>`Sunset ${t}`,sunsetD:"Best from Galata, Çamlıca or the ferry to Kadıköy",
+ rate:r=>`€1 = ${r} TL`,rateD:(x,d)=>`100 TL ≈ €${x} · rate of ${d}`,
+ hol:n=>`Public holiday: ${n}`,holD:"Banks and offices closed. Public transport is often free on holidays, check İBB.",eve:n=>`Holiday tomorrow: ${n}`,eveD:"Offices close at noon today, heavy traffic in the evening. Night metro runs.",
+ mon:"Monday: many museums closed",monD:"Dolmabahçe, Istanbul Modern, Pera Museum. Topkapı is open.",tue:"Tuesday: Topkapı Palace closed",tueD:"Dolmabahçe and most other museums are open.",
+ fri:"Friday prayer: mosques busy approx. 12–14:30",friD:"Better visit in the morning or later.",
+ ev:"Events",evMore:"More events and ticket sites",evNote:"Dates without guarantee, check with the organiser.",free:"free",until:d=>`until ${d}`,runs:d=>`on until ${d}`,
+ mons:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]}};
+const h=k=>HT[LANG][k];
+/* Gesetzliche Feiertage; Bayram-Daten nach Diyanet. Vortag (arife) = halber Tag. */
+const HOL={"2026-01-01":["Neujahr","New Year"],"2026-03-20":["Ramazan Bayramı","Ramadan Feast"],"2026-03-21":["Ramazan Bayramı","Ramadan Feast"],"2026-03-22":["Ramazan Bayramı","Ramadan Feast"],"2026-04-23":["Tag der Kinder","Children’s Day"],"2026-05-01":["Tag der Arbeit","Labour Day"],"2026-05-19":["Tag der Jugend","Youth Day"],"2026-05-27":["Kurban Bayramı","Feast of Sacrifice"],"2026-05-28":["Kurban Bayramı","Feast of Sacrifice"],"2026-05-29":["Kurban Bayramı","Feast of Sacrifice"],"2026-05-30":["Kurban Bayramı","Feast of Sacrifice"],"2026-07-15":["Tag der Demokratie","Democracy Day"],"2026-08-30":["Tag des Sieges","Victory Day"],"2026-10-29":["Tag der Republik","Republic Day"],
+ "2027-01-01":["Neujahr","New Year"],"2027-03-09":["Ramazan Bayramı","Ramadan Feast"],"2027-03-10":["Ramazan Bayramı","Ramadan Feast"],"2027-03-11":["Ramazan Bayramı","Ramadan Feast"],"2027-04-23":["Tag der Kinder","Children’s Day"],"2027-05-01":["Tag der Arbeit","Labour Day"],"2027-05-16":["Kurban Bayramı","Feast of Sacrifice"],"2027-05-17":["Kurban Bayramı","Feast of Sacrifice"],"2027-05-18":["Kurban Bayramı","Feast of Sacrifice"],"2027-05-19":["Kurban Bayramı, Tag der Jugend","Feast of Sacrifice, Youth Day"],"2027-07-15":["Tag der Demokratie","Democracy Day"],"2027-08-30":["Tag des Sieges","Victory Day"],"2027-10-29":["Tag der Republik","Republic Day"]};
+function istDate(off=0){try{return new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Istanbul"}).format(new Date(Date.now()+off*864e5))}catch(e){return new Date(Date.now()+off*864e5).toISOString().slice(0,10)}}
+function istDay(){return new Date(istDate()+"T12:00:00Z").getUTCDay()}
+const num=(x,d)=>x.toLocaleString(LANG==="de"?"de-DE":"en-GB",{minimumFractionDigits:d,maximumFractionDigits:d});
+const fmtD=s=>{const [y,m,d]=s.split("-").map(Number);return`${d}${LANG==="de"?".":""} ${h("mons")[m-1]}`};
+
+/* Live-Daten: Wetter (Open-Meteo), Kurs (EZB über Frankfurter), Events (Supabase). Zwischenspeicher im Browser, damit offline das Letzte steht. */
+let LIVE=store.get("ist-live",{});
+const AGE={wx:30*6e4,fx:6*36e5,ev:30*6e4};
+function loadLive(){
+  const now=Date.now(),get=(k,url,map,opt)=>{if(LIVE[k]&&now-LIVE[k].at<AGE[k])return;
+    (opt?rpc(url):fetch(url).then(r=>{if(!r.ok)throw 0;return r.json()})).then(d=>{LIVE[k]={at:Date.now(),d:map(d)};store.set("ist-live",LIVE);const el=document.getElementById("heute");if(el)el.outerHTML=heuteHTML()}).catch(()=>{})};
+  get("wx","https://api.open-meteo.com/v1/forecast?latitude=41.01&longitude=28.98&current=temperature_2m,weather_code&hourly=precipitation_probability&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunset&forecast_days=2&timezone=Europe%2FIstanbul",
+    d=>({t:d.current.temperature_2m,c:d.current.weather_code,hr:d.hourly.time.map((t,i)=>[t,d.hourly.precipitation_probability[i]]).slice(0,24),mx:d.daily.temperature_2m_max,mn:d.daily.temperature_2m_min,pp:d.daily.precipitation_probability_max,wc:d.daily.weather_code,ss:d.daily.sunset,day:d.daily.time[0]}));
+  get("fx","https://api.frankfurter.dev/v1/latest?base=EUR&symbols=TRY",d=>({r:d.rates.TRY,date:d.date}));
+  get("ev","get_events",d=>d,true);
+}
+const wxIdx=c=>c===0?0:c<=1?1:c===2?2:c===3?3:c<=48?4:c<=57?5:c<=67?6:c<=77?7:c<=82?8:c<=86?7:9;
+const wxIco=c=>{const i=wxIdx(c);return i<=1?["sun","--c4"]:i<=4?["cloud","--c7"]:["rain","--c1"]};
+function wxRows(){
+  const w=LIVE.wx&&LIVE.wx.d;if(!w||w.day!==istDate())return"";
+  const [ic,col]=wxIco(w.c),hr=new Date().toLocaleString("en-US",{timeZone:"Europe/Istanbul",hour:"numeric",hour12:false})|0;
+  const wet=w.hr.find(([t,p])=>+t.slice(11,13)>=hr&&p>=50);
+  const tip=wet?h("rainAt")(+wet[0].slice(11,13)):w.pp[1]>=50?h("rainTom"):`${h("tomorrow")}: ${h("wx")[wxIdx(w.wc[1])]}, ${Math.round(w.mn[1])}–${Math.round(w.mx[1])}°`;
+  const ss=w.ss[0].slice(11,16);
+  return`<div class="row ic">${ico(ic,col)}<div class="l"><div class="t">${Math.round(w.t)}° · ${esc(h("wx")[wxIdx(w.c)])} <span class="mut">${Math.round(w.mn[0])}–${Math.round(w.mx[0])}°</span></div><div class="d">${esc(tip)}</div></div></div>
+   <div class="row ic">${ico("sunset","--c2")}<div class="l"><div class="t">${esc(h("sunset")(ss))}</div><div class="d">${esc(h("sunsetD"))}</div></div></div>`;
+}
+function fxRow(){
+  const f=LIVE.fx&&LIVE.fx.d;if(!f)return"";
+  return`<button class="row ic" data-go="geld">${ico("money","--c3")}<div class="l"><div class="t">${esc(h("rate")(num(f.r,2)))}</div><div class="d">${esc(h("rateD")(num(100/f.r,2),fmtD(f.date)))}</div></div>${svg("chev","chev")}</button>`;
+}
+function hintRows(d){
+  const out=[],hol=HOL[istDate()],eve=HOL[istDate(1)],L=LANG==="de"?0:1;
+  const row=(i,c,t,s)=>`<div class="row ic">${ico(i,c)}<div class="l"><div class="t">${esc(t)}</div><div class="d">${esc(s)}</div></div></div>`;
+  if(hol)out.push(row("cal","--c2",h("hol")(hol[L]),h("holD")));
+  else if(eve)out.push(row("cal","--c4",h("eve")(eve[L]),h("eveD")));
+  if(d===1)out.push(row("dome","--c6",h("mon"),h("monD")));
+  if(d===2)out.push(row("dome","--c6",h("tue"),h("tueD")));
+  if(d===5)out.push(row("dome","--c6",h("fri"),h("friD")));
+  return out.join("");
+}
+function evHTML(){
+  const ev=(LIVE.ev&&LIVE.ev.d||[]).filter(e=>(e.ends||e.starts)>=istDate());
+  const more=`<button class="row ic" data-go="events">${ico("ticket","--c8")}<div class="l"><div class="t">${esc(h("evMore"))}</div></div>${svg("chev","chev")}</button>`;
+  const rows=ev.slice(0,6).map(e=>{
+    const running=e.starts<=istDate()&&e.ends;
+    const [,em,ed]=(running?e.ends:e.starts).split("-").map(Number);
+    const when=`<span class="dt${running?" now":""}"><small>${h("mons")[em-1]}</small><b>${ed}</b></span>`;
+    const sub=[e.place,running?h("runs")(fmtD(e.ends)):e.ends?h("until")(fmtD(e.ends)):""].filter(Boolean).join(" · ");
+    const inner=`${when}<div class="l"><div class="t">${esc(LANG==="en"&&e.title_en||e.title)}${e.free?` <span class="free">${h("free")}</span>`:""}</div>${sub?`<div class="d">${esc(sub)}</div>`:""}</div>`;
+    return e.url?`<a class="row ic" href="${esc(e.url)}" target="_blank" rel="noopener">${inner}${svg("ext","ext")}</a>`:`<div class="row ic">${inner}</div>`;
+  }).join("");
+  return`<div class="gh">${h("ev")}</div><div class="grp">${rows}${more}</div>${rows?`<div class="gf">${esc(h("evNote"))}</div>`:""}`;
+}
 function heuteHTML(){
   const d=istDay(),rows=PG("pazar").g[0].r,market=(rows.find(r=>r[0]===u("days")[d]||r[0]===["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][d])||[])[1]||u("monMarket");
-  const night=d===5||d===6;
-  return`<div class="gh">${u("today")} · ${u("days")[d]}</div><div class="grp">
+  const night=d===5||d===6||!!HOL[istDate(1)];
+  return`<div id="heute"><div class="gh">${u("today")} · ${u("days")[d]}</div><div class="grp">
+   ${wxRows()}${hintRows(d)}${fxRow()}
    <button class="row ic" data-go="pazar">${ico("market","--c8")}<div class="l"><div class="t">${esc(u("marketToday"))}</div><div class="d">${esc(market)}</div></div>${svg("chev","chev")}</button>
-   <button class="row ic" data-go="nacht">${ico("moon","--c5")}<div class="l"><div class="t">${esc(night?u("nightYes"):u("nightNo"))}</div></div>${svg("chev","chev")}</button></div>`;
+   <button class="row ic" data-go="nacht">${ico("moon","--c5")}<div class="l"><div class="t">${esc(night?u("nightYes"):u("nightNo"))}</div></div>${svg("chev","chev")}</button></div>
+   ${evHTML()}</div>`;
 }
 
 /* ---------- Start ---------- */
@@ -354,6 +432,7 @@ de:{intro:"Diese Seite ist ein privates, nicht kommerzielles Projekt. Hier steht
   ["Bewertungen, Vorschläge, Meldungen",["Damit jede Person pro Spot nur einmal abstimmen kann, erzeugt die Seite eine zufällige Geräte-Kennung und speichert sie in deinem Browser. Sie enthält keinen Namen und keine Gerätedaten.","Zusammen mit deinen Stimmen, Vorschlägen, Fehlermeldungen und Nachrichten wird sie bei Supabase gespeichert (Server in Frankfurt, Supabase Inc., USA). Kontaktdaten aus dem Kontaktformular sind nicht öffentlich und werden nur zur Antwort genutzt.","Rechtsgrundlage: deine Einwilligung durch das aktive Abstimmen oder Absenden (Art. 6 Abs. 1 lit. a DSGVO)."]],
   ["Im Browser gespeichert",["Sprache, abgehakte Schritte, Rechner-Einstellungen und die Geräte-Kennung liegen nur in deinem Browser (Local Storage). Für den Offline-Modus legt die Seite Dateien im Browser-Cache ab. Das ist alles löschbar, siehe unten."]],
   ["Standort",["Nur wenn du „In der Nähe“ antippst, fragt der Browser nach deinem Standort. Er wird nur auf deinem Gerät zum Sortieren genutzt und nirgends gespeichert oder gesendet."]],
+  ["Wetter, Wechselkurs, Events",["Die Startseite lädt das Wetter von Open-Meteo (Schweiz) und den Euro-Kurs der EZB über Frankfurter (frankfurter.dev). Dabei wird deine IP-Adresse an diese Dienste übertragen, sonst nichts. Die Event-Liste kommt von Supabase, ohne Geräte-Kennung. Die Werte werden im Browser zwischengespeichert. Rechtsgrundlage: berechtigtes Interesse."]],
   ["Links nach außen",["Links zu Google Maps, Google Docs, Instagram und anderen Seiten öffnen fremde Angebote. Dort gelten deren Datenschutzregeln."]],
   ["Deine Rechte",["Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit und Widerspruch sowie auf Beschwerde bei einer Datenschutz-Aufsichtsbehörde. Eine Einwilligung kannst du jederzeit widerrufen.","Mit dem Knopf unten löschst du sofort alles, was zu deiner Geräte-Kennung gespeichert ist."]]
  ],
@@ -367,6 +446,7 @@ en:{intro:"This site is a private, non-commercial project. Here’s what data is
   ["Ratings, suggestions, reports",["So that everyone can vote only once per spot, the site creates a random device ID and stores it in your browser. It contains no name and no device data.","It is stored together with your votes, suggestions, reports and messages at Supabase (servers in Frankfurt, Supabase Inc., USA). Contact details from the credit or contact form are not public and only used to reply.","Legal basis: your consent by actively voting or sending (Art. 6(1)(a) GDPR)."]],
   ["Stored in your browser",["Language, checked steps, calculator settings and the device ID live only in your browser (local storage). For offline mode the site keeps files in the browser cache. You can delete all of it, see below."]],
   ["Location",["Only when you tap “Near me” does the browser ask for your location. It’s used on your device to sort the list and is never stored or sent."]],
+  ["Weather, exchange rate, events",["The home page loads the weather from Open-Meteo (Switzerland) and the ECB euro rate via Frankfurter (frankfurter.dev). Your IP address is sent to these services, nothing else. The event list comes from Supabase, without the device ID. Values are cached in your browser. Legal basis: legitimate interest."]],
   ["External links",["Links to Google Maps, Google Docs, Instagram and other sites open third-party services with their own privacy rules."]],
   ["Your rights",["You have the right to access, correction, deletion, restriction, data portability and objection, and to complain to a data protection authority. You can withdraw consent at any time.","The button below instantly deletes everything stored for your device ID."]]
  ],
@@ -408,7 +488,7 @@ function showTab(id,keepScroll){
   const t=TABS.find(x=>x.id===id)||TABS[0];tab=t.id;
   if(map&&t.id!=="essen"){map.remove();map=null}
   main.innerHTML=t.id==="start"?startHTML():t.id==="essen"?essenHTML():tabHTML(t);
-  if(t.id==="start")bindStart();if(t.id==="essen")bindEssen();
+  if(t.id==="start"){bindStart();loadLive()}if(t.id==="essen")bindEssen();
   drawTabbar();if(!keepScroll)window.scrollTo(0,0);navScroll();
 }
 function openPage(id){

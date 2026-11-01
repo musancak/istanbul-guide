@@ -1,5 +1,5 @@
 /* Offline: eigene Dateien und Leaflet aus dem Cache, im Hintergrund aktualisieren. Kartenkacheln nur, was schon angesehen wurde. */
-const V = "ist-v7";
+const V = "ist-v8";
 const CORE = ["./", "index.html", "data.js", "app.js", "coords.json", "manifest.webmanifest", "icon-192.png",
   "leaflet/leaflet.min.css", "leaflet/leaflet.min.js", "rechtliches.html"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(V).then(c => c.addAll(CORE.map(u => new Request(u, { cache: "reload" })))).then(() => self.skipWaiting())); });
