@@ -21,7 +21,7 @@ muzekart:{t:"Müzekart",i:"ticket",c:"--c4",s:"Karte für staatliche Museen",g:[
 viertel:{t:"Viertel für Studierende",i:"pin",c:"--c1",s:"Wo man sich trifft",g:[{"r":[["Beşiktaş","Studentisch, Cafés, Frühstück, nah am Wasser"],["Kadıköy und Moda","Bars, Second-Hand, Sonnenuntergang an der Küste"],["Beyoğlu","Ausgehen, Galerien, Galata"],["Şişli","Zentral, Metro, Einkaufszentren"],["Fatih","Altstadt, Moscheen, ruhige Teegärten"],["Balat","Bunte Häuser, gut für Fotos"]]}]},
 rechner:{t:"Monatskarten-Rechner",i:"card",c:"--c3",s:"Lohnt sich die Monatskarte?",g:[]},
 vorschlag:{t:"Spot vorschlagen",i:"plus",c:"--c2",s:"Erscheint nach kurzer Prüfung",g:[]},
-danke:{t:"Danke und Quellen",i:"people",c:"--c5",s:"Woher die Infos kommen",g:[]},
+danke:{t:"Quellen",i:"people",c:"--c5",s:"Woher die Infos kommen",g:[]},
 datenschutz:{t:"Datenschutz",i:"doc",c:"--c7",s:"Und Kontakt",g:[]}
 };
 
@@ -47,7 +47,7 @@ muzekart:{t:"Müzekart",s:"Pass for state museums",g:[{"r":["The Müzekart gets 
 viertel:{t:"Student neighbourhoods",s:"Where people meet",g:[{"r":[["Beşiktaş","Student vibe, cafés, breakfast, by the water"],["Kadıköy and Moda","Bars, second-hand, sunset on the coast"],["Beyoğlu","Nights out, galleries, Galata"],["Şişli","Central, metro, malls"],["Fatih","Old town, mosques, quiet tea gardens"],["Balat","Colourful houses, good for photos"]]}]},
 rechner:{t:"Monthly pass calculator",s:"Does the monthly pass pay off?",g:[]},
 vorschlag:{t:"Suggest a spot",s:"Shown after a quick check",g:[]},
-danke:{t:"Thanks and sources",s:"Where the info comes from",g:[]},
+danke:{t:"Sources",s:"Where the info comes from",g:[]},
 datenschutz:{t:"Privacy",s:"And contact",g:[]}
 };
 

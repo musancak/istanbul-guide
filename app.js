@@ -322,35 +322,15 @@ function bindVorschlag(){
     b.disabled=false};
 }
 
-/* ---------- Danke und Quellen ---------- */
+/* ---------- Quellen ---------- */
 const SOURCES=[
- {id:"offiziell",de:["Offizielle Seiten","İBB, Metro İstanbul, Istanbulkart, Şehir Hatları, Migrationsbehörde, Müzekart"],en:["Official sources","İBB, Metro İstanbul, Istanbulkart, Şehir Hatları, migration authority, Müzekart"],own:1},
- {id:"fooddoc",de:["Food-Spots-Liste","Google Doc aus der Gruppe SoSe 2026"],en:["Food spot list","Google Doc from the SoSe 2026 group"]},
- {id:"maps500",de:["Liste mit 500 Spots","Google Maps, aus der Gruppe WiSe 26/27"],en:["List with 500 spots","Google Maps, from the WiSe 26/27 group"]},
- {id:"chats",de:["Tipps aus den Gruppenchats","Frühstück, Lahmacun, Bank, eSIM und mehr"],en:["Tips from the group chats","Breakfast, lahmacun, banks, eSIM and more"]}
+ {de:["Offizielle Seiten","İBB, Metro İstanbul, Istanbulkart, Şehir Hatları, Migrationsbehörde, Müzekart"],en:["Official sources","İBB, Metro İstanbul, Istanbulkart, Şehir Hatları, migration authority, Müzekart"]},
+ {de:["Food-Spots","Empfehlungen von Studierenden, geprüft und ergänzt"],en:["Food spots","Recommendations from students, checked and extended"]}
 ];
-const DK={de:{intro:"Die Infoseiten sind selbst geschrieben, nach offiziellen Seiten. Food-Spots und Tipps kommen aus den Gruppen. Wer etwas davon erstellt hat, wird hier genannt, sobald es bestätigt ist.",open:"Noch nicht bestätigt",by:"Von",claimH:"Ist etwas davon von dir?",claimIntro:"Melde dich. Nach einer kurzen Prüfung wirst du hier genannt. Deine Kontaktdaten sind nicht öffentlich.",src:"Was ist von dir?",name:"Name, wie er hier stehen soll",contact:"Kontakt (Instagram, E-Mail oder Telefon)",proof:"Wie kannst du zeigen, dass es von dir ist?",proofP:"z. B. Link zum Original, Bearbeitungsrechte, Screenshot auf Anfrage",send:"Meldung senden",thanks:"Danke! Wir melden uns und nennen dich nach der Prüfung.",err:"Senden hat nicht geklappt. Bitte später nochmal."},
- en:{intro:"The info pages are written by us from official sources. Food spots and tips come from the groups. Whoever created any of that gets credited here once it’s confirmed.",open:"Not confirmed yet",by:"By",claimH:"Did you make any of this?",claimIntro:"Get in touch. After a quick check you’ll be credited here. Your contact details stay private.",src:"What did you make?",name:"Name as it should appear",contact:"Contact (Instagram, email or phone)",proof:"How can you show it’s yours?",proofP:"e.g. link to the original, edit rights, screenshot on request",send:"Send",thanks:"Thanks! We’ll get back to you and credit you after the check.",err:"Sending failed. Please try again later."}};
-let CREDITS=null;
+const DK={de:{intro:"Die Infoseiten sind selbst geschrieben, nach offiziellen Seiten. Preise und Regeln ändern sich, im Zweifel gilt die offizielle Seite."},
+ en:{intro:"The info pages are our own, written from official sources. Prices and rules change, if in doubt the official site applies."}};
 function dankeHTML(){const t=DK[LANG];
-  return`<p class="gf" style="margin:4px 16px 0">${t.intro}</p><div style="height:14px"></div><div class="grp" id="srcs">${srcRows()}</div>
-  <div class="gh">${t.claimH}</div><p class="gf" style="margin:0 16px 10px">${t.claimIntro}</p>
-  <form id="cf" class="grp form" autocomplete="off">
-   <label class="row"><span class="fl">${t.src}</span><select id="cs">${SOURCES.filter(s=>!s.own).map(s=>`<option value="${s.id}">${esc(s[LANG][0])}</option>`).join("")}</select></label>
-   <label class="row"><span class="fl">${t.name}</span><input id="cn" required minlength="2" maxlength="80"></label>
-   <label class="row"><span class="fl">${t.contact}</span><input id="cc" required minlength="3" maxlength="120"></label>
-   <label class="row"><span class="fl">${t.proof}</span><textarea id="cp" maxlength="500" rows="3" placeholder="${esc(t.proofP)}"></textarea></label>
-  </form><button class="cta" id="csend" form="cf" type="submit">${t.send}</button><p class="gf" id="cmsg" role="status"></p><p class="gf"><a href="rechtliches.html#istanbul" style="color:inherit">${LANG==="de"?"Datenschutz":"Privacy"}</a></p>`}
-function srcRows(){const t=DK[LANG];return SOURCES.map(s=>{const names=(CREDITS||[]).filter(c=>c.source===s.id).map(c=>c.credit);
-  const inner=`<div class="l"><div class="t">${esc(s[LANG][0])}</div><div class="d">${esc(s[LANG][1])}</div>${s.own?"":`<div class="d cr">${names.length?`${t.by} ${esc(names.join(", "))}`:t.open}</div>`}</div>`;
-  return s.u?`<a class="row" href="${s.u}" target="_blank" rel="noopener">${inner}${svg("ext","ext")}</a>`:`<div class="row">${inner}</div>`}).join("")}
-function bindDanke(){const t=DK[LANG],$=id=>document.getElementById(id);
-  if(!CREDITS)rpc("credits").then(c=>{CREDITS=c||[];const el=$("srcs");if(el)el.innerHTML=srcRows()}).catch(()=>{});
-  $("cf").onsubmit=async e=>{e.preventDefault();const b=$("csend");b.disabled=true;
-    try{await rpc("claim",{p_source:$("cs").value,p_name:$("cn").value,p_contact:$("cc").value,p_proof:$("cp").value,p_device:DEVICE});$("cmsg").textContent=t.thanks;$("cf").reset();toast(t.thanks)}
-    catch(err){$("cmsg").textContent=t.err}
-    b.disabled=false};
-}
+  return`<p class="gf" style="margin:4px 16px 0">${t.intro}</p><div style="height:14px"></div><div class="grp">${SOURCES.map(s=>`<div class="row"><div class="l"><div class="t">${esc(s[LANG][0])}</div><div class="d">${esc(s[LANG][1])}</div></div></div>`).join("")}</div>`}
 
 /* ---------- „Stimmt nicht mehr“ auf jeder Infoseite ---------- */
 const RP={de:{btn:"Stimmt etwas nicht mehr?",ph:"Was ist falsch oder veraltet? z. B. „Einzelfahrt kostet jetzt 50 TL“",send:"Melden",thanks:"Danke! Wir prüfen das und passen die Seite an.",err:"Senden hat nicht geklappt. Bitte später nochmal.",note:"Bitte keine persönlichen Daten eintragen."},
@@ -370,7 +350,7 @@ de:{intro:"Diese Seite ist ein privates, nicht kommerzielles Projekt. Hier steht
   ["Verantwortlich",[OWNER+(OWNER_MAIL?" · "+OWNER_MAIL:""),"Kontakt auch über das Formular unten."]],
   ["Hosting (GitHub Pages)",["Die Seite liegt bei GitHub (GitHub Inc., USA). Beim Aufruf verarbeitet GitHub technisch nötige Daten wie IP-Adresse und Zeitpunkt, um die Seite auszuliefern und vor Angriffen zu schützen. Rechtsgrundlage: berechtigtes Interesse (Art. 6 Abs. 1 lit. f DSGVO)."]],
   ["Karte und Programmbibliothek",["Die Karte lädt Kartenbilder von Esri (Esri Inc., USA), die Kartenfunktion Leaflet liegt auf dieser Seite selbst. Beim Laden der Karte wird deine IP-Adresse an Esri übertragen. Ohne diesen Abruf funktioniert die Karte nicht. Rechtsgrundlage: berechtigtes Interesse."]],
-  ["Bewertungen, Vorschläge, Meldungen",["Damit jede Person pro Spot nur einmal abstimmen kann, erzeugt die Seite eine zufällige Geräte-Kennung und speichert sie in deinem Browser. Sie enthält keinen Namen und keine Gerätedaten.","Zusammen mit deinen Stimmen, Vorschlägen, Fehlermeldungen und Nachrichten wird sie bei Supabase gespeichert (Server in Frankfurt, Supabase Inc., USA). Kontaktdaten aus dem Urheber- oder Kontaktformular sind nicht öffentlich und werden nur zur Antwort genutzt.","Rechtsgrundlage: deine Einwilligung durch das aktive Abstimmen oder Absenden (Art. 6 Abs. 1 lit. a DSGVO)."]],
+  ["Bewertungen, Vorschläge, Meldungen",["Damit jede Person pro Spot nur einmal abstimmen kann, erzeugt die Seite eine zufällige Geräte-Kennung und speichert sie in deinem Browser. Sie enthält keinen Namen und keine Gerätedaten.","Zusammen mit deinen Stimmen, Vorschlägen, Fehlermeldungen und Nachrichten wird sie bei Supabase gespeichert (Server in Frankfurt, Supabase Inc., USA). Kontaktdaten aus dem Kontaktformular sind nicht öffentlich und werden nur zur Antwort genutzt.","Rechtsgrundlage: deine Einwilligung durch das aktive Abstimmen oder Absenden (Art. 6 Abs. 1 lit. a DSGVO)."]],
   ["Im Browser gespeichert",["Sprache, abgehakte Schritte, Rechner-Einstellungen und die Geräte-Kennung liegen nur in deinem Browser (Local Storage). Für den Offline-Modus legt die Seite Dateien im Browser-Cache ab. Das ist alles löschbar, siehe unten."]],
   ["Standort",["Nur wenn du „In der Nähe“ antippst, fragt der Browser nach deinem Standort. Er wird nur auf deinem Gerät zum Sortieren genutzt und nirgends gespeichert oder gesendet."]],
   ["Links nach außen",["Links zu Google Maps, Google Docs, Instagram und anderen Seiten öffnen fremde Angebote. Dort gelten deren Datenschutzregeln."]],
@@ -433,7 +413,7 @@ function showTab(id,keepScroll){
 function openPage(id){
   if(!P[id])return;page=id;
   pane.innerHTML=pageHTML(id,tabT(TABS.find(x=>x.id===tab)||TABS[0]));pane.scrollTop=0;
-  const binds={rechner:bindRechner,vorschlag:bindVorschlag,danke:bindDanke,datenschutz:bindDatenschutz};(binds[id]||bindReport)(id);
+  const binds={rechner:bindRechner,vorschlag:bindVorschlag,datenschutz:bindDatenschutz};(binds[id]||bindReport)(id);
   requestAnimationFrame(()=>{pane.classList.add("open");main.classList.add("pushed")});
   paneScroll();
 }
