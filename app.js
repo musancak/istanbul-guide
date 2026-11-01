@@ -103,6 +103,7 @@ async function loadRemote(){
   if(tab==="essen")list();
 }
 function vote(id,dir){
+  zaehl("bewertet");
   const old=MINE[id]||0,nv=old===dir?0:dir;
   SCORES[id]=(SCORES[id]||0)-old+nv;if(nv)MINE[id]=nv;else delete MINE[id];
   store.set("ist-scores",SCORES);store.set("ist-mine",MINE);
@@ -317,7 +318,7 @@ function bindVorschlag(){
   $("sf").onsubmit=async e=>{e.preventDefault();const b=$("ssend");b.disabled=true;
     const d=$("sd").value==="_"?$("sdx").value.trim():$("sd").value;
     try{await rpc("suggest",{p_name:$("sn").value.trim(),p_district:d||"Istanbul",p_note:$("sno").value.trim(),p_kind:$("sk").value,p_device:DEVICE});
-      $("smsg").textContent=u("fThanks");$("sf").reset();$("sdo").hidden=true;toast(u("fThanks"))}
+      zaehl("vorschlag");$("smsg").textContent=u("fThanks");$("sf").reset();$("sdo").hidden=true;toast(u("fThanks"))}
     catch(err){$("smsg").textContent=u("fErr")}
     b.disabled=false};
 }
