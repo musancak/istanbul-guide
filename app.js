@@ -531,6 +531,6 @@ pane.addEventListener("touchend",()=>{if(sx===null)return;sx=null;pane.classList
 
 document.documentElement.lang=LANG;
 route();
-fetch("coords.json").then(r=>r.json()).then(c=>{COORDS=c;for(const s of SPOTS)s.ll=COORDS[s.id]||s.ll;if(tab==="essen")list(false)}).catch(()=>{});
+fetch("coords.json",{cache:"no-cache"}).then(r=>r.json()).then(c=>{COORDS=c;for(const s of SPOTS)s.ll=COORDS[s.id]||s.ll;if(tab==="essen")list(false)}).catch(()=>{});
 loadRemote();
 if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("sw.js").catch(()=>{});
