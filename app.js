@@ -71,7 +71,7 @@ const TABS=[
  {id:"start",i:"home"},
  {id:"verkehr",i:"train",s:{de:"Istanbulkart, Taxi, Nacht",en:"Istanbulkart, taxi, night"},g:[{r:["istanbulkart","rechner","flughafen","taxi","dolmus","nacht","ausfluege"]},{h:{de:"Planen",en:"Planning"},r:["links"]}]},
  {id:"essen",i:"fork"},
- {id:"alltag",i:"bag",s:{de:"Alles für die ersten Wochen",en:"Everything for the first weeks"},g:[{h:{de:"Ankommen",en:"Arriving"},r:["sim","imei","aufenthalt","wohnen"]},{h:{de:"Jeden Tag",en:"Every day"},r:["geld","einkaufen","pazar","wlan"]},{h:{de:"Sicherheit",en:"Safety"},r:["notfall"]}]},
+ {id:"alltag",i:"bag",s:{de:"Alles für die ersten Wochen",en:"Everything for the first weeks"},g:[{h:{de:"Ankommen",en:"Arriving"},r:["sim","imei","aufenthalt","wohnen"]},{h:{de:"Jeden Tag",en:"Every day"},r:["geld","einkaufen","pazar","wlan"]},{h:{de:"Gesundheit und Sicherheit",en:"Health and safety"},r:["arzt","notfall"]}]},
  {id:"entdecken",i:"compass",s:{de:"Sehen, Museen, Viertel",en:"Sights, museums, neighbourhoods"},g:[{r:["events","sehen","muzekart","viertel","ausfluege"]},{h:{de:"Über die Seite",en:"About"},r:["danke","datenschutz"]}]}
 ];
 
