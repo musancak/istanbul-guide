@@ -39,18 +39,18 @@ const store={get(k,f){try{const v=localStorage.getItem(k);return v===null?f:JSON
 /* ---------- Sprache ---------- */
 let LANG=store.get("ist-lang",(navigator.language||"de").startsWith("de")?"de":"en");
 const UI={
-de:{start:"Start",verkehr:"Verkehr",essen:"Essen",alltag:"Alltag",entdecken:"Entdecken",sub:"Für Studierende · Stand 2026",search:"Suchen: Taxi, Ramen, e-İkamet …",clear:"Löschen",sos:"Notruf",sosAll:"Alle Notdienste",police:"Polizei",fire:"Feuer",tourist:"Touristen",sosMore:"Nummern zum Abtippen. Mehr unter",first:"Erste Tage",firstNote:"Abhaken wird nur auf diesem Gerät gespeichert.",prices:"Preise auf einen Blick",popular:"Beliebt",today:"Heute",spots:"Food-Spots",spotsSub:n=>`${n} Orte, mit Karte und Bewertung`,foot:"Zusammengestellt aus dem ESI Istanbul Survival Guide (2025/26), den Istanbul-Gruppenchats und der Food-Spot-Liste der Gruppe. Kein offizielles Angebot. Preise ändern sich schnell, vor Ort kurz prüfen.",tabFoot:"Angaben laut ESI Survival Guide und Gruppenchats, Stand 2025/26.",nothing:v=>`Nichts gefunden für „${v}“.`,topics:"Themen",infos:"Infos",
+de:{start:"Start",verkehr:"Verkehr",essen:"Essen",alltag:"Alltag",entdecken:"Entdecken",sub:"Für Studierende · Stand 2026",search:"Suchen: Taxi, Ramen, e-İkamet …",clear:"Löschen",sos:"Notruf",sosAll:"Alle Notdienste",police:"Polizei",fire:"Feuer",tourist:"Ausländer",sosMore:"Nummern zum Abtippen. Mehr unter",first:"Erste Tage",firstNote:"Abhaken wird nur auf diesem Gerät gespeichert.",prices:"Preise auf einen Blick",popular:"Beliebt",today:"Heute",spots:"Food-Spots",spotsSub:n=>`${n} Orte, mit Karte und Bewertung`,foot:"Eigene Texte nach offiziellen Seiten (İBB, Metro İstanbul, Istanbulkart, Migrationsbehörde) sowie Tipps aus den Istanbul-Gruppenchats und der Food-Spot-Liste der Gruppe. Kein offizielles Angebot. Preise ändern sich schnell, vor Ort kurz prüfen.",tabFoot:"Nach offiziellen Seiten, Stand November 2026.",nothing:v=>`Nichts gefunden für „${v}“.`,topics:"Themen",infos:"Infos",
  essenSub:"Food-Spots aus der Gruppe. Antippen öffnet Google Maps, Pfeile zum Bewerten. Punkte auf der Karte sind automatisch gesetzt und können leicht danebenliegen.",list500:"Liste mit 500 Spots",list500d:"Google Maps, aus der Gruppe WiSe 26/27",orig:"Original-Liste",origd:"Google Doc nach Bezirken",all:"Alle",byArea:"Bezirk",byTop:"Beliebt",byNear:"In der Nähe",fq:"Burger, Mantı, Moda …",places:n=>`${n} ${n===1?"Ort":"Orte"}`,none:"Kein Spot passt. Anderen Bezirk oder Begriff probieren.",onMap:n=>`${n} auf der Karte`,openMaps:"In Google Maps öffnen",noGeo:"Standort nicht verfügbar. Erlaube den Zugriff im Browser oder wähle einen Bezirk.",locating:"Standort wird gesucht …",suggest:"Spot vorschlagen",suggestD:"Fehlt dein Lieblingsladen?",fresh:"Neu",offline:"Bewertungen gerade nicht erreichbar.",
- t1:"Fahrt mit Studentenkarte",t2:"Monatskarte Student, 200 Fahrten",t3:"Taxi-Mindestpreis",t4:"Halk Ekmek, 250 g Brot",
- steps:[["s1","Istanbulkart am Flughafen holen","flughafen"],["s2","SIM-Karte kaufen, Pass mitnehmen","sim"],["s3","e-İkamet innerhalb von 30 Tagen","aufenthalt"],["s4","Studenten-Istanbulkart beantragen","istanbulkart"],["s5","Handy-Frist von 120 Tagen notieren","imei"],["s6","Notrufnummern speichern","notfall"]],
- days:["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"],monMarket:"Kleine Märkte in vielen Bezirken",marketToday:"Wochenmarkt heute",nightYes:"Heute Nacht fahren Nachtmetro und Nachtfähre",nightNo:"Nachts fahren heute nur Metrobüs und Nachtbusse",ramadan:"",
+ t1:"Fahrt mit Studentenkarte",t2:"Monatskarte Student",t3:"Taxi-Mindestpreis",t4:"Einzelfahrt voll",
+ steps:[["s1","Istanbulkart am Flughafen holen","flughafen"],["s2","SIM-Karte kaufen, Pass mitnehmen","sim"],["s3","e-İkamet rechtzeitig beantragen","aufenthalt"],["s4","Studenten-Istanbulkart beantragen","istanbulkart"],["s5","Handy-Frist von 120 Tagen notieren","imei"],["s6","Notrufnummern speichern","notfall"]],
+ days:["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"],monMarket:"Kleine Märkte in vielen Bezirken",marketToday:"Wochenmarkt heute",nightYes:"Heute Nacht fährt die Nachtmetro",nightNo:"Nachts fahren heute nur Metrobüs und Nachtbusse",ramadan:"",
  calcRides:"Fahrten pro Tag",calcDays:"Tage im Monat",calcStudent:"Studentenkarte",single:"Einzelfahrten",pass:"Monatskarte",verdictPass:d=>`Monatskarte lohnt sich, du sparst ${d} TL.`,verdictSingle:d=>`Einzelfahrten sind ${d} TL günstiger.`,calcNote:"Monatskarte: 653 TL Student (200 Fahrten) oder 3.628 TL voll (180 Fahrten). Fahrten über dem Limit kosten den Einzelpreis.",
  fName:"Name des Ladens",fArea:"Bezirk",fKind:"Art",fNote:"Kurze Notiz (optional)",fNoteP:"z. B. bester Lahmacun, günstig",fSend:"Vorschlag senden",fThanks:"Danke! Der Spot erscheint, sobald er geprüft ist.",fErr:"Senden hat nicht geklappt. Bitte später nochmal.",fOther:"Anderer Bezirk",fIntro:"Neue Spots werden kurz geprüft und erscheinen dann für alle in der Liste.",lang:"English"},
-en:{start:"Home",verkehr:"Transport",essen:"Food",alltag:"Daily life",entdecken:"Explore",sub:"For students · 2026",search:"Search: taxi, ramen, e-İkamet …",clear:"Clear",sos:"Emergency",sosAll:"All services",police:"Police",fire:"Fire",tourist:"Tourist",sosMore:"Numbers to dial. More under",first:"First days",firstNote:"Checkmarks are saved on this device only.",prices:"Prices at a glance",popular:"Popular",today:"Today",spots:"Food spots",spotsSub:n=>`${n} places, with map and ratings`,foot:"Compiled from the ESI Istanbul Survival Guide (2025/26), the Istanbul group chats and the group’s food spot list. Not an official service. Prices change fast, double-check on site.",tabFoot:"Based on the ESI Survival Guide and group chats, 2025/26.",nothing:v=>`Nothing found for “${v}”.`,topics:"Topics",infos:"Info",
+en:{start:"Home",verkehr:"Transport",essen:"Food",alltag:"Daily life",entdecken:"Explore",sub:"For students · 2026",search:"Search: taxi, ramen, e-İkamet …",clear:"Clear",sos:"Emergency",sosAll:"All services",police:"Police",fire:"Fire",tourist:"Foreigners",sosMore:"Numbers to dial. More under",first:"First days",firstNote:"Checkmarks are saved on this device only.",prices:"Prices at a glance",popular:"Popular",today:"Today",spots:"Food spots",spotsSub:n=>`${n} places, with map and ratings`,foot:"Written by us from official sources (İBB, Metro İstanbul, Istanbulkart, migration authority), plus tips from the Istanbul group chats and the group’s food spot list. Not an official service. Prices change fast, double-check on site.",tabFoot:"Based on official sources, as of November 2026.",nothing:v=>`Nothing found for “${v}”.`,topics:"Topics",infos:"Info",
  essenSub:"Food spots from the group. Tap to open Google Maps, arrows to rate. Map pins are placed automatically and may be slightly off.",list500:"List with 500 spots",list500d:"Google Maps, from the WiSe 26/27 group",orig:"Original list",origd:"Google Doc by district",all:"All",byArea:"District",byTop:"Top rated",byNear:"Near me",fq:"Burger, mantı, Moda …",places:n=>`${n} ${n===1?"place":"places"}`,none:"No spot matches. Try another district or word.",onMap:n=>`${n} on the map`,openMaps:"Open in Google Maps",noGeo:"Location not available. Allow access in your browser or pick a district.",locating:"Finding your location …",suggest:"Suggest a spot",suggestD:"Missing your favourite place?",fresh:"New",offline:"Ratings are not reachable right now.",
- t1:"Ride with student card",t2:"Student monthly pass, 200 rides",t3:"Taxi minimum fare",t4:"Halk Ekmek, 250 g bread",
- steps:[["s1","Get an Istanbulkart at the airport","flughafen"],["s2","Buy a SIM card, bring your passport","sim"],["s3","e-İkamet within 30 days","aufenthalt"],["s4","Apply for the student Istanbulkart","istanbulkart"],["s5","Note the 120-day phone deadline","imei"],["s6","Save the emergency numbers","notfall"]],
- days:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],monMarket:"Small markets in many districts",marketToday:"Market today",nightYes:"Night metro and night ferry run tonight",nightNo:"Tonight only Metrobüs and night buses run",
+ t1:"Ride with student card",t2:"Student monthly pass",t3:"Taxi minimum fare",t4:"Full single ride",
+ steps:[["s1","Get an Istanbulkart at the airport","flughafen"],["s2","Buy a SIM card, bring your passport","sim"],["s3","Apply for e-İkamet in time","aufenthalt"],["s4","Apply for the student Istanbulkart","istanbulkart"],["s5","Note the 120-day phone deadline","imei"],["s6","Save the emergency numbers","notfall"]],
+ days:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],monMarket:"Small markets in many districts",marketToday:"Market today",nightYes:"The night metro runs tonight",nightNo:"Tonight only Metrobüs and night buses run",
  calcRides:"Rides per day",calcDays:"Days per month",calcStudent:"Student card",single:"Single rides",pass:"Monthly pass",verdictPass:d=>`The monthly pass pays off, you save ${d} TL.`,verdictSingle:d=>`Single rides are ${d} TL cheaper.`,calcNote:"Monthly pass: 653 TL student (200 rides) or 3,628 TL full (180 rides). Rides above the limit cost the single fare.",
  fName:"Name of the place",fArea:"District",fKind:"Type",fNote:"Short note (optional)",fNoteP:"e.g. best lahmacun, cheap",fSend:"Send suggestion",fThanks:"Thanks! The spot shows up once it’s checked.",fErr:"Sending failed. Please try again later.",fOther:"Other district",fIntro:"New spots get a quick check and then show up for everyone.",lang:"Deutsch"}
 };
@@ -68,7 +68,7 @@ const TABS=[
  {id:"verkehr",i:"train",s:{de:"Istanbulkart, Taxi, Nacht",en:"Istanbulkart, taxi, night"},g:[{r:["istanbulkart","rechner","flughafen","taxi","dolmus","nacht","ausfluege"]},{h:{de:"Planen",en:"Planning"},r:["links"]}]},
  {id:"essen",i:"fork"},
  {id:"alltag",i:"bag",s:{de:"Alles für die ersten Wochen",en:"Everything for the first weeks"},g:[{h:{de:"Ankommen",en:"Arriving"},r:["sim","imei","aufenthalt","wohnen"]},{h:{de:"Jeden Tag",en:"Every day"},r:["geld","einkaufen","pazar","wlan"]},{h:{de:"Sicherheit",en:"Safety"},r:["notfall"]}]},
- {id:"entdecken",i:"compass",s:{de:"Sehen, Museen, Viertel",en:"Sights, museums, neighbourhoods"},g:[{r:["sehen","muzekart","viertel","ausfluege"]},{h:{de:"Über die Seite",en:"About"},r:["danke"]}]}
+ {id:"entdecken",i:"compass",s:{de:"Sehen, Museen, Viertel",en:"Sights, museums, neighbourhoods"},g:[{r:["sehen","muzekart","viertel","ausfluege"]},{h:{de:"Über die Seite",en:"About"},r:["danke","datenschutz"]}]}
 ];
 
 /* ---------- Food-Spots, Bewertungen ---------- */
@@ -132,7 +132,7 @@ const langBtn=()=>`<button class="navr" data-lang>${LANG==="de"?"EN":"DE"}</butt
 /* ---------- Heute ---------- */
 function istDay(){try{const w=new Intl.DateTimeFormat("en-US",{timeZone:"Europe/Istanbul",weekday:"short"}).format(new Date());return["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].indexOf(w)}catch(e){return new Date().getDay()}}
 function heuteHTML(){
-  const d=istDay(),rows=PG("pazar").g[0].r,market=d===1?u("monMarket"):rows[(d+5)%7]?.[1];
+  const d=istDay(),rows=PG("pazar").g[0].r,market=(rows.find(r=>r[0]===u("days")[d]||r[0]===["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][d])||[])[1]||u("monMarket");
   const night=d===5||d===6;
   return`<div class="gh">${u("today")} · ${u("days")[d]}</div><div class="grp">
    <button class="row ic" data-go="pazar">${ico("market","--c8")}<div class="l"><div class="t">${esc(u("marketToday"))}</div><div class="d">${esc(market)}</div></div>${svg("chev","chev")}</button>
@@ -159,7 +159,7 @@ function startHTML(){
    <button class="tile" data-go="istanbulkart"><b>22,55<small>TL</small></b><span>${u("t1")}</span></button>
    <button class="tile" data-go="rechner"><b>653<small>TL</small></b><span>${u("t2")}</span></button>
    <button class="tile" data-go="taxi"><b>230<small>TL</small></b><span>${u("t3")}</span></button>
-   <button class="tile" data-go="einkaufen"><b>15<small>TL</small></b><span>${u("t4")}</span></button>
+   <button class="tile" data-go="istanbulkart"><b>46,20<small>TL</small></b><span>${u("t4")}</span></button>
   </div>
   <div class="gh">${u("popular")}</div>
   <div class="grp">${["sim","nacht","geld","wohnen"].map(pageRow).join("")}
@@ -324,25 +324,25 @@ function bindVorschlag(){
 
 /* ---------- Danke und Quellen ---------- */
 const SOURCES=[
- {id:"esi",de:["ESI Istanbul Survival Guide","Verkehr, SIM, Geld, Wohnen, Aufenthalt, Notfall"],en:["ESI Istanbul Survival Guide","Transport, SIM, money, housing, residence, emergency"],u:"https://www.instagram.com/erasmus_social_istanbul/"},
+ {id:"offiziell",de:["Offizielle Seiten","İBB, Metro İstanbul, Istanbulkart, Şehir Hatları, Migrationsbehörde, Müzekart"],en:["Official sources","İBB, Metro İstanbul, Istanbulkart, Şehir Hatları, migration authority, Müzekart"],own:1},
  {id:"fooddoc",de:["Food-Spots-Liste","Google Doc aus der Gruppe SoSe 2026"],en:["Food spot list","Google Doc from the SoSe 2026 group"]},
  {id:"maps500",de:["Liste mit 500 Spots","Google Maps, aus der Gruppe WiSe 26/27"],en:["List with 500 spots","Google Maps, from the WiSe 26/27 group"]},
  {id:"chats",de:["Tipps aus den Gruppenchats","Frühstück, Lahmacun, Bank, eSIM und mehr"],en:["Tips from the group chats","Breakfast, lahmacun, banks, eSIM and more"]}
 ];
-const DK={de:{intro:"Diese Seite sammelt, was andere zusammengetragen haben. Wer etwas davon erstellt hat, wird hier genannt, sobald es bestätigt ist.",open:"Noch nicht bestätigt",by:"Von",claimH:"Ist etwas davon von dir?",claimIntro:"Melde dich. Nach einer kurzen Prüfung wirst du hier genannt. Deine Kontaktdaten sind nicht öffentlich.",src:"Was ist von dir?",name:"Name, wie er hier stehen soll",contact:"Kontakt (Instagram, E-Mail oder Telefon)",proof:"Wie kannst du zeigen, dass es von dir ist?",proofP:"z. B. Link zum Original, Bearbeitungsrechte, Screenshot auf Anfrage",send:"Meldung senden",thanks:"Danke! Wir melden uns und nennen dich nach der Prüfung.",err:"Senden hat nicht geklappt. Bitte später nochmal."},
- en:{intro:"This page collects what others put together. Whoever created something here gets credited once it’s confirmed.",open:"Not confirmed yet",by:"By",claimH:"Did you make any of this?",claimIntro:"Get in touch. After a quick check you’ll be credited here. Your contact details stay private.",src:"What did you make?",name:"Name as it should appear",contact:"Contact (Instagram, email or phone)",proof:"How can you show it’s yours?",proofP:"e.g. link to the original, edit rights, screenshot on request",send:"Send",thanks:"Thanks! We’ll get back to you and credit you after the check.",err:"Sending failed. Please try again later."}};
+const DK={de:{intro:"Die Infoseiten sind selbst geschrieben, nach offiziellen Seiten. Food-Spots und Tipps kommen aus den Gruppen. Wer etwas davon erstellt hat, wird hier genannt, sobald es bestätigt ist.",open:"Noch nicht bestätigt",by:"Von",claimH:"Ist etwas davon von dir?",claimIntro:"Melde dich. Nach einer kurzen Prüfung wirst du hier genannt. Deine Kontaktdaten sind nicht öffentlich.",src:"Was ist von dir?",name:"Name, wie er hier stehen soll",contact:"Kontakt (Instagram, E-Mail oder Telefon)",proof:"Wie kannst du zeigen, dass es von dir ist?",proofP:"z. B. Link zum Original, Bearbeitungsrechte, Screenshot auf Anfrage",send:"Meldung senden",thanks:"Danke! Wir melden uns und nennen dich nach der Prüfung.",err:"Senden hat nicht geklappt. Bitte später nochmal."},
+ en:{intro:"The info pages are written by us from official sources. Food spots and tips come from the groups. Whoever created any of that gets credited here once it’s confirmed.",open:"Not confirmed yet",by:"By",claimH:"Did you make any of this?",claimIntro:"Get in touch. After a quick check you’ll be credited here. Your contact details stay private.",src:"What did you make?",name:"Name as it should appear",contact:"Contact (Instagram, email or phone)",proof:"How can you show it’s yours?",proofP:"e.g. link to the original, edit rights, screenshot on request",send:"Send",thanks:"Thanks! We’ll get back to you and credit you after the check.",err:"Sending failed. Please try again later."}};
 let CREDITS=null;
 function dankeHTML(){const t=DK[LANG];
   return`<p class="gf" style="margin:4px 16px 0">${t.intro}</p><div style="height:14px"></div><div class="grp" id="srcs">${srcRows()}</div>
   <div class="gh">${t.claimH}</div><p class="gf" style="margin:0 16px 10px">${t.claimIntro}</p>
   <form id="cf" class="grp form" autocomplete="off">
-   <label class="row"><span class="fl">${t.src}</span><select id="cs">${SOURCES.map(s=>`<option value="${s.id}">${esc(s[LANG][0])}</option>`).join("")}</select></label>
+   <label class="row"><span class="fl">${t.src}</span><select id="cs">${SOURCES.filter(s=>!s.own).map(s=>`<option value="${s.id}">${esc(s[LANG][0])}</option>`).join("")}</select></label>
    <label class="row"><span class="fl">${t.name}</span><input id="cn" required minlength="2" maxlength="80"></label>
    <label class="row"><span class="fl">${t.contact}</span><input id="cc" required minlength="3" maxlength="120"></label>
    <label class="row"><span class="fl">${t.proof}</span><textarea id="cp" maxlength="500" rows="3" placeholder="${esc(t.proofP)}"></textarea></label>
-  </form><button class="cta" id="csend" form="cf" type="submit">${t.send}</button><p class="gf" id="cmsg" role="status"></p>`}
+  </form><button class="cta" id="csend" form="cf" type="submit">${t.send}</button><p class="gf" id="cmsg" role="status"></p><p class="gf"><a href="rechtliches.html#istanbul" style="color:inherit">${LANG==="de"?"Datenschutz":"Privacy"}</a></p>`}
 function srcRows(){const t=DK[LANG];return SOURCES.map(s=>{const names=(CREDITS||[]).filter(c=>c.source===s.id).map(c=>c.credit);
-  const inner=`<div class="l"><div class="t">${esc(s[LANG][0])}</div><div class="d">${esc(s[LANG][1])}</div><div class="d cr">${names.length?`${t.by} ${esc(names.join(", "))}`:t.open}</div></div>`;
+  const inner=`<div class="l"><div class="t">${esc(s[LANG][0])}</div><div class="d">${esc(s[LANG][1])}</div>${s.own?"":`<div class="d cr">${names.length?`${t.by} ${esc(names.join(", "))}`:t.open}</div>`}</div>`;
   return s.u?`<a class="row" href="${s.u}" target="_blank" rel="noopener">${inner}${svg("ext","ext")}</a>`:`<div class="row">${inner}</div>`}).join("")}
 function bindDanke(){const t=DK[LANG],$=id=>document.getElementById(id);
   if(!CREDITS)rpc("credits").then(c=>{CREDITS=c||[];const el=$("srcs");if(el)el.innerHTML=srcRows()}).catch(()=>{});
@@ -352,11 +352,72 @@ function bindDanke(){const t=DK[LANG],$=id=>document.getElementById(id);
     b.disabled=false};
 }
 
+/* ---------- „Stimmt nicht mehr“ auf jeder Infoseite ---------- */
+const RP={de:{btn:"Stimmt etwas nicht mehr?",ph:"Was ist falsch oder veraltet? z. B. „Einzelfahrt kostet jetzt 50 TL“",send:"Melden",thanks:"Danke! Wir prüfen das und passen die Seite an.",err:"Senden hat nicht geklappt. Bitte später nochmal.",note:"Bitte keine persönlichen Daten eintragen."},
+ en:{btn:"Something out of date?",ph:"What’s wrong or outdated? e.g. “A single ride now costs 50 TL”",send:"Report",thanks:"Thanks! We’ll check it and update the page.",err:"Sending failed. Please try again later.",note:"Please don’t include personal data."}};
+const reportHTML=()=>{const t=RP[LANG];return`<details class="report"><summary>${t.btn}</summary><form id="rf" class="grp form"><label class="row"><textarea id="rt" required minlength="3" maxlength="500" rows="3" placeholder="${esc(t.ph)}" aria-label="${esc(t.btn)}"></textarea></label></form>
+  <button class="cta" form="rf" type="submit" id="rs">${t.send}</button><p class="gf" id="rm" role="status">${t.note}</p></details>`};
+function bindReport(id){const f=document.getElementById("rf");if(!f)return;const t=RP[LANG];
+  f.onsubmit=async e=>{e.preventDefault();const b=document.getElementById("rs");b.disabled=true;
+    try{await rpc("report",{p_page:id,p_text:document.getElementById("rt").value,p_device:DEVICE});f.reset();document.getElementById("rm").textContent=t.thanks;toast(t.thanks)}
+    catch(err){document.getElementById("rm").textContent=t.err}b.disabled=false}}
+
+/* ---------- Datenschutz und Kontakt ---------- */
+const OWNER="Muhammet Sancak",OWNER_MAIL="sancakmet@outlook.com";   /* OWNER_MAIL eintragen, sobald die Adresse feststeht */
+const DS={
+de:{intro:"Diese Seite ist ein privates, nicht kommerzielles Projekt. Hier steht, welche Daten anfallen und warum. Kurz: keine Accounts, keine Cookies, kein Tracking.",
+ sec:[
+  ["Verantwortlich",[OWNER+(OWNER_MAIL?" · "+OWNER_MAIL:""),"Kontakt auch über das Formular unten."]],
+  ["Hosting (GitHub Pages)",["Die Seite liegt bei GitHub (GitHub Inc., USA). Beim Aufruf verarbeitet GitHub technisch nötige Daten wie IP-Adresse und Zeitpunkt, um die Seite auszuliefern und vor Angriffen zu schützen. Rechtsgrundlage: berechtigtes Interesse (Art. 6 Abs. 1 lit. f DSGVO)."]],
+  ["Karte und Programmbibliothek",["Die Karte lädt Kartenbilder von Esri (Esri Inc., USA), die Kartenfunktion Leaflet liegt auf dieser Seite selbst. Beim Laden der Karte wird deine IP-Adresse an Esri übertragen. Ohne diesen Abruf funktioniert die Karte nicht. Rechtsgrundlage: berechtigtes Interesse."]],
+  ["Bewertungen, Vorschläge, Meldungen",["Damit jede Person pro Spot nur einmal abstimmen kann, erzeugt die Seite eine zufällige Geräte-Kennung und speichert sie in deinem Browser. Sie enthält keinen Namen und keine Gerätedaten.","Zusammen mit deinen Stimmen, Vorschlägen, Fehlermeldungen und Nachrichten wird sie bei Supabase gespeichert (Server in Frankfurt, Supabase Inc., USA). Kontaktdaten aus dem Urheber- oder Kontaktformular sind nicht öffentlich und werden nur zur Antwort genutzt.","Rechtsgrundlage: deine Einwilligung durch das aktive Abstimmen oder Absenden (Art. 6 Abs. 1 lit. a DSGVO)."]],
+  ["Im Browser gespeichert",["Sprache, abgehakte Schritte, Rechner-Einstellungen und die Geräte-Kennung liegen nur in deinem Browser (Local Storage). Für den Offline-Modus legt die Seite Dateien im Browser-Cache ab. Das ist alles löschbar, siehe unten."]],
+  ["Standort",["Nur wenn du „In der Nähe“ antippst, fragt der Browser nach deinem Standort. Er wird nur auf deinem Gerät zum Sortieren genutzt und nirgends gespeichert oder gesendet."]],
+  ["Links nach außen",["Links zu Google Maps, Google Docs, Instagram und anderen Seiten öffnen fremde Angebote. Dort gelten deren Datenschutzregeln."]],
+  ["Deine Rechte",["Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit und Widerspruch sowie auf Beschwerde bei einer Datenschutz-Aufsichtsbehörde. Eine Einwilligung kannst du jederzeit widerrufen.","Mit dem Knopf unten löschst du sofort alles, was zu deiner Geräte-Kennung gespeichert ist."]]
+ ],
+ forget:"Meine Daten löschen",forgetD:"Entfernt deine Stimmen, offenen Vorschläge und Nachrichten vom Server und setzt die Seite auf diesem Gerät zurück.",forgetOk:"Gelöscht. Die Seite ist auf diesem Gerät zurückgesetzt.",forgetConfirm:"Wirklich löschen? Tippe nochmal zum Bestätigen.",
+ cH:"Kontakt",cIntro:"Fragen, Kooperationen oder Datenschutz-Anliegen.",topic:"Thema",topics:{kooperation:"Kooperation",datenschutz:"Datenschutz",sonstiges:"Sonstiges"},msg:"Nachricht",reply:"Antwort an (optional: E-Mail oder Instagram)",send:"Senden",thanks:"Danke! Wir melden uns, falls du eine Antwortadresse angegeben hast.",err:"Senden hat nicht geklappt. Bitte später nochmal.",stand:"Stand: November 2026"},
+en:{intro:"This site is a private, non-commercial project. Here’s what data is processed and why. In short: no accounts, no cookies, no tracking.",
+ sec:[
+  ["Responsible",[OWNER+(OWNER_MAIL?" · "+OWNER_MAIL:""),"You can also use the contact form below."]],
+  ["Hosting (GitHub Pages)",["The site is hosted by GitHub (GitHub Inc., USA). When you visit, GitHub processes technically necessary data such as your IP address and time of access to deliver the site and protect it from attacks. Legal basis: legitimate interest (Art. 6(1)(f) GDPR)."]],
+  ["Map and library",["The map loads map images from Esri (Esri Inc., USA); the Leaflet map library is hosted on this site. Loading the map sends your IP address to Esri. The map can’t work without it. Legal basis: legitimate interest."]],
+  ["Ratings, suggestions, reports",["So that everyone can vote only once per spot, the site creates a random device ID and stores it in your browser. It contains no name and no device data.","It is stored together with your votes, suggestions, reports and messages at Supabase (servers in Frankfurt, Supabase Inc., USA). Contact details from the credit or contact form are not public and only used to reply.","Legal basis: your consent by actively voting or sending (Art. 6(1)(a) GDPR)."]],
+  ["Stored in your browser",["Language, checked steps, calculator settings and the device ID live only in your browser (local storage). For offline mode the site keeps files in the browser cache. You can delete all of it, see below."]],
+  ["Location",["Only when you tap “Near me” does the browser ask for your location. It’s used on your device to sort the list and is never stored or sent."]],
+  ["External links",["Links to Google Maps, Google Docs, Instagram and other sites open third-party services with their own privacy rules."]],
+  ["Your rights",["You have the right to access, correction, deletion, restriction, data portability and objection, and to complain to a data protection authority. You can withdraw consent at any time.","The button below instantly deletes everything stored for your device ID."]]
+ ],
+ forget:"Delete my data",forgetD:"Removes your votes, pending suggestions and messages from the server and resets the site on this device.",forgetOk:"Deleted. The site has been reset on this device.",forgetConfirm:"Really delete? Tap again to confirm.",
+ cH:"Contact",cIntro:"Questions, partnerships or privacy requests.",topic:"Topic",topics:{kooperation:"Partnership",datenschutz:"Privacy",sonstiges:"Other"},msg:"Message",reply:"Reply to (optional: email or Instagram)",send:"Send",thanks:"Thanks! We’ll get back to you if you left a reply address.",err:"Sending failed. Please try again later.",stand:"Last updated: November 2026"}};
+function datenschutzHTML(){const t=DS[LANG];
+  return`<p class="gf" style="margin:4px 16px 0">${t.intro}</p>${t.sec.map(([h,ps])=>`<div class="gh">${esc(h)}</div><div class="grp">${ps.map(p=>`<div class="row txt">${esc(p)}</div>`).join("")}</div>`).join("")}
+  <div style="height:14px"></div><div class="grp"><button class="row" id="forget"><div class="l"><div class="t" style="color:var(--red)">${t.forget}</div><div class="d">${t.forgetD}</div></div></button></div>
+  <div class="gh">${t.cH}</div><p class="gf" style="margin:0 16px 10px">${t.cIntro}</p>
+  <form id="kf" class="grp form" autocomplete="off">
+   <label class="row"><span class="fl">${t.topic}</span><select id="kt">${Object.entries(t.topics).map(([k,v])=>`<option value="${k}">${v}</option>`).join("")}</select></label>
+   <label class="row"><span class="fl">${t.msg}</span><textarea id="km" required minlength="3" maxlength="1000" rows="4"></textarea></label>
+   <label class="row"><span class="fl">${t.reply}</span><input id="kr" maxlength="120"></label>
+  </form><button class="cta" form="kf" type="submit" id="ks">${t.send}</button><p class="gf" id="kmsg" role="status"></p>
+  <p class="foot">${t.stand}</p>`}
+function bindDatenschutz(){const t=DS[LANG],$=id=>document.getElementById(id);let armed=false;
+  $("forget").onclick=async()=>{if(!armed){armed=true;$("forget").querySelector(".d").textContent=t.forgetConfirm;return}
+    try{await rpc("forget_me",{p_device:DEVICE})}catch(e){}
+    try{["ist-device","ist-scores","ist-mine","ist-done","ist-calc","ist-lang"].forEach(k=>localStorage.removeItem(k))}catch(e){}
+    try{(await caches.keys()).forEach(k=>caches.delete(k))}catch(e){}
+    $("forget").querySelector(".d").textContent=t.forgetOk;toast(t.forgetOk);setTimeout(()=>location.reload(),1600)};
+  $("kf").onsubmit=async e=>{e.preventDefault();const b=$("ks");b.disabled=true;
+    try{await rpc("contact",{p_topic:$("kt").value,p_text:$("km").value,p_reply_to:$("kr").value,p_device:DEVICE});$("kf").reset();$("kmsg").textContent=t.thanks;toast(t.thanks)}
+    catch(err){$("kmsg").textContent=t.err}b.disabled=false};
+}
+
 /* ---------- Tabs, Seiten, Navigation ---------- */
 const tabT=t=>u(t.id);
-function tabHTML(t){return`${navbar(tabT(t),"",langBtn())}<div class="wrap view"><h1 class="lt">${esc(tabT(t))}</h1><p class="sub">${esc(t.s[LANG])}</p>${t.g.map(g=>group({...g,h:g.h&&g.h[LANG]},pageRow)).join("")}<p class="foot">${u("tabFoot")}</p></div>`}
+function tabHTML(t){return`${navbar(tabT(t),"",langBtn())}<div class="wrap view"><h1 class="lt">${esc(tabT(t))}</h1><p class="sub">${esc(t.s[LANG])}</p>${t.g.map(g=>group({...g,h:g.h&&g.h[LANG]},pageRow)).join("")}<p class="foot">${u("tabFoot")}<br><a href="rechtliches.html" style="color:inherit">${LANG==="de"?"Kontakt · Datenschutz":"Contact · Privacy"}</a></p></div>`}
 function pageHTML(id,back){const p=PG(id);
-  const body=id==="rechner"?rechnerHTML():id==="vorschlag"?vorschlagHTML():id==="danke"?dankeHTML():p.g.map(g=>group(g,rowHTML)).join("");
+  const special={rechner:rechnerHTML,vorschlag:vorschlagHTML,danke:dankeHTML,datenschutz:datenschutzHTML}[id];
+  const body=special?special():p.g.map(g=>group(g,rowHTML)).join("")+reportHTML();
   return`${navbar(p.t,back)}<div class="wrap body"><h1 class="lt">${esc(p.t)}</h1>${p.s?`<p class="sub">${esc(p.s)}</p>`:""}${body}</div>`}
 
 const main=document.getElementById("main"),pane=document.getElementById("pane"),tabsEl=document.getElementById("tabs");
@@ -372,7 +433,7 @@ function showTab(id,keepScroll){
 function openPage(id){
   if(!P[id])return;page=id;
   pane.innerHTML=pageHTML(id,tabT(TABS.find(x=>x.id===tab)||TABS[0]));pane.scrollTop=0;
-  if(id==="rechner")bindRechner();if(id==="vorschlag")bindVorschlag();if(id==="danke")bindDanke();
+  const binds={rechner:bindRechner,vorschlag:bindVorschlag,danke:bindDanke,datenschutz:bindDatenschutz};(binds[id]||bindReport)(id);
   requestAnimationFrame(()=>{pane.classList.add("open");main.classList.add("pushed")});
   paneScroll();
 }
