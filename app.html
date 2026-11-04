@@ -374,6 +374,18 @@ body::after{display:none}
 .food-photo.has-photo{height:190px}.food-photo.has-photo span{position:absolute;bottom:8px;left:8px;background:#000a;color:white}.food-card .row.spot{padding:12px;align-items:center}.food-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}.food-tags span{font-size:11px;padding:4px 7px;background:var(--fill);border-radius:6px;color:var(--fg2)}
 .food-filters select:focus-visible,.food-photo:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 @media(min-width:600px){.food-filters{grid-template-columns:repeat(2,1fr)}.food-photo.has-photo{height:220px}}
+/* Anfahrt im Spot-Blatt */
+.row.spot>button.l{padding:5px 0;display:block;text-align:left;color:inherit}
+.row.spot>button.l:active{opacity:.55}
+.row.stop{gap:10px}
+.row.stop .t{display:flex;align-items:center;flex-wrap:wrap;gap:4px;min-width:0}
+.row.stop .sn{margin-left:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row.stop .mut{flex:none;font-size:13.5px}
+.ln{font:600 11px/1 var(--mono);color:#fff;border-radius:5px;padding:4px 5px;background:var(--c7)}
+.ln.m{background:var(--c3)}.ln.t{background:var(--c1)}.ln.b{background:var(--c2)}.ln.f{background:var(--c6)}
+.rt{display:flex;gap:8px;margin-top:10px}
+.rt a{flex:1;height:42px;display:grid;place-items:center;border-radius:12px;background:var(--ink);color:var(--on-ink);font-size:14.5px;font-weight:600;transition:transform .5s var(--spring)}
+.rt a:active{transform:scale(.96)}
 </style>
 <script data-goatcounter="https://musancak.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script><script>addEventListener("hashchange",()=>{if(window.goatcounter&&goatcounter.count)goatcounter.count({path:location.pathname+location.hash})})</script><script>function zaehl(n){var i=0;(function f(){if(window.goatcounter&&goatcounter.count){try{goatcounter.count({path:n,title:n,event:true})}catch(e){}}else if(i++<20)setTimeout(f,500)})()}addEventListener("appinstalled",function(){zaehl("app-installiert")});if(matchMedia("(display-mode: standalone)").matches||navigator.standalone)zaehl("als-app-geoeffnet")</script>
 <link rel="stylesheet" href="entdecken.css">
