@@ -97,9 +97,11 @@ function markerSetzen(){
 }
 function karteBauen(el){
   leafletLaden().then(()=>{if(!el.isConnected)return;
-    tKarte=L.map(el,{zoomControl:false,scrollWheelZoom:false,attributionControl:true}).setView([41.025,29.0],12);
+    tKarte=L.map(el,{zoomControl:false,scrollWheelZoom:false,attributionControl:true,zoomSnap:.5}).setView([41.025,29.0],12);
+    /* während die Karte sich bewegt: Pulsen und Glas aus, damit der Zoom flüssig bleibt */
+    const huelle=el.parentNode;tKarte.on("movestart zoomstart",()=>huelle.classList.add("bewegt")).on("moveend zoomend",()=>huelle.classList.remove("bewegt"));
     const ton=matchMedia("(prefers-color-scheme: dark)").matches?"Dark":"Light",esri=t=>`https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_${ton}_Gray_${t}/MapServer/tile/{z}/{y}/{x}`;
-    L.tileLayer(esri("Base"),{maxZoom:16,attribution:'Esri, HERE, Garmin, &copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'}).addTo(tKarte);
+    L.tileLayer(esri("Base"),{maxZoom:16,keepBuffer:4,updateWhenZooming:false,attribution:'Esri, HERE, Garmin, &copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'}).addTo(tKarte);
     markerSetzen();tKarte.fitBounds(L.latLngBounds(ORTE.map(o=>o.ll)),{padding:[18,18]});
     /* Pins fallen nacheinander herein */
     Object.values(tMarker).forEach((m,i)=>{const p=m.getElement()?.firstChild;p&&p.animate([{transform:"translateY(-40px) scale(.4)",opacity:0},{transform:"none",opacity:1}],{duration:leise?1:330,delay:leise?0:200+i*35,easing:FEDER,fill:"backwards"})});
@@ -108,13 +110,13 @@ function karteBauen(el){
 function ortWaehlen(id){
   tOrt=id;markerSetzen();
   const o=id&&ortVon(id),info=$("#ortInfo",tSeite);
-  if(o){tKarte.flyTo(o.ll,14,{duration:leise?0:.9});
+  if(o){tKarte.setView(o.ll,14,{animate:!leise});
     const T=alleTreffen().filter(x=>x.ort===id),n=T.reduce((a,x)=>a+x.n,0);
     info.innerHTML=`<div><b>${esc(o.n)}</b><small>${esc(o.d)} · ${esc(o.t)}</small></div><span class="ort-n"><b>${n}</b><small>${T.length===1?"1 Treffen":T.length+" Treffen"}</small></span>
       <button class="knopf press" id="hierVorschlagen">Hier treffen</button>`;
     info.hidden=false;info.animate([{opacity:0,transform:"translateY(14px) scale(.97)"},{opacity:1,transform:"none"}],{duration:leise?1:260,easing:FEDER});
     $("#hierVorschlagen",info).onclick=()=>vorschlagen(id);
-  }else{info.hidden=true;tKarte&&tKarte.flyTo([41.025,29.0],12,{duration:leise?0:.8})}
+  }else{info.hidden=true;tKarte&&tKarte.setView([41.025,29.0],12,{animate:!leise})}
   liste();
 }
 function liste(){
@@ -178,7 +180,7 @@ function vorschlagen(ortId){
   const los=$("#tLos",s),pruefen=()=>{los.disabled=!wahl.ort;los.textContent=wahl.ort?`Vorschlagen · ${ortVon(wahl.ort).n}`:"Ort wählen"};pruefen();
   $$(".chips",s).forEach(c=>c.onclick=e=>{const b=e.target.closest(".chip");if(!b)return;
     $$(".chip",c).forEach(x=>x.setAttribute("aria-pressed",x===b));wahl[c.dataset.name]=c.dataset.name==="tag"?+b.dataset.v:b.dataset.v;
-    if(c.dataset.name==="ort"){tOrt=wahl.ort;markerSetzen();tKarte&&tKarte.flyTo(ortVon(wahl.ort).ll,14,{duration:leise?0:.8})}
+    if(c.dataset.name==="ort"){tOrt=wahl.ort;markerSetzen();tKarte&&tKarte.setView(ortVon(wahl.ort).ll,14,{animate:!leise})}
     if(c.dataset.name==="art"){const f=$("#tTitel",s);f.placeholder=`Titel, z. B. ${ARTEN.find(a=>a[0]===wahl.art)[1]}`}
     pruefen()});
   if(wahl.ort)requestAnimationFrame(()=>$(`[data-name=ort] [aria-pressed=true]`,s)?.scrollIntoView({inline:"center",block:"nearest"}));
