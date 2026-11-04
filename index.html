@@ -14,6 +14,7 @@
 <link rel="apple-touch-icon" href="icon-180.png">
 <script>/* alte Links wie #essen oder #sim führen in die ganze App */if(location.hash.length>1)location.replace("app.html"+location.hash)</script>
 <link rel="stylesheet" href="start.css">
+<link rel="stylesheet" href="treffen.css">
 <style>
 /* ---------- Himmel oben ---------- */
 .held{position:relative;height:calc(430px + env(safe-area-inset-top));overflow:hidden;color:#fff;--h1:#8EC5E8;--h2:#E9F1F4;--h3:#F6E7D2;--silh:#24384F;--wasser:#3E6E92}
@@ -249,6 +250,7 @@ main{position:relative;z-index:2;margin-top:-30px;background:var(--bg);border-ra
 <script src="data.js"></script>
 <script src="icons.js"></script>
 <script src="start.js"></script>
+<script src="treffen.js"></script>
 <script>
 /* ---------- Daten der Startseite ---------- */
 const WOERTER=[["Kolay gelsin","Möge es dir leicht fallen. Sagt man zu allen, die gerade arbeiten.","ko-LAI gel-SIN"],["Afiyet olsun","Guten Appetit, auch nach dem Essen als Dank an die Köchin.","a-fi-JET ol-SUN"],["Hesap lütfen","Die Rechnung, bitte.","he-SAP lüt-FEN"],["Ne kadar?","Wie viel kostet das?","ne ka-DAR"],["Öğrenciyim","Ich bin Student oder Studentin. Lohnt sich bei Rabatten.","ö-ren-DSCHI-jim"],["Aktarma","Umsteigen. Mit der Istanbulkart wird es dabei billiger.","ak-tar-MA"],["Durak","Haltestelle.","du-RAK"],["İndirim var mı?","Gibt es einen Rabatt?","in-di-RIM var-MI"],["Çok güzel","Sehr schön. Passt fast immer.","tschok gü-SEL"],["Sağ ol","Danke, locker und kurz.","SA ol"],["Pardon","Entschuldigung, um durchzukommen.","par-DON"],["Bir çay lütfen","Einen Tee, bitte.","bir TSCHAI lüt-FEN"],["Nerede?","Wo ist das?","NE-re-de"],["Tamam","Okay, passt.","ta-MAM"],["Yavaş yavaş","Langsam, ganz entspannt.","ja-WASCH ja-WASCH"],["Geçmiş olsun","Gute Besserung, auch nach Ärger aller Art.","getsch-MISCH ol-SUN"],["Kira","Miete.","ki-RA"],["Ev sahibi","Vermieter oder Vermieterin.","ew sa-hi-BI"],["Eczane","Apotheke.","edsch-sa-NE"],["Görüşürüz","Bis bald.","gö-rü-schü-RÜS"],["Hadi","Los, komm.","HA-di"],["İnşallah","Hoffentlich, so Gott will.","in-SCHAL-lah"],["Maşallah","Wie schön, als Bewunderung.","MA-schal-lah"],["Boş mu?","Ist der Platz frei?","BOSCH mu"],["Fatura","Rechnung für Strom, Wasser oder Internet.","fa-TU-ra"]];
@@ -383,12 +385,16 @@ $("#suche").onclick=e=>{
 
 /* ---------- Leiste unten mit wanderndem Blob ---------- */
 function leiste(){
-  const l=$("#leiste"),eintraege=[["start","home"],...THEMEN.map(t=>[t.id,t.i])];
-  l.insertAdjacentHTML("beforeend",eintraege.map(([id,i],n)=>`<button data-tab="${id}" aria-label="${id==="start"?"Start":THEMEN.find(t=>t.id===id).t}" aria-current="${n===0}">${ic(i)}</button>`).join(""));
-  const blob=$("#blob"),setz=b=>{$$("button",l).forEach(x=>x.setAttribute("aria-current",x===b));blob.style.transform=`translateX(${b.offsetLeft-6}px)`;
-    blob.animate([{scale:"1 1"},{scale:"1.25 .85"},{scale:"1 1"}],{duration:leise?1:500,easing:SANFT})};
-  $$("button",l).forEach(b=>b.onclick=()=>{setz(b);if(b.dataset.tab==="start"){offen&&offen();scrollTo({top:0,behavior:"smooth"})}
-    else{offen&&offen();setTimeout(()=>{const s=themaOeffnen(THEMEN.find(t=>t.id===b.dataset.tab),b);new MutationObserver((_,o)=>{if(!s.isConnected){o.disconnect();setz($("[data-tab=start]",l))}}).observe(document.body,{childList:true})},offen?860:0)}});
+  /* Themen links und rechts, Treffen in der Mitte */
+  const l=$("#leiste"),th=THEMEN.map(t=>`<button data-tab="${t.id}" aria-label="${t.t}" aria-current="false">${ic(t.i)}</button>`);
+  th.splice(2,0,`<button class="mitte" id="tabTreffen" data-tab="treffen" aria-label="Treffen" aria-current="false"><span class="rund">${ic("people")}</span><span class="badge" hidden></span></button>`);
+  l.insertAdjacentHTML("beforeend",th.join(""));
+  const blob=$("#blob"),setz=b=>{$$("button",l).forEach(x=>x.setAttribute("aria-current",x===b));blob.classList.toggle("weg",!b||b.dataset.tab==="treffen");if(!b||b.dataset.tab==="treffen")return;
+    blob.style.transform=`translateX(${b.offsetLeft-6}px)`;blob.animate([{scale:"1 1"},{scale:"1.25 .85"},{scale:"1 1"}],{duration:leise?1:500,easing:SANFT})};
+  setz(null);tabZahl();
+  $$("button",l).forEach(b=>b.onclick=()=>{if(b.getAttribute("aria-current")==="true"){offen&&offen();return}setz(b);const war=offen;offen&&offen();
+    setTimeout(()=>{const s=b.dataset.tab==="treffen"?treffenOeffnen(b):themaOeffnen(THEMEN.find(t=>t.id===b.dataset.tab),b);
+      new MutationObserver((_,o)=>{if(!s.isConnected){o.disconnect();if(b.getAttribute("aria-current")==="true")setz(null)}}).observe(document.body,{childList:true})},war?860:0)});
 }
 
 /* ---------- Rollen: Himmel-Parallaxe und Mini-Kopf ---------- */
