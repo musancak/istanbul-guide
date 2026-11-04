@@ -650,6 +650,8 @@ pane.addEventListener("touchmove",e=>{if(sx===null)return;dx=Math.max(0,e.touche
 pane.addEventListener("touchend",()=>{if(sx===null)return;sx=null;pane.classList.remove("drag");main.style.transition="";
   if(dx>innerWidth*.3){closePage();setHash(tab)}else{pane.style.transform="";main.style.transform=""}});
 
+pane.addEventListener("touchcancel",()=>{sx=null;dx=0;pane.classList.remove("drag");main.style.transition="";pane.style.transform="";main.style.transform=""});
+
 document.documentElement.lang=LANG;
 route();
 fetch("coords.json",{cache:"no-cache"}).then(r=>r.json()).then(c=>{COORDS=c;for(const s of SPOTS)s.ll=COORDS[s.id]||s.ll;if(tab==="essen")list(false)}).catch(()=>{});
