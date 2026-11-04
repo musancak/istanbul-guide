@@ -184,13 +184,26 @@ function vorschlagen(ortId){
     if(c.dataset.name==="art"){const f=$("#tTitel",s);f.placeholder=`Titel, z. B. ${ARTEN.find(a=>a[0]===wahl.art)[1]}`}
     pruefen()});
   if(wahl.ort)requestAnimationFrame(()=>$(`[data-name=ort] [aria-pressed=true]`,s)?.scrollIntoView({inline:"center",block:"nearest"}));
-  const zu=()=>{hg.animate([{opacity:1},{opacity:0}],{duration:leise?1:160,fill:"forwards"}).onfinish=()=>hg.remove();
-    s.animate([{transform:"none"},{transform:"translateY(105%)"}],{duration:leise?1:200,easing:SANFT,fill:"forwards"}).onfinish=()=>s.remove()};
+  let schliesst=false,zug=0;
+  const zu=()=>{if(schliesst)return;schliesst=true;
+    hg.animate([{opacity:1},{opacity:0}],{duration:leise?1:160,fill:"forwards"}).onfinish=()=>hg.remove();
+    s.animate([{transform:`translateY(${zug}px)`},{transform:"translateY(105%)"}],{duration:leise?1:200,easing:SANFT,fill:"forwards"}).onfinish=()=>s.remove()};
   hg.onclick=zu;
-  /* nach unten ziehen = schließen */
-  let y0=null;s.addEventListener("touchstart",e=>{y0=s.scrollTop<=0?e.touches[0].clientY:null},{passive:true});
-  s.addEventListener("touchmove",e=>{if(y0!==null){const d=Math.max(0,e.touches[0].clientY-y0);s.style.transform=`translateY(${d}px)`}},{passive:true});
-  s.addEventListener("touchend",e=>{if(y0!==null){const d=e.changedTouches[0].clientY-y0;s.style.transform="";if(d>90)zu()}y0=null});
+  /* Nur vertikale Gesten ziehen das Blatt; Chips bleiben horizontal bedienbar. */
+  let y0=null,x0=0;
+  s.addEventListener("touchstart",e=>{y0=s.scrollTop<=0?e.touches[0].clientY:null;x0=e.touches[0].clientX;zug=0},{passive:true});
+  s.addEventListener("touchmove",e=>{if(y0===null||schliesst)return;
+    const d=e.touches[0].clientY-y0;
+    if(!zug&&(d<0||Math.abs(e.touches[0].clientX-x0)>Math.abs(d))){y0=null;return}
+    zug=Math.max(0,d);s.style.transform=`translateY(${zug}px)`;
+  },{passive:true});
+  const ende=()=>{if(y0===null)return;y0=null;
+    if(zug>90){zu();return}
+    const von=zug;zug=0;s.style.transform="";
+    s.animate([{transform:`translateY(${von}px)`},{transform:"none"}],{duration:leise?1:220,easing:SANFT});
+  };
+  s.addEventListener("touchend",ende);
+  s.addEventListener("touchcancel",()=>{y0=null;zug=0;s.style.transform=""});
   los.onclick=async()=>{
     const art=ARTEN.find(a=>a[0]===wahl.art)[1],titel=$("#tTitel",s).value.trim()||`${art} · ${ortVon(wahl.ort).n}`;
     const[h,m]=wahl.zeit.split(":").map(Number),w=tagStart(wahl.tag);w.setHours(h,m);
@@ -201,7 +214,7 @@ function vorschlagen(ortId){
     ECHT.push({id,art:wahl.art,t:titel,ort:wahl.ort,wann:w,zeit:wahl.zeit,n:1,dabei:true,mine:true,echt:1});zu();
     const r=los.getBoundingClientRect();funken(r.left+r.width/2,r.top);navigator.vibrate&&navigator.vibrate([10,40,10]);
     tFilter="alle";$$(".filter .chip",tSeite).forEach(x=>x.setAttribute("aria-pressed",x.dataset.f==="alle"));ortWaehlen(wahl.ort);
-    setTimeout(()=>{const k=$(`.tk[data-id="${id}"]`,tSeite);if(k){k.scrollIntoView({behavior:"smooth",block:"center"});k.classList.add("neu")}},350);
+    setTimeout(()=>{const k=$(`.tk[data-id="${id}"]`,tSeite);if(k){k.scrollIntoView({behavior:leise?"auto":"smooth",block:"center"});k.classList.add("neu")}},350);
     toast("Vorgeschlagen. Du bist automatisch dabei.");
   };
 }

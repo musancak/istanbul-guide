@@ -4,10 +4,12 @@ const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&g
 const ic=(k,c="i")=>`<svg viewBox="0 0 24 24" class="${c}" aria-hidden="true">${I[k]||""}</svg>`;
 const FEDER="linear(0,.06 2%,.24 5%,.52 9%,.79 14%,.95 19%,1.03 24%,1.05 29%,1.03 37%,1.005 48%,.998 60%,1)";
 const SANFT="cubic-bezier(.2,.8,.2,1)";
-const leise=matchMedia("(prefers-reduced-motion: reduce)").matches;
-/* Alles ruhiger: jede Web-Animation läuft LANGSAM-mal so lang wie angegeben */
-const LANGSAM=2;
-{const a=Element.prototype.animate;Element.prototype.animate=function(k,o){if(!leise)o=typeof o==="number"?o*LANGSAM:o&&{...o,duration:(o.duration||0)*LANGSAM,delay:(o.delay||0)*LANGSAM};return a.call(this,k,o)}}
+const bewegung=matchMedia("(prefers-reduced-motion: reduce)");
+let leise=bewegung.matches;
+bewegung.addEventListener("change",e=>{
+  leise=e.matches;
+  if(leise)document.getAnimations().forEach(a=>{if(a.effect?.getTiming().iterations!==Infinity)a.finish()});
+});
 
 /* Themen wie in der App */
 const THEMEN=[
@@ -62,19 +64,20 @@ function seiteHTML(id){
 }
 
 /* Detailseite, die aus dem angetippten Element herauswächst (Clip-Pfad-Morph) */
-let offen=null;
+let offen=null,ignorierePop=false;
 function oeffne(html,von,titel){
   const r=von?von.getBoundingClientRect():{left:innerWidth/2-40,top:innerHeight/2-40,right:innerWidth/2+40,bottom:innerHeight/2+40};
   const s=document.createElement("section");s.className="seite";s.setAttribute("role","dialog");s.setAttribute("aria-label",titel||"Seite");
   s.innerHTML=`<header class="s-kopf"><button class="zurueck press" aria-label="Zurück">${ic("backc")}</button><span class="s-titel">${esc(titel||"")}</span></header><div class="s-inhalt">${html}</div>`;
   document.body.appendChild(s);
   const clip=`inset(${r.top}px ${innerWidth-r.right}px ${innerHeight-r.bottom}px ${r.left}px round 22px)`;
-  const anim=leise?{duration:1}:{duration:620,easing:FEDER};
+  const anim=leise?{duration:1}:{duration:380,easing:FEDER};
   s.animate([{clipPath:clip},{clipPath:"inset(0 0 0 0 round 0px)"}],anim);
-  $$(".s-inhalt>*",s).forEach((el,i)=>el.animate([{opacity:0,transform:"translateY(18px)",filter:"blur(6px)"},{opacity:1,transform:"none",filter:"blur(0)"}],{duration:leise?1:520,delay:leise?0:80+i*28,easing:SANFT,fill:"backwards"}));
-  von&&von.animate([{opacity:1},{opacity:.0},{opacity:1}],{duration:700});
-  const schliessen=()=>{const a=s.animate([{clipPath:"inset(0 0 0 0 round 0px)",opacity:1},{clipPath:clip,opacity:.4}],{duration:leise?1:420,easing:SANFT});a.onfinish=()=>s.remove();offen=null;history.state&&history.state.seite&&history.back()};
-  $(".zurueck",s).onclick=schliessen;
+  $$(".s-inhalt>*",s).forEach((el,i)=>el.animate([{opacity:0,transform:"translateY(18px)"},{opacity:1,transform:"none"}],{duration:leise?1:320,delay:leise?0:40+Math.min(i,5)*24,easing:SANFT,fill:"backwards"}));
+  von&&von.animate([{opacity:1},{opacity:.0},{opacity:1}],{duration:380});
+  const vorher=offen;let schliesst=false;
+  const schliessen=(vomVerlauf=false)=>{if(schliesst)return;schliesst=true;const a=s.animate([{clipPath:"inset(0 0 0 0 round 0px)",opacity:1},{clipPath:clip,opacity:.4}],{duration:leise?1:280,easing:SANFT});a.onfinish=()=>s.remove();offen=vorher;if(!vomVerlauf&&history.state?.seite){ignorierePop=true;history.back()}};
+  $(".zurueck",s).onclick=()=>schliessen();
   /* vom linken Rand wischen = zurück */
   let x0=null;s.addEventListener("touchstart",e=>{x0=e.touches[0].clientX<30?e.touches[0].clientX:null},{passive:true});
   s.addEventListener("touchend",e=>{if(x0!==null&&e.changedTouches[0].clientX-x0>80)schliessen();x0=null});
@@ -82,7 +85,7 @@ function oeffne(html,von,titel){
   s.addEventListener("scroll",()=>s.classList.toggle("gerollt",s.scrollTop>40),{passive:true});
   return s;
 }
-addEventListener("popstate",()=>{if(offen){const f=offen;offen=null;f()}});
+addEventListener("popstate",()=>{if(ignorierePop){ignorierePop=false;return}if(offen)offen(true)});
 function themaHTML(t){
   return`<h1 class="s-gross">${esc(t.t)}</h1><p class="s-sub">${esc(t.s)}</p><div class="gruppe">${t.r.map(id=>`<button class="z pfeil" data-seite="${id}"><span class="mini" style="--f:${t.farbe}">${ic(P[id].i||"doc")}</span><span><b>${esc(P[id].t)}</b><small>${esc(P[id].s||"")}</small></span>${ic("chev","chev")}</button>`).join("")}</div>`;
 }
@@ -108,7 +111,7 @@ function essenOeffnen(von){
    <div class="kats">${kat.map((k,i)=>`<button class="kat press" aria-pressed="${i===0}" data-k="${k}">${esc(F[k].t)}</button>`).join("")}</div><div class="gruppe" id="spotliste"></div>
    <a class="in-app press" href="app.html#essen">Karte und Bewertungen in der App</a>`,von,"Essen");
   const zeig=k=>{const l=$("#spotliste",s);l.innerHTML=SPOTS.filter(x=>x.k===k).slice(0,40).map(x=>`<a class="z link" href="${maps(x)}" target="_blank" rel="noopener"><span><b>${esc(x.n)}${x.top?' <i class="stern"></i>':""}</b><small>${esc([x.d,x.note].filter(Boolean).join(" · "))}</small></span>${ic("ext")}</a>`).join("");
-    $$(".z",l).forEach((el,i)=>el.animate([{opacity:0,transform:"translateX(24px)"},{opacity:1,transform:"none"}],{duration:leise?1:420,delay:i*18,easing:FEDER,fill:"backwards"}))};
+    $$(".z",l).forEach((el,i)=>el.animate([{opacity:0,transform:"translateX(24px)"},{opacity:1,transform:"none"}],{duration:leise?1:280,delay:leise?0:Math.min(i,7)*18,easing:FEDER,fill:"backwards"}))};
   $$(".kat",s).forEach(b=>b.onclick=()=>{$$(".kat",s).forEach(x=>x.setAttribute("aria-pressed",x===b));zeig(b.dataset.k)});zeig(kat[0]);return s;
 }
 
@@ -122,7 +125,7 @@ function zaehlen(el,ziel,d=0,dauer=1100){ /* Zahl zählt hoch */
   const t0=performance.now();const f=t=>{const p=Math.min(1,(t-t0)/dauer),e=1-Math.pow(1-p,4);el.textContent=zahl(ziel*e,d);if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f);
 }
 function unscharfRein(el,start=0){ /* Wörter erscheinen aus der Unschärfe */
-  const w=el.textContent.split(" ");el.innerHTML=w.map((x,i)=>`<span class="w" style="transition-delay:${start+i*140}ms">${esc(x)}</span>`).join(" ");
+  const w=el.textContent.split(" ");el.innerHTML=w.map((x,i)=>`<span class="w" style="transition-delay:${start+Math.min(i,8)*45}ms">${esc(x)}</span>`).join(" ");
   requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add("da")));
 }
 function wirbeln(el,ziel,dauer=1800){ /* Buchstaben-Scramble */
@@ -133,12 +136,20 @@ function wirbeln(el,ziel,dauer=1800){ /* Buchstaben-Scramble */
   requestAnimationFrame(f);
 }
 function staffeln(els,{dauer=560,abstand=45,von="translateY(22px) scale(.96)",start=0}={}){
-  els.forEach((el,i)=>el.animate([{opacity:0,transform:von,filter:"blur(4px)"},{opacity:1,transform:"none",filter:"blur(0)"}],{duration:leise?1:dauer,delay:leise?0:start+i*abstand,easing:FEDER,fill:"backwards"}));
+  els.forEach((el,i)=>el.animate([{opacity:0,transform:von},{opacity:1,transform:"none"}],{duration:leise?1:dauer,delay:leise?0:start+Math.min(i,7)*abstand,easing:FEDER,fill:"backwards"}));
 }
 function kippen(el,staerke=8){ /* 3D-Neigung unter dem Finger */
-  if(leise)return;
-  el.addEventListener("pointermove",e=>{const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;el.style.transform=`perspective(700px) rotateX(${-y*staerke}deg) rotateY(${x*staerke}deg) scale(.985)`;el.style.setProperty("--gx",(x+.5)*100+"%");el.style.setProperty("--gy",(y+.5)*100+"%")});
-  const weg=()=>{el.style.transition="transform 1.2s "+FEDER;el.style.transform="";setTimeout(()=>el.style.transition="",1200)};
+  const maus=matchMedia("(hover: hover) and (pointer: fine)");
+  let frame=0,letztes=null;
+  el.addEventListener("pointermove",e=>{
+    if(leise||!maus.matches||e.pointerType==="touch")return;
+    letztes={x:e.clientX,y:e.clientY};if(frame)return;
+    frame=requestAnimationFrame(()=>{frame=0;const r=el.getBoundingClientRect(),x=(letztes.x-r.left)/r.width-.5,y=(letztes.y-r.top)/r.height-.5;
+      el.style.transform=`perspective(700px) rotateX(${-y*staerke}deg) rotateY(${x*staerke}deg)`;
+      el.style.setProperty("--gx",(x+.5)*100+"%");el.style.setProperty("--gy",(y+.5)*100+"%");
+    });
+  });
+  const weg=()=>{cancelAnimationFrame(frame);frame=0;el.style.transform=""};
   el.addEventListener("pointerleave",weg);el.addEventListener("pointerup",weg);el.addEventListener("pointercancel",weg);
 }
 function wellen(el,e){ /* Welle beim Antippen */

@@ -56,7 +56,7 @@
 .suche span{opacity:.85}
 /* Kopfzeile, wenn der Himmel weggerollt ist */
 .mini-kopf{position:fixed;z-index:40;left:0;right:0;top:0;padding:calc(env(safe-area-inset-top) + 10px) 20px 10px;display:flex;align-items:center;gap:8px;
- background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:blur(20px) saturate(1.6);-webkit-backdrop-filter:blur(20px) saturate(1.6);box-shadow:0 .5px 0 var(--linie);transform:translateY(-100%);transition:transform 1s var(--feder)}
+ background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:blur(20px) saturate(1.6);-webkit-backdrop-filter:blur(20px) saturate(1.6);box-shadow:0 .5px 0 var(--linie);transform:translateY(-100%);transition:transform .4s var(--feder)}
 .mini-kopf.da{transform:none}
 .mini-kopf b{font:700 17px var(--font-d);letter-spacing:-.02em}
 .mini-kopf .mono{margin-left:auto;color:var(--fg2)}
@@ -76,7 +76,7 @@ main{position:relative;z-index:2;margin-top:-30px;background:var(--bg);border-ra
 /* Wort des Tages: Karte zum Umdrehen */
 .wort{min-height:150px;padding:0;background:none;box-shadow:none;perspective:900px;overflow:visible}
 .wort::after{display:none}
-.wort-in{position:relative;flex:1;transform-style:preserve-3d;transition:transform 1.8s var(--feder)}
+.wort-in{position:relative;flex:1;transform-style:preserve-3d;transition:transform .6s var(--feder)}
 .wort.um .wort-in{transform:rotateY(180deg)}
 .seite-a,.seite-b{position:absolute;inset:0;border-radius:22px;padding:16px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;overflow:hidden;color:#fff;box-shadow:var(--schatten);
  background:linear-gradient(135deg,var(--tuerkis),color-mix(in srgb,var(--tuerkis) 55%,var(--kobalt)))}
@@ -107,7 +107,7 @@ main{position:relative;z-index:2;margin-top:-30px;background:var(--bg);border-ra
 .ring b{position:absolute;inset:0;display:grid;place-items:center;font:700 17px var(--font-d)}
 /* Stempel */
 .punkte{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:auto}
-.punkte i{aspect-ratio:1;border-radius:50%;border:1.5px dashed var(--fg3);transition:background .8s,border-color .8s,transform 1s var(--feder)}
+.punkte i{aspect-ratio:1;border-radius:50%;border:1.5px dashed var(--fg3);transition:background .8s,border-color .8s,transform .4s var(--feder)}
 .punkte i.an{background:var(--koralle);border:1.5px solid var(--koralle)}
 .punkte i.neu{animation:stempelPunkt 1.4s var(--feder)}
 @keyframes stempelPunkt{0%{transform:scale(2.2);opacity:0}}
@@ -156,14 +156,14 @@ main{position:relative;z-index:2;margin-top:-30px;background:var(--bg);border-ra
  background:color-mix(in srgb,var(--karte) 72%,transparent);backdrop-filter:blur(22px) saturate(1.8);-webkit-backdrop-filter:blur(22px) saturate(1.8);box-shadow:0 16px 40px -14px rgba(40,25,10,.45),inset 0 0 0 .5px var(--linie)}
 .leiste button{position:relative;z-index:1;width:58px;height:50px;display:grid;place-items:center;color:var(--fg2);transition:color .6s}
 .leiste button[aria-current=true]{color:var(--auf-tinte)}
-.leiste .i{width:23px;height:23px;transition:transform 1s var(--feder)}
+.leiste .i{width:23px;height:23px;transition:transform .4s var(--feder)}
 .leiste button:active .i{transform:scale(.8)}
-.blob{position:absolute;z-index:0;top:6px;left:6px;width:58px;height:50px;border-radius:20px;background:var(--tinte);transition:transform 1.2s var(--feder),width 1.2s var(--feder)}
+.blob{position:absolute;z-index:0;top:6px;left:6px;width:58px;height:50px;border-radius:20px;background:var(--tinte);transition:transform .38s var(--feder),width .38s var(--feder)}
 /* Suche, Checkliste */
 .such-feld{display:flex;align-items:center;gap:10px;height:50px;padding:0 16px;border-radius:16px;background:var(--karte);box-shadow:var(--schatten);margin:8px 0 14px}
 .such-feld input{flex:1;border:0;background:none;font:inherit;font-size:17px;color:var(--fg);outline:none;min-width:0}
 .leer{color:var(--fg2);text-align:center;padding:30px 10px}
-.check{width:26px;height:26px;border-radius:50%;border:1.8px solid var(--fg3);display:grid;place-items:center;flex:none;transition:background .6s,border-color .6s,transform 1s var(--feder)}
+.check{width:26px;height:26px;border-radius:50%;border:1.8px solid var(--fg3);display:grid;place-items:center;flex:none;transition:background .6s,border-color .6s,transform .4s var(--feder)}
 .check .i{width:15px;height:15px;color:#fff;stroke-width:3;stroke-dasharray:24;stroke-dashoffset:24;transition:stroke-dashoffset .8s .2s var(--sanft)}
 .an-c .check{background:var(--minze);border-color:var(--minze);transform:scale(1.08)}
 .an-c .check .i{stroke-dashoffset:0}
@@ -175,12 +175,13 @@ main{position:relative;z-index:2;margin-top:-30px;background:var(--bg);border-ra
  .thema{background:linear-gradient(150deg,color-mix(in srgb,var(--f) 72%,#000),color-mix(in srgb,var(--f) 42%,#000))}
  .mini{background:linear-gradient(150deg,color-mix(in srgb,var(--f) 75%,#000),color-mix(in srgb,var(--f) 50%,#000))}
  .k::after{opacity:.15}}
-/* Bewegung reduzieren: die ruhigen Hintergrund-Bewegungen laufen trotzdem, nur langsam */
+/* Die Systemeinstellung gilt auch für dekorative Endlosschleifen. */
 @media(prefers-reduced-motion:reduce){
- .wolke.w1,.wolke.w2,.faehre,.muster,.band,.wasser i,.sterne i{animation-iteration-count:infinite!important}
- .wolke.w1{animation-duration:140s!important}.wolke.w2{animation-duration:190s!important}.faehre{animation-duration:90s!important}.muster{animation-duration:120s!important}
- .wasser i{animation-duration:10s!important}.sterne i{animation-duration:7s!important}.band{animation-duration:var(--band,160s)!important}}
+ .wolke,.faehre,.muster,.band,.wasser i,.sterne i,.tropfen i{animation:none!important}}
 @media(min-width:700px){.bento{grid-template-columns:repeat(4,1fr)}.themen{grid-template-columns:repeat(4,1fr)}.kk{width:42%}}
+/* Endlosschleifen pausieren außerhalb des sichtbaren Himmels und im Hintergrund. */
+#held.ruht *,html.inaktiv *{animation-play-state:paused!important}
+.events:focus-within .band{animation-play-state:paused}
 </style>
 </head>
 <body>
@@ -324,8 +325,8 @@ function spot(anim){
   const s=spotDesTages(spotV),box=$("#spotBox");
   const setz=()=>{$("#spotName").textContent=s.n;$("#spotRest").textContent=[s.d,s.note].filter(Boolean).join(" · ");$("#spotKarte").href=maps(s)};
   if(!anim||leise)return setz();
-  box.animate([{opacity:1,transform:"none",filter:"blur(0)"},{opacity:0,transform:"translateX(-30px)",filter:"blur(6px)"}],{duration:220,easing:"ease-in"}).onfinish=()=>{setz();
-    box.animate([{opacity:0,transform:"translateX(40px)",filter:"blur(6px)"},{opacity:1,transform:"none",filter:"blur(0)"}],{duration:600,easing:FEDER})};
+  box.animate([{opacity:1,transform:"none"},{opacity:0,transform:"translateX(-30px)"}],{duration:220,easing:"ease-in"}).onfinish=()=>{setz();
+    box.animate([{opacity:0,transform:"translateX(40px)"},{opacity:1,transform:"none"}],{duration:600,easing:FEDER})};
 }
 $("#spotWeiter").onclick=()=>{spotV++;spot(true)};
 
@@ -356,7 +357,7 @@ $("#stempelK").onclick=e=>{
 let preisI=0;
 function preis(){const [z,was,info,seite]=PREISE[preisI];rollen($("#preisZahl"),z);$("#preisWas").textContent=was;$("#preisInfo").textContent=info;$("#preisK").dataset.seite=seite;
   $("#preisPunkte").innerHTML=PREISE.map((_,i)=>`<i class="${i===preisI?"an":""}"></i>`).join("")}
-setInterval(()=>{if(document.hidden)return;preisI=(preisI+1)%PREISE.length;preis()},7000);
+setInterval(()=>{if(document.hidden||leise||offen)return;preisI=(preisI+1)%PREISE.length;preis()},7000);
 
 /* ---------- Themen und Beliebt ---------- */
 function themen(){
@@ -366,7 +367,8 @@ function themen(){
   const farbe=id=>`var(--${["kobalt","koralle","minze","safran","tuerkis"][BELIEBT.indexOf(id)%5]})`;
   $("#karussell").innerHTML=BELIEBT.filter(id=>P[id]).map(id=>`<button class="kk" data-seite="${id}"><span class="mini" style="--f:${farbe(id)}">${ic(P[id].i||"doc")}</span><b>${esc(P[id].t)}</b><small>${esc(P[id].s||"")}</small></button>`).join("");
   const k=$("#karussell"),skal=()=>{const m=k.getBoundingClientRect().left+k.clientWidth/2;$$(".kk",k).forEach(c=>{const r=c.getBoundingClientRect(),d=Math.min(1,Math.abs(r.left+r.width/2-m)/r.width);c.style.transform=`scale(${1-d*.08})`;c.style.opacity=1-d*.35})};
-  k.addEventListener("scroll",()=>requestAnimationFrame(skal),{passive:true});skal();
+  let skalFrame=0;const planen=()=>{if(leise||skalFrame)return;skalFrame=requestAnimationFrame(()=>{skalFrame=0;skal()})};
+  k.addEventListener("scroll",planen,{passive:true});addEventListener("resize",planen);if(!leise)skal();
 }
 document.addEventListener("click",e=>{const b=e.target.closest("main [data-seite]");if(b&&!e.target.closest(".seite"))seiteOeffnen(b.dataset.seite,b)});
 
@@ -395,13 +397,13 @@ function leiste(){
   setz(null);tabZahl();
   $$("button",l).forEach(b=>b.onclick=()=>{if(b.getAttribute("aria-current")==="true"){offen&&offen();return}setz(b);const war=offen;offen&&offen();
     setTimeout(()=>{const s=b.dataset.tab==="treffen"?treffenOeffnen(b):themaOeffnen(THEMEN.find(t=>t.id===b.dataset.tab),b);
-      new MutationObserver((_,o)=>{if(!s.isConnected){o.disconnect();if(b.getAttribute("aria-current")==="true")setz(null)}}).observe(document.body,{childList:true})},war?860:0)});
+      new MutationObserver((_,o)=>{if(!s.isConnected){o.disconnect();if(b.getAttribute("aria-current")==="true")setz(null)}}).observe(document.body,{childList:true})},war&&!leise?280:0)});
 }
 
 /* ---------- Rollen: Himmel-Parallaxe und Mini-Kopf ---------- */
 function rollenEffekt(){
   const vorne=$("#vorne"),hinten=$("#hinten"),inhalt=$("#heldInhalt"),g=$("#gestirn"),mk=$("#miniKopf");let wartet=false;
-  addEventListener("scroll",()=>{if(wartet)return;wartet=true;requestAnimationFrame(()=>{wartet=false;const y=Math.max(0,scrollY);
+  addEventListener("scroll",()=>{if(wartet)return;wartet=true;requestAnimationFrame(()=>{wartet=false;const y=Math.min(500,Math.max(0,scrollY));
     if(!leise){hinten.style.transform=`translateY(${y*.35}px)`;vorne.style.transform=`translateY(${y*.18}px)`;g.style.translate=`0 ${y*.5}px`;
       inhalt.style.transform=`translateY(${y*.45}px) scale(${1-Math.min(y,300)/1500})`;inhalt.style.opacity=1-Math.min(1,y/240)}
     mk.classList.toggle("da",y>300)})},{passive:true});
@@ -412,6 +414,9 @@ kopf();wort();spot();ring();stempelheft();preis();themen();leiste();rollenEffekt
 staffeln($$("#bento>*"),{start:250,abstand:70});
 if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("sw.js").catch(()=>{});
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){io.unobserve(e.target);staffeln([...e.target.children],{abstand:70,von:"translateY(30px) scale(.94)"})}}),{threshold:.15});
+const himmelIO=new IntersectionObserver(es=>es.forEach(e=>$("#held").classList.toggle("ruht",!e.isIntersecting)));
+himmelIO.observe($("#held"));
+document.addEventListener("visibilitychange",()=>document.documentElement.classList.toggle("inaktiv",document.hidden));
 io.observe($("#themen"));io.observe($("#karussell"));
 $$(".k:not(.wort)").forEach(k=>kippen(k,5));
 setTimeout(()=>{$("#ringVoll").style.strokeDashoffset=163.4;requestAnimationFrame(()=>requestAnimationFrame(ring))},0);
