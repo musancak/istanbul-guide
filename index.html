@@ -12,8 +12,10 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-180.png">
-<script>/* alte Links wie #essen oder #sim führen in die ganze App */if(location.hash.length>1)location.replace("app.html"+location.hash)</script>
+<script>/* alte Links wie #essen oder #sim führen in die ganze App */if(location.hash.length>1&&location.hash!=="#essen")location.replace("app.html"+location.hash)</script>
 <link rel="stylesheet" href="start.css">
+<link rel="stylesheet" href="leaflet/leaflet.min.css">
+<link rel="stylesheet" href="essen.css">
 <link rel="stylesheet" href="treffen.css">
 <link rel="preconnect" href="https://server.arcgisonline.com" crossorigin>
 <style>
@@ -254,6 +256,8 @@ main{position:relative;z-index:2;margin-top:-30px;background:var(--bg);border-ra
 <script src="orte.js"></script>
 <script src="entdecken.js"></script>
 <script src="icons.js"></script>
+<script src="leaflet/leaflet.min.js"></script>
+<script src="essen.js"></script>
 <script src="start.js"></script>
 <script src="treffen.js"></script>
 <script>
@@ -422,5 +426,6 @@ $$(".k:not(.wort)").forEach(k=>kippen(k,5));
 setTimeout(()=>{$("#ringVoll").style.strokeDashoffset=163.4;requestAnimationFrame(()=>requestAnimationFrame(ring))},0);
 </script>
 <script data-goatcounter="https://musancak.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<script>if(location.hash==="#essen")IstanbulFood.open();</script>
 </body>
 </html>

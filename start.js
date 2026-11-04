@@ -105,7 +105,7 @@ function themaOeffnen(t,von){
   const s=oeffne(themaHTML(t),von,t.t);
   $$("[data-seite]",s).forEach(b=>b.onclick=()=>seiteOeffnen(b.dataset.seite,b));return s;
 }
-function essenOeffnen(von){location.assign("app.html#essen")}
+function essenOeffnen(von){return IstanbulFood.open(von)}
 
 /* Animations-Werkzeuge */
 function rollen(el,text){ /* jede Ziffer rollt einzeln herein */
