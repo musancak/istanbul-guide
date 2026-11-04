@@ -38,10 +38,12 @@ search:'<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>', check:'<path
 const svg=(k,c="")=>`<svg viewBox="0 0 24 24" class="${c}" aria-hidden="true">${I[k]}</svg>`;
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const norm=s=>String(s).toLowerCase().replace(/ı/g,"i").normalize("NFD").replace(/[̀-ͯ]/g,"");
+const matches=(text,query)=>norm(query).trim().split(/\s+/).every(word=>norm(text).includes(word));
 const store={get(k,f){try{const v=localStorage.getItem(k);return v===null?f:JSON.parse(v)}catch(e){return f}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 
 /* ---------- Sprache ---------- */
 let LANG=store.get("ist-lang",(navigator.language||"de").startsWith("de")?"de":"en");
+if(!["de","en"].includes(LANG))LANG="de";
 const UI={
 de:{start:"Start",verkehr:"Verkehr",essen:"Essen",alltag:"Alltag",entdecken:"Entdecken",sub:"Für Studierende · Stand 2026",search:"Suchen: Taxi, Ramen, e-İkamet …",clear:"Löschen",sos:"Notruf",sosAll:"Alle Notdienste",police:"Polizei",fire:"Feuer",tourist:"Ausländer",sosMore:"Nummern zum Abtippen. Mehr unter",first:"Erste Tage",firstNote:"Abhaken wird nur auf diesem Gerät gespeichert.",prices:"Preise auf einen Blick",popular:"Beliebt",today:"Heute",spots:"Food-Spots",spotsSub:n=>`${n} Orte, mit Karte und Bewertung`,foot:"Eigene Texte nach offiziellen Seiten (İBB, Metro İstanbul, Istanbulkart, Migrationsbehörde) sowie Tipps aus den Istanbul-Gruppenchats und der Food-Spot-Liste der Gruppe. Kein offizielles Angebot. Preise ändern sich schnell, vor Ort kurz prüfen.",tabFoot:"Nach offiziellen Seiten, Stand November 2026.",nothing:v=>`Nichts gefunden für „${v}“.`,topics:"Themen",infos:"Infos",
  essenSub:"Food-Spots aus der Gruppe. Antippen öffnet Google Maps, Pfeile zum Bewerten. Punkte auf der Karte sind automatisch gesetzt und können leicht danebenliegen.",list500:"Liste mit 500 Spots",list500d:"Google Maps, aus der Gruppe WiSe 26/27",orig:"Original-Liste",origd:"Google Doc nach Bezirken",all:"Alle",byArea:"Bezirk",byTop:"Beliebt",byNear:"In der Nähe",fq:"Burger, Mantı, Moda …",places:n=>`${n} ${n===1?"Ort":"Orte"}`,none:"Kein Spot passt. Anderen Bezirk oder Begriff probieren.",onMap:n=>`${n} auf der Karte`,openMaps:"In Google Maps öffnen",noGeo:"Standort nicht verfügbar. Erlaube den Zugriff im Browser oder wähle einen Bezirk.",locating:"Standort wird gesucht …",suggest:"Spot vorschlagen",suggestD:"Fehlt dein Lieblingsladen?",fresh:"Neu",offline:"Bewertungen gerade nicht erreichbar.",
@@ -223,7 +225,7 @@ let done=store.get("ist-done",{});
 function startHTML(){
   return`${navbar("Istanbul","",langBtn())}<div class="wrap view">
   <h1 class="lt">Istanbul</h1><p class="sub">${u("sub")}</p>
-  <label class="search">${svg("search")}<input id="q" type="search" placeholder="${esc(u("search"))}" autocomplete="off" enterkeyhint="search"><button id="qx" hidden>${u("clear")}</button></label>
+  <label class="search">${svg("search")}<input id="q" type="search" aria-label="${esc(u("search"))}" placeholder="${esc(u("search"))}" autocomplete="off" enterkeyhint="search"><button id="qx" hidden>${u("clear")}</button></label>
   <div id="res"></div>
   <div id="home">
   <div class="gh">${u("sos")}</div>
@@ -258,10 +260,10 @@ function searchHTML(v){
   const nv=norm(v),idx=[];
   for(const id in P)for(const g of PG(id).g)for(const r of g.r){
     const txt=typeof r==="string"?r:Array.isArray(r)?r.join(": "):r.u?r.l+" "+(r.d||""):r.s?r.s.join(" · "):"";
-    if(txt&&norm(txt).includes(nv))idx.push({id,txt});
+    if(txt&&matches(txt,nv))idx.push({id,txt});
   }
-  const pages=Object.keys(P).filter(id=>norm(PG(id).t+" "+PG(id).s).includes(nv));
-  const hits=idx.slice(0,25),sp=SPOTS.filter(s=>norm(s.n+" "+s.note+" "+s.d).includes(nv)).slice(0,25);
+  const pages=Object.keys(P).filter(id=>matches(PG(id).t+" "+PG(id).s,nv));
+  const hits=idx.slice(0,25),sp=SPOTS.filter(s=>matches(s.n+" "+s.note+" "+s.d,nv)).slice(0,25);
   if(!pages.length&&!hits.length&&!sp.length)return`<div class="gf" style="margin-top:20px">${esc(u("nothing")(v))}</div>`;
   let h="";
   if(pages.length)h+=group({h:u("topics"),r:pages},pageRow);
@@ -286,7 +288,7 @@ function essenHTML(){
   <div class="mapbox"><div id="map" role="img" aria-label="Karte"></div><button class="locbtn" id="loc" aria-label="${u("byNear")}">${svg("locate")}</button><span class="mapcount" id="mapcount"></span></div>
   <div class="chips" id="chips"></div>
   <div class="sortrow"><div class="seg sm" id="sort" role="group"><i></i>${[["area",u("byArea")],["top",u("byTop")],["near",u("byNear")]].map(([k,t])=>`<button data-s="${k}" aria-pressed="${k===fsort}">${t}</button>`).join("")}</div></div>
-  <label class="search">${svg("search")}<input id="fq" type="search" placeholder="${esc(u("fq"))}" value="${esc(fq)}" autocomplete="off"></label>
+  <label class="search">${svg("search")}<input id="fq" type="search" aria-label="${esc(u("fq"))}" placeholder="${esc(u("fq"))}" value="${esc(fq)}" autocomplete="off"></label>
   <div id="flist"></div>
   <div class="gh"></div>
   <div class="grp">
@@ -311,7 +313,7 @@ function chips(){
   el.innerHTML=ds.map(d=>`<button class="chip" aria-pressed="${d===fd}" data-d="${esc(d)}">${esc(d==="all"?u("all"):areaL(d))}</button>`).join("");
   el.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{fd=c.dataset.d;el.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed",x===c));c.scrollIntoView({inline:"center",block:"nearest",behavior:"smooth"});list(true)});
 }
-function filtered(){const nv=norm(fq);return SPOTS.filter(x=>x.k===fk&&(fd==="all"||x.d===fd)&&(!nv||norm(x.n+" "+x.note+" "+x.d).includes(nv)))}
+function filtered(){const nv=norm(fq);return SPOTS.filter(x=>x.k===fk&&(fd==="all"||x.d===fd)&&(!nv||matches(x.n+" "+x.note+" "+x.d,nv)))}
 function list(fit){
   const el=document.getElementById("flist");if(!el)return;
   let s=filtered();
@@ -497,23 +499,26 @@ function openPage(id){
   const binds={rechner:bindRechner,vorschlag:bindVorschlag,datenschutz:bindDatenschutz};(binds[id]||bindReport)(id);
   requestAnimationFrame(()=>{pane.classList.add("open");main.classList.add("pushed")});
   paneScroll();
+  pane.inert=false;main.inert=true;
+  const heading=pane.querySelector("h1");if(heading){heading.tabIndex=-1;heading.focus({preventScroll:true})}
 }
-function closePage(){page=null;pane.classList.remove("open","drag");pane.style.transform="";main.classList.remove("pushed");main.style.transform=""}
+function closePage(){page=null;pane.inert=true;main.inert=false;pane.classList.remove("open","drag");pane.style.transform="";main.classList.remove("pushed");main.style.transform="";tabsEl.querySelector(`[data-tab="${tab}"]`)?.focus({preventScroll:true})}
 function setHash(h){try{if(location.hash.slice(1)!==h)history.pushState(null,"","#"+h)}catch(e){}}
 const parentTab=id=>(TABS.find(t=>t.g&&t.g.some(g=>g.r.includes(id)))||TABS[0]).id;
 function go(id){if(P[id]){openPage(id);setHash(id)}else{if(page)closePage();if(id!==tab||!main.innerHTML)showTab(id);setHash(id)}}
 function route(){
-  const h=decodeURIComponent((location.hash||"").slice(1));
+  let h="";
+  try{h=decodeURIComponent((location.hash||"").slice(1))}catch(e){/* Fehlerhafte Links öffnen weiterhin die Startseite. */}
   if(P[h]){if(!main.innerHTML)showTab(parentTab(h));if(page!==h)openPage(h)}
   else if(TABS.some(t=>t.id===h)){if(page)closePage();if(h!==tab||!main.innerHTML)showTab(h)}
-  else{if(page)closePage();if(!main.innerHTML)showTab("start")}
+  else{if(page)closePage();if(tab!=="start"||!main.innerHTML)showTab("start")}
 }
 document.addEventListener("click",e=>{
   const g=e.target.closest("[data-go]"),t=e.target.closest("[data-tab]"),b=e.target.closest("[data-back]"),l=e.target.closest("[data-lang]");
-  if(l){LANG=LANG==="de"?"en":"de";store.set("ist-lang",LANG);document.documentElement.lang=LANG;showTab(tab,true);return}
+  if(l){const currentPage=page;LANG=LANG==="de"?"en":"de";store.set("ist-lang",LANG);document.documentElement.lang=LANG;showTab(tab,true);if(currentPage)openPage(currentPage);return}
   if(b){e.preventDefault();if(history.state!==undefined&&history.length>1&&location.hash.slice(1)===page)history.back();else{closePage();setHash(tab)}return}
   if(g){e.preventDefault();go(g.dataset.go);return}
-  if(t){e.preventDefault();if(page)closePage();if(t.dataset.tab===tab&&!page)window.scrollTo({top:0,behavior:"smooth"});else showTab(t.dataset.tab);setHash(t.dataset.tab)}
+  if(t){e.preventDefault();const sameTab=t.dataset.tab===tab;if(page)closePage();if(sameTab)window.scrollTo({top:0,behavior:"smooth"});else showTab(t.dataset.tab);setHash(t.dataset.tab)}
 });
 addEventListener("popstate",route);addEventListener("hashchange",route);
 
