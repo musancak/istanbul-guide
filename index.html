@@ -397,7 +397,7 @@ function leiste(){
   setz(null);tabZahl();
   $$("button",l).forEach(b=>b.onclick=()=>{if(b.getAttribute("aria-current")==="true"){offen&&offen();return}setz(b);const war=offen;offen&&offen();
     setTimeout(()=>{const s=b.dataset.tab==="treffen"?treffenOeffnen(b):themaOeffnen(THEMEN.find(t=>t.id===b.dataset.tab),b);
-      new MutationObserver((_,o)=>{if(!s.isConnected){o.disconnect();if(b.getAttribute("aria-current")==="true")setz(null)}}).observe(document.body,{childList:true})},war&&!leise?280:0)});
+      if(!s)return;new MutationObserver((_,o)=>{if(!s.isConnected){o.disconnect();if(b.getAttribute("aria-current")==="true")setz(null)}}).observe(document.body,{childList:true})},war&&!leise?280:0)});
 }
 
 /* ---------- Rollen: Himmel-Parallaxe und Mini-Kopf ---------- */

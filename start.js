@@ -106,13 +106,7 @@ function themaOeffnen(t,von){
   $$("[data-seite]",s).forEach(b=>b.onclick=()=>seiteOeffnen(b.dataset.seite,b));return s;
 }
 function essenOeffnen(von){
-  const kat=Object.keys(F);
-  const s=oeffne(`<h1 class="s-gross">Essen</h1><p class="s-sub">${SPOTS.length} Spots aus der Gruppe</p>
-   <div class="kats">${kat.map((k,i)=>`<button class="kat press" aria-pressed="${i===0}" data-k="${k}">${esc(F[k].t)}</button>`).join("")}</div><div class="gruppe" id="spotliste"></div>
-   <a class="in-app press" href="app.html#essen">Karte und Bewertungen in der App</a>`,von,"Essen");
-  const zeig=k=>{const l=$("#spotliste",s);l.innerHTML=SPOTS.filter(x=>x.k===k).slice(0,40).map(x=>`<a class="z link" href="${maps(x)}" target="_blank" rel="noopener"><span><b>${esc(x.n)}${x.top?' <i class="stern"></i>':""}</b><small>${esc([x.d,x.note].filter(Boolean).join(" · "))}</small></span>${ic("ext")}</a>`).join("");
-    $$(".z",l).forEach((el,i)=>el.animate([{opacity:0,transform:"translateX(24px)"},{opacity:1,transform:"none"}],{duration:leise?1:280,delay:leise?0:Math.min(i,7)*18,easing:FEDER,fill:"backwards"}))};
-  $$(".kat",s).forEach(b=>b.onclick=()=>{$$(".kat",s).forEach(x=>x.setAttribute("aria-pressed",x===b));zeig(b.dataset.k)});zeig(kat[0]);return s;
+  location.assign("app.html#essen");
 }
 
 /* Animations-Werkzeuge */

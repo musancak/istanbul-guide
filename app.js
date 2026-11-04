@@ -47,7 +47,7 @@ let LANG=store.get("ist-lang",(navigator.language||"de").startsWith("de")?"de":"
 if(!["de","en"].includes(LANG))LANG="de";
 const UI={
 de:{start:"Start",verkehr:"Verkehr",essen:"Essen",alltag:"Alltag",entdecken:"Entdecken",sub:"Für Studierende · Stand 2026",search:"Suchen: Taxi, Ramen, e-İkamet …",clear:"Löschen",sos:"Notruf",sosAll:"Alle Notdienste",police:"Polizei",fire:"Feuer",tourist:"Ausländer",sosMore:"Nummern zum Abtippen. Mehr unter",first:"Erste Tage",firstNote:"Abhaken wird nur auf diesem Gerät gespeichert.",prices:"Preise auf einen Blick",popular:"Beliebt",today:"Heute",spots:"Food-Spots",spotsSub:n=>`${n} Orte, mit Karte und Bewertung`,foot:"Eigene Texte nach offiziellen Seiten (İBB, Metro İstanbul, Istanbulkart, Migrationsbehörde) sowie Tipps aus den Istanbul-Gruppenchats und der Food-Spot-Liste der Gruppe. Kein offizielles Angebot. Preise ändern sich schnell, vor Ort kurz prüfen.",tabFoot:"Nach offiziellen Seiten, Stand November 2026.",nothing:v=>`Nichts gefunden für „${v}“.`,topics:"Themen",infos:"Infos",
- essenSub:"Food-Spots aus der Gruppe. Antippen öffnet Google Maps, Pfeile zum Bewerten. Punkte auf der Karte sind automatisch gesetzt und können leicht danebenliegen.",list500:"Liste mit 500 Spots",list500d:"Google Maps, aus der Gruppe WiSe 26/27",orig:"Original-Liste",origd:"Google Doc nach Bezirken",all:"Alle",byArea:"Bezirk",byTop:"Beliebt",byNear:"In der Nähe",fq:"Burger, Mantı, Moda …",places:n=>`${n} ${n===1?"Ort":"Orte"}`,none:"Kein Spot passt. Anderen Bezirk oder Begriff probieren.",onMap:n=>`${n} auf der Karte`,openMaps:"In Google Maps öffnen",noGeo:"Standort nicht verfügbar. Erlaube den Zugriff im Browser oder wähle einen Bezirk.",locating:"Standort wird gesucht …",suggest:"Spot vorschlagen",suggestD:"Fehlt dein Lieblingsladen?",fresh:"Neu",offline:"Bewertungen gerade nicht erreichbar.",
+ essenSub:"Food-Spots aus der Gruppe. Antippen öffnet Google Maps, Pfeile zum Bewerten. Punkte auf der Karte sind automatisch gesetzt und können leicht danebenliegen.",list500:"Liste mit 500 Spots",list500d:"Google Maps, aus der Gruppe WiSe 26/27",orig:"Original-Liste",origd:"Google Doc nach Bezirken",all:"Alle",byArea:"Bezirk",byTop:"Beliebt",byNear:"In der Nähe",fq:"Burger, Mantı, Moda …",places:n=>`${n} ${n===1?"Ort":"Orte"}`,none:"Kein Spot passt zu dieser Auswahl. Filter zurücksetzen oder eine andere Küche, ein anderes Budget oder einen anderen Bezirk wählen.",onMap:n=>`${n} auf der Karte`,openMaps:"In Google Maps öffnen",noGeo:"Standort nicht verfügbar. Erlaube den Zugriff im Browser oder wähle einen Bezirk.",locating:"Standort wird gesucht …",suggest:"Spot vorschlagen",suggestD:"Fehlt dein Lieblingsladen?",fresh:"Neu",offline:"Bewertungen gerade nicht erreichbar.",
  t1:"Fahrt mit Studentenkarte",t2:"Monatskarte Student",t3:"Taxi-Mindestpreis",t4:"Einzelfahrt voll",
  steps:[["s1","Istanbulkart am Flughafen holen","flughafen"],["s2","SIM-Karte kaufen, Pass mitnehmen","sim"],["s3","e-İkamet rechtzeitig beantragen","aufenthalt"],["s4","Studenten-Istanbulkart beantragen","istanbulkart"],["s5","Handy-Frist von 120 Tagen notieren","imei"],["s6","Notrufnummern speichern","notfall"]],
  days:["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"],monMarket:"Kleine Märkte in vielen Bezirken",marketToday:"Wochenmarkt heute",nightYes:"Heute Nacht fährt die Nachtmetro",nightNo:"Nachts fahren heute nur Metrobüs und Nachtbusse",ramadan:"",
@@ -59,7 +59,7 @@ de:{start:"Start",verkehr:"Verkehr",essen:"Essen",alltag:"Alltag",entdecken:"Ent
  areas:"Bezirks-Stempel",beenList:"Besucht",ratedList:"Von dir empfohlen",ratedNote:"Deine Stimmen zählen für alle: Sie sortieren die Liste „Beliebt“ und den Tipp für heute.",delList:"Löschen",delSure:"Wirklich löschen?",emptyList:"Noch leer. Tippe bei einem Spot auf das Lesezeichen.",
  tipD:"Tipp für heute",tipM:"Frühstück heute",tipN:"Noch hungrig?",tipW:"Bei Regen ins Café",tipGood:n=>`${n} ${n===1?"Stimme":"Stimmen"} aus der Gruppe`},
 en:{start:"Home",verkehr:"Transport",essen:"Food",alltag:"Daily life",entdecken:"Explore",sub:"For students · 2026",search:"Search: taxi, ramen, e-İkamet …",clear:"Clear",sos:"Emergency",sosAll:"All services",police:"Police",fire:"Fire",tourist:"Foreigners",sosMore:"Numbers to dial. More under",first:"First days",firstNote:"Checkmarks are saved on this device only.",prices:"Prices at a glance",popular:"Popular",today:"Today",spots:"Food spots",spotsSub:n=>`${n} places, with map and ratings`,foot:"Written by us from official sources (İBB, Metro İstanbul, Istanbulkart, migration authority), plus tips from the Istanbul group chats and the group’s food spot list. Not an official service. Prices change fast, double-check on site.",tabFoot:"Based on official sources, as of November 2026.",nothing:v=>`Nothing found for “${v}”.`,topics:"Topics",infos:"Info",
- essenSub:"Food spots from the group. Tap to open Google Maps, arrows to rate. Map pins are placed automatically and may be slightly off.",list500:"List with 500 spots",list500d:"Google Maps, from the WiSe 26/27 group",orig:"Original list",origd:"Google Doc by district",all:"All",byArea:"District",byTop:"Top rated",byNear:"Near me",fq:"Burger, mantı, Moda …",places:n=>`${n} ${n===1?"place":"places"}`,none:"No spot matches. Try another district or word.",onMap:n=>`${n} on the map`,openMaps:"Open in Google Maps",noGeo:"Location not available. Allow access in your browser or pick a district.",locating:"Finding your location …",suggest:"Suggest a spot",suggestD:"Missing your favourite place?",fresh:"New",offline:"Ratings are not reachable right now.",
+ essenSub:"Food spots from the group. Tap to open Google Maps, arrows to rate. Map pins are placed automatically and may be slightly off.",list500:"List with 500 spots",list500d:"Google Maps, from the WiSe 26/27 group",orig:"Original list",origd:"Google Doc by district",all:"All",byArea:"District",byTop:"Top rated",byNear:"Near me",fq:"Burger, mantı, Moda …",places:n=>`${n} ${n===1?"place":"places"}`,none:"No spot matches these filters. Reset filters or try another cuisine, budget or district.",onMap:n=>`${n} on the map`,openMaps:"Open in Google Maps",noGeo:"Location not available. Allow access in your browser or pick a district.",locating:"Finding your location …",suggest:"Suggest a spot",suggestD:"Missing your favourite place?",fresh:"New",offline:"Ratings are not reachable right now.",
  t1:"Ride with student card",t2:"Student monthly pass",t3:"Taxi minimum fare",t4:"Full single ride",
  steps:[["s1","Get an Istanbulkart at the airport","flughafen"],["s2","Buy a SIM card, bring your passport","sim"],["s3","Apply for e-İkamet in time","aufenthalt"],["s4","Apply for the student Istanbulkart","istanbulkart"],["s5","Note the 120-day phone deadline","imei"],["s6","Save the emergency numbers","notfall"]],
  days:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],monMarket:"Small markets in many districts",marketToday:"Market today",nightYes:"The night metro runs tonight",nightNo:"Tonight only Metrobüs and night buses run",
@@ -383,18 +383,69 @@ function searchHTML(v){
 }
 
 /* ---------- Essen: Karte, Liste, Abstimmen ---------- */
+let fc="all",fb="all",fstyle="all";
 let fk="r",fd="all",fq="",fsort="area",me=null,map=null,layer=null,meLayer=null;
 const km=(a,b)=>{const R=6371,t=Math.PI/180,dl=(b[0]-a[0])*t,dn=(b[1]-a[1])*t,x=Math.sin(dl/2)**2+Math.cos(a[0]*t)*Math.cos(b[0]*t)*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(x))};
 const fmtKm=d=>d<1?`${Math.round(d*1000/10)*10} m`:`${d.toFixed(1).replace(".",LANG==="de"?",":".")} km`;
 const voteHTML=s=>`<div class="vote" data-id="${esc(s.id)}"><button class="up" aria-label="Gut" aria-pressed="${MINE[s.id]===1}">${svg("up")}</button><b class="${MINE[s.id]===1?"pos":MINE[s.id]===-1?"neg":""}">${SCORES[s.id]||0}</b><button class="dn" aria-label="Schlecht" aria-pressed="${MINE[s.id]===-1}">${svg("down")}</button></div>`;
-function spotRow(s){
-  const note=noteL(s.note)||(s.k==="t"?areaL(s.d):""),dist=me&&s.ll?fmtKm(km(me,s.ll)):"";
-  return`<div class="row spot"><a class="l" href="${s.u}" target="_blank" rel="noopener"><div class="t">${BEEN[s.id]?`<span class="been">${svg("check")}</span>`:""}${esc(s.n)}${s.top?'<span class="pill">Top</span>':""}${s.fresh?`<span class="pill">${u("fresh")}</span>`:""}</div>${note||dist?`<div class="d">${esc(note)}${note&&dist?" · ":""}${dist}</div>`:""}</a>${keepBtn(s)}${voteHTML(s)}</div>`;
+const FOOD_CUISINES=[
+ ["turkish","Türkisch & Anatolisch","Turkish & Anatolian",/kebap|döner|iskender|lahmacun|pide|mantı|konyalı|çiğköfte|pilav|karadeniz|hausmannskost|lokanta|zennup|tuğra|olden|1741|güzelburç/i],
+ ["asian","Asiatisch & Sushi","Asian & sushi",/sushi|ramen|noodle|dumpling|gyoza|wok|konoha|pad thai|kroken|inari|inari|roka|hakkasan/i],
+ ["uyghur","Uigurisch","Uyghur",/uygur|uigur|uyghur|kroren/i],
+ ["middleeast","Orientalisch","Middle Eastern",/jemen|syrisch|libanes|persisch|afghan|pakistan|hadramout|mazaj|shamse|beirut|kudüs/i],
+ ["italian","Italienisch & Pasta","Italian & pasta",/pizza|pasta|lasagne|italien|eataly|ravenna|cipriani|cecconi|say cheese|mac and cheese|sliceguy/i],
+ ["burger","Burger & Fried Chicken","Burgers & fried chicken",/burger|smash|fried chicken|wings|wingo|hungry birds|bcante|grungy|bbq|chicken|schnitzel/i],
+ ["mexican","Mexikanisch & Tacos","Mexican & tacos",/mexi|taco(?!s)/i],
+ ["breakfast","Frühstück","Breakfast",/frühstück|breakfast|brekkie|gazebo|ethem efendi/i],
+ ["coffee","Kaffee & Süßes","Coffee & sweets",/coffee|kahve|choco|bakery|pastry|dessert|cheese.?cake|baklava|churro|café|cafe|matcha/i],
+ ["seafood","Fisch & Seafood","Fish & seafood",/balık|fisch|seafood|uskumru|sakhalin/i],
+ ["african","Afrikanisch","African",/afrikanisch/i],
+ ["other","Noch nicht zugeordnet","Not classified yet",null]
+];
+function foodMeta(s){
+ const text=(s.n+" "+s.note).replace(/İ/g,"I");
+ const tags=FOOD_CUISINES.filter(x=>x[3]&&x[3].test(text)).map(x=>x[0]);
+ if(s.k==="c"&&!tags.includes("coffee"))tags.push("coffee");
+ if(!tags.length)tags.push("other");
+ // Relative Orientierung nach Lokaltyp; keine behaupteten aktuellen Menüpreise.
+ const budget=s.k==="g"||/olden 1772|lokanta 1741|cecconi|eataly|inari|sushico/i.test(text)?"3":/preis-leistung|günstig|pilav arabası|çiğköfte|pasta to go|kızılkayalar/i.test(text)?"1":tags.some(t=>["burger","italian","asian","uyghur","middleeast","turkish","mexican","breakfast"].includes(t))?"2":"unknown";
+ const styles=[];
+ if(/rooftop|dachterrasse|terrace/i.test(text))styles.push("rooftop");
+ if(/am wasser|sahil|bosphorus|paşalimanı/i.test(text))styles.push("water");
+ if(/hausmannskost|lokanta/i.test(text))styles.push("lokanta");
+ if(/burger|döner|dürüm|pilav|fried chicken|çiğköfte|sokak/i.test(text))styles.push("casual");
+ if(s.k==="g"||budget==="3")styles.push("fine");
+ return {tags,budget,styles};
 }
+const foodLabel=x=>x[LANG==="de"?1:2];
+function spotRow(s){
+ const note=noteL(s.note)||(s.k==="t"?areaL(s.d):""),dist=me&&s.ll?fmtKm(km(me,s.ll)):"",m=foodMeta(s);
+ const photo=FOOD_PHOTOS[s.id];
+ const photoUrl=`https://www.google.com/search?tbm=isch&q=${encodeURIComponent(s.n+" "+s.d+" Istanbul interior iç mekan")}`;
+ return `<article class="food-card"><a class="food-photo ${photo?"has-photo":""}" href="${photo?esc(photo.source):photoUrl}" target="_blank" rel="noopener" aria-label="${esc(s.n)}: ${LANG==="de"?"Innenraum ansehen":"View interior"}">${photo?`<img src="${esc(photo.url)}" alt="${esc(s.n)} – ${LANG==="de"?"Innenraum":"interior"}" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.remove('has-photo')">`:""}<span>${svg("house")} ${photo?(LANG==="de"?"Innenraum · Quelle ansehen":"Interior · view source"):(LANG==="de"?"Innenraumfotos suchen ↗":"Find interior photos ↗")}</span></a><div class="row spot"><a class="l" href="${s.u}" target="_blank" rel="noopener"><div class="t">${BEEN[s.id]?`<span class="been">${svg("check")}</span>`:""}${esc(s.n)}${s.top?'<span class="pill">Top</span>':""}${s.fresh?`<span class="pill">${u("fresh")}</span>`:""}</div><div class="d">${esc(areaL(s.d))}${note?" · "+esc(note):""}${dist?" · "+dist:""}</div><div class="food-tags">${m.tags.map(k=>`<span>${esc(foodLabel(FOOD_CUISINES.find(c=>c[0]===k)))}</span>`).join("")}<span>${m.budget==="unknown"?(LANG==="de"?"Budget offen":"Budget unknown"):"₺".repeat(+m.budget)+" · "+(LANG==="de"?"Orientierung":"estimate")}</span></div></a>${keepBtn(s)}${voteHTML(s)}</div></article>`;
+}
+const FOOD_PHOTOS={
+ "Fatih|Lokanta 1741":{url:"https://lokanta1741.com/wp-content/uploads/2023/02/lokanta-1741-bottom-1.jpg",source:"https://lokanta1741.com/tr/anasayfa/"},
+ "Fatih|Olden 1772":{url:"https://gengroups.com/wp-content/uploads/2023/05/olden_1.jpg",source:"https://gengroups.com/olden-1772/"}
+};
+const FOOD_STYLES=[["rooftop","Dachterrasse","Rooftop"],["water","Am Wasser","Waterfront"],["lokanta","Lokanta & Hausmannskost","Lokanta & home cooking"],["casual","Streetfood & unkompliziert","Street food & casual"],["fine","Gehoben essen","Fine dining"]];
+function foodDistricts(){return [...new Set([...Object.keys(F[fk].d),...SPOTS.filter(s=>s.k===fk).map(s=>s.d)])]}
+function foodFilters(){
+ return `<div class="food-filters"><label>${u("byArea")}<select id="food-district"><option value="all">${LANG==="de"?"Alle Bezirke":"All districts"}</option>${foodDistricts().map(d=>`<option value="${esc(d)}" ${fd===d?"selected":""}>${esc(areaL(d))}</option>`).join("")}</select></label><label>${LANG==="de"?"Küche / Richtung":"Cuisine"}<select id="food-cuisine"><option value="all">${LANG==="de"?"Alle Küchen":"All cuisines"}</option>${FOOD_CUISINES.map(c=>`<option value="${c[0]}" ${fc===c[0]?"selected":""}>${foodLabel(c)}</option>`).join("")}</select></label><label>${LANG==="de"?"Stil / Atmosphäre":"Style / atmosphere"}<select id="food-style"><option value="all">${LANG==="de"?"Jeder Stil":"Any style"}</option>${FOOD_STYLES.map(c=>`<option value="${c[0]}" ${fstyle===c[0]?"selected":""}>${foodLabel(c)}</option>`).join("")}</select></label><label>Budget<select id="food-budget">${[["all",LANG==="de"?"Jedes Budget":"Any budget"],["1","₺ · "+(LANG==="de"?"Günstig":"Affordable")],["2","₺₺ · "+(LANG==="de"?"Mittel":"Moderate")],["3","₺₺₺ · "+(LANG==="de"?"Gehoben":"Upscale")],["unknown",LANG==="de"?"Noch offen":"Not known yet"]].map(([k,t])=>`<option value="${k}" ${fb===k?"selected":""}>${t}</option>`).join("")}</select></label><button id="food-reset" class="chip">${LANG==="de"?"Zurücksetzen":"Reset"}</button></div><p class="gf food-note">${LANG==="de"?"Budget ist eine grobe Orientierung nach Lokaltyp, kein aktueller Menüpreis. Unbekannte Angaben bleiben offen. Fotos zeigen nur eindeutig zugeordnete Lokale; sonst kannst du gezielt nach Innenraumfotos suchen.":"Budget is an estimate by venue type, not a current menu price. Unknown details stay open. Photos are shown only for identified venues; otherwise you can search for interior photos."}</p>`;
+}
+function bindFoodFilters(){
+ document.getElementById("food-district").onchange=e=>{fd=e.target.value;chips();list(true)};
+ document.getElementById("food-cuisine").onchange=e=>{fc=e.target.value;list(true)};
+ document.getElementById("food-style").onchange=e=>{fstyle=e.target.value;list(true)};
+ document.getElementById("food-budget").onchange=e=>{fb=e.target.value;list(true)};
+ document.getElementById("food-reset").onclick=()=>{fd=fc=fb=fstyle="all";fq="";document.getElementById("fq").value="";refreshFoodFilters();chips();list(true)};
+}
+function refreshFoodFilters(){document.getElementById("food-filter-wrap").innerHTML=foodFilters();bindFoodFilters()}
 function essenHTML(){
   return`${navbar(u("essen"),"",langBtn())}<div class="wrap view">
   <h1 class="lt">${u("essen")}</h1><p class="sub">${u("essenSub")}</p>
   <div class="seg" id="seg" role="group"><i></i>${Object.keys(F).map(k=>`<button data-k="${k}" aria-pressed="${k===fk}">${kindL(k)}</button>`).join("")}</div>
+  <div id="food-filter-wrap">${foodFilters()}</div>
   <div class="mapbox"><div id="map" role="img" aria-label="Karte"></div><button class="locbtn" id="loc" aria-label="${u("byNear")}">${svg("locate")}</button><span class="mapcount" id="mapcount"></span></div>
   <div class="chips" id="chips"></div>
   <div class="sortrow"><div class="seg sm" id="sort" role="group"><i></i>${[["area",u("byArea")],["top",u("byTop")],["near",u("byNear")]].map(([k,t])=>`<button data-s="${k}" aria-pressed="${k===fsort}">${t}</button>`).join("")}</div></div>
@@ -411,19 +462,19 @@ function segPlace(seg,sel,attr){const pill=seg.querySelector("i"),btns=[...seg.q
   pill.style.width=`calc((100% - 4px) / ${btns.length})`;pill.style.transform=`translateX(${i*100}%)`;btns.forEach(b=>b.setAttribute("aria-pressed",b.dataset[attr]===sel))}
 function bindEssen(){
   const seg=document.getElementById("seg"),sort=document.getElementById("sort");
-  seg.querySelectorAll("button").forEach(b=>b.onclick=()=>{fk=b.dataset.k;fd="all";segPlace(seg,fk,"k");chips();list(true)});
+  seg.querySelectorAll("button").forEach(b=>b.onclick=()=>{fk=b.dataset.k;if(fd!=="all"&&!F[fk].d[fd])fd="all";refreshFoodFilters();segPlace(seg,fk,"k");chips();list(true)});
   sort.querySelectorAll("button").forEach(b=>b.onclick=()=>{const s=b.dataset.s;if(s==="near"&&!me){locate();return}fsort=s;segPlace(sort,fsort,"s");list(s==="near")});
   document.getElementById("loc").onclick=locate;
   document.getElementById("fq").oninput=e=>{fq=e.target.value.trim();list(true)};
   segPlace(seg,fk,"k");segPlace(sort,fsort,"s");
-  initMap();chips();list(true);
+  bindFoodFilters();initMap();chips();list(true);
 }
 function chips(){
   const el=document.getElementById("chips"),ds=["all",...Object.keys(F[fk].d),...new Set(SPOTS.filter(s=>s.k===fk&&s.fresh&&!F[fk].d[s.d]).map(s=>s.d))];
   el.innerHTML=ds.map(d=>`<button class="chip" aria-pressed="${d===fd}" data-d="${esc(d)}">${esc(d==="all"?u("all"):areaL(d))}</button>`).join("");
-  el.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{fd=c.dataset.d;el.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed",x===c));c.scrollIntoView({inline:"center",block:"nearest",behavior:"smooth"});list(true)});
+  el.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{fd=c.dataset.d;document.getElementById("food-district").value=fd;el.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed",x===c));c.scrollIntoView({inline:"center",block:"nearest",behavior:"smooth"});list(true)});
 }
-function filtered(){const nv=norm(fq);return SPOTS.filter(x=>x.k===fk&&(fd==="all"||x.d===fd)&&(!nv||matches(x.n+" "+x.note+" "+x.d,nv)))}
+function filtered(){const nv=norm(fq);return SPOTS.filter(x=>x.k===fk&&(fc==="all"||foodMeta(x).tags.includes(fc))&&(fb==="all"||foodMeta(x).budget===fb)&&(fstyle==="all"||foodMeta(x).styles.includes(fstyle))&&(fd==="all"||x.d===fd)&&(!nv||matches(x.n+" "+x.note+" "+x.d,nv)))}
 function list(fit){
   const el=document.getElementById("flist");if(!el)return;
   let s=filtered();
@@ -432,16 +483,16 @@ function list(fit){
   let h="";
   if(!s.length)h=`<div class="gf" style="margin-top:20px">${u("none")}</div>`;
   else if(fsort==="area"){const by={};s.forEach(x=>(by[x.d]=by[x.d]||[]).push(x));
-    h=`<div class="count">${u("places")(s.length)}${online===false?" · "+u("offline"):""}</div>`+Object.keys(by).map(d=>`<div class="gh">${esc(areaL(d))}</div><div class="grp">${by[d].map(spotRow).join("")}</div>`).join("")}
-  else h=`<div class="count">${u("places")(s.length)}</div><div class="grp" style="margin-top:8px">${s.map(spotRow).join("")}</div>`;
+    h=`<div class="count" role="status" aria-live="polite">${u("places")(s.length)}${online===false?" · "+u("offline"):""}</div>`+Object.keys(by).map(d=>`<div class="gh">${esc(areaL(d))}</div><div class="grp">${by[d].map(spotRow).join("")}</div>`).join("")}
+  else h=`<div class="count" role="status" aria-live="polite">${u("places")(s.length)}</div><div class="grp" style="margin-top:8px">${s.map(spotRow).join("")}</div>`;
   el.innerHTML=h;
   drawMarkers(s,fit);
 }
 function locate(){
   if(!navigator.geolocation){toast(u("noGeo"));return}
   toast(u("locating"));
-  navigator.geolocation.getCurrentPosition(p=>{me=[p.coords.latitude,p.coords.longitude];fsort="near";fd="all";
-    const sort=document.getElementById("sort");if(sort)segPlace(sort,"near","s");chips();list(false);
+  navigator.geolocation.getCurrentPosition(p=>{me=[p.coords.latitude,p.coords.longitude];fsort="near";
+    const sort=document.getElementById("sort");if(sort)segPlace(sort,"near","s");refreshFoodFilters();chips();list(false);
     if(map&&window.L){if(meLayer)meLayer.remove();meLayer=L.circleMarker(me,{radius:8,color:"#fff",weight:3,fillColor:"#2F6FD6",fillOpacity:1}).addTo(map);map.flyTo(me,15,{duration:.8})}
   },()=>toast(u("noGeo")),{enableHighAccuracy:true,timeout:10000,maximumAge:60000});
 }
