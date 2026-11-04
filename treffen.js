@@ -1,5 +1,7 @@
 /* Treffen: Leute kennenlernen an guten Orten. Lädt nach start.js.
-   Vorerst nur im Browser gespeichert (localStorage „ist-treffen“), die fünf Beispiele sind fest. */
+   Echte Treffen und Zusagen liegen in Supabase (RPCs get_treffen, treffen_neu, treffen_mit, treffen_weg, treffen_melden),
+   Gerät = dieselbe zufällige ID wie in der App. Die fünf Beispiele erscheinen nur, solange es kaum echte Treffen gibt;
+   Zusagen zu Beispielen bleiben im Browser (localStorage „ist-treffen“). */
 const ORTE=[
  {id:"moda",n:"Moda Sahili",d:"Kadıköy",t:"Wiese am Meer, Sonnenuntergang",ll:[40.9787,29.0262]},
  {id:"kadikoy",n:"Kadıköy İskele",d:"Kadıköy",t:"Fähranleger, Treffpunkt Nr. 1 auf der Asien-Seite",ll:[40.9918,29.0228]},
@@ -26,17 +28,36 @@ const BEISPIELE=[
 const FARBEN=["#1E6E7E","#2B4C9B","#D0553F","#E0A23A","#3F9C83","#8A4FA3","#B5533F"];
 const farbeVon=s=>FARBEN[[...s].reduce((a,c)=>a+c.charCodeAt(0),0)%FARBEN.length];
 
-let TR={eigene:[],dabei:{}};try{TR={...TR,...JSON.parse(localStorage.getItem("ist-treffen"))}}catch(e){}
-const trSpeichern=()=>{try{localStorage.setItem("ist-treffen",JSON.stringify(TR))}catch(e){}};
+let TR={dabei:{}};try{TR={...TR,...JSON.parse(localStorage.getItem("ist-treffen"))}}catch(e){}
+const trSpeichern=()=>{try{localStorage.setItem("ist-treffen",JSON.stringify({dabei:TR.dabei}))}catch(e){}};
+
+/* Server */
+const TSB="https://tdattimvlqyljahijyoo.supabase.co/rest/v1/rpc/",TKEY="sb_publishable_GhyClAXoPp0t752Fvk1kUw_VxGZ0tuX";
+let GERAET=null;try{GERAET=JSON.parse(localStorage.getItem("ist-device"))}catch(e){}
+if(!GERAET){GERAET=crypto.randomUUID?crypto.randomUUID():"10000000-1000-4000-8000-100000000000".replace(/[018]/g,c=>(c^crypto.getRandomValues(new Uint8Array(1))[0]&15>>c/4).toString(16));try{localStorage.setItem("ist-device",JSON.stringify(GERAET))}catch(e){}}
+async function trpc(f,body){
+  const r=await fetch(TSB+f,{method:"POST",headers:{apikey:TKEY,"Content-Type":"application/json"},body:JSON.stringify(body)});
+  const j=await r.json().catch(()=>null);if(!r.ok)throw new Error(j&&j.message||"offline");return j;
+}
+/* Server-Zeit in die Istanbul-Wanduhr umrechnen, wie istZeit() es tut, und zurück */
+const zuIst=d=>new Date(d.getTime()+(d.getTimezoneOffset()+180)*6e4);
+const vonIst=d=>new Date(d.getTime()-(d.getTimezoneOffset()+180)*6e4);
+const hhmm=d=>String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");
+let ECHT=[],tGeladen=false;
+async function treffenLaden(){
+  try{const r=await trpc("get_treffen",{p_device:GERAET});
+    ECHT=r.map(x=>{const w=zuIst(new Date(x.starts));return{id:x.id,art:x.art,t:x.titel,ort:x.ort,wann:w,zeit:hhmm(w),n:x.n,dabei:x.dabei,mine:x.mine,echt:1}});tGeladen=true}
+  catch(e){if(!tGeladen)ECHT=[]}
+  tabZahl();
+}
 
 function tagStart(v){const t=istZeit();t.setHours(0,0,0,0);t.setDate(t.getDate()+v);return t}
-function zeitpunkt(x){const[h,m]=x.zeit.split(":").map(Number),t=x.datum?new Date(x.datum):tagStart(x.tag);t.setHours(h,m);return t}
+function zeitpunkt(x){const[h,m]=x.zeit.split(":").map(Number),t=tagStart(x.tag);t.setHours(h,m);return t}
 /* Beispiele, die heute schon vorbei sind, rutschen einen Tag weiter */
 function alleTreffen(){
   const jetzt=istZeit();
-  return[...BEISPIELE.map(b=>{const x={...b,beispiel:1};if(zeitpunkt(x)<jetzt-36e5)x.tag+=1;return x}),...TR.eigene]
-    .map(x=>({...x,wann:zeitpunkt(x),n:x.leute.length+(TR.dabei[x.id]?1:0)}))
-    .filter(x=>x.wann>jetzt-2*36e5).sort((a,b)=>a.wann-b.wann);
+  const bsp=ECHT.length>=3?[]:BEISPIELE.map(b=>{const x={...b,beispiel:1};if(zeitpunkt(x)<jetzt-36e5)x.tag+=1;const d=!!TR.dabei[x.id];return{...x,wann:zeitpunkt(x),n:x.leute.length+(d?1:0),dabei:d}});
+  return[...bsp,...ECHT].filter(x=>x.wann>jetzt-2*36e5).sort((a,b)=>a.wann-b.wann);
 }
 function wannText(x){
   const tage=Math.round((new Date(x.wann).setHours(0,0,0,0)-tagStart(0))/864e5);
@@ -46,14 +67,16 @@ function wannText(x){
   return{tag,zeit:x.zeit,bald};
 }
 const ortVon=id=>ORTE.find(o=>o.id===id);
-const avatare=(leute,du)=>`<span class="ava">${(du?["DU",...leute]:leute).slice(0,3).map(l=>`<i class="${l==="DU"?"du":""}" style="--a:${l==="DU"?"var(--tinte)":farbeVon(l)}">${l}</i>`).join("")}</span>`;
+/* echte Treffen sind anonym: neutrale Punkte statt Initialen */
+const leuteVon=x=>x.leute||Array.from({length:Math.max(0,x.n-(x.dabei?1:0))},()=>"");
+const avatare=(leute,du)=>`<span class="ava">${(du?["DU",...leute]:leute).slice(0,3).map(l=>`<i class="${l==="DU"?"du":""}" style="--a:${l==="DU"?"var(--tinte)":l?farbeVon(l):"var(--fg3)"}">${l}</i>`).join("")}</span>`;
 
 function treffenKarte(x){
-  const w=wannText(x),o=ortVon(x.ort),d=!!TR.dabei[x.id];
+  const w=wannText(x),o=ortVon(x.ort),d=x.dabei;
   return`<article class="tk${d?" dabei":""}" data-id="${x.id}" data-ort="${x.ort}">
    <div class="tk-zeit"><span class="mono">${esc(w.tag.toUpperCase())}</span><b>${w.zeit}</b>${w.bald?`<small>${w.bald}</small>`:""}</div>
    <div class="tk-mitte"><b class="tk-titel">${esc(x.t)}</b><span class="tk-ort">${ic("pin")}${esc(o.n)}</span>
-    <div class="tk-leute">${avatare(x.leute,d)}<span class="tk-n"><b class="zahl">${x.n}</b> dabei</span>${x.beispiel?'<span class="bsp mono">BEISPIEL</span>':""}</div></div>
+    <div class="tk-leute">${avatare(leuteVon(x),d)}<span class="tk-n"><b class="zahl">${x.n}</b> dabei</span>${x.beispiel?'<span class="bsp mono">BEISPIEL</span>':x.mine?'<button class="bsp mono weg">LÖSCHEN</button>':'<button class="bsp mono melden">MELDEN</button>'}</div></div>
    <button class="mit press" aria-label="${d?"Nicht mehr dabei":"Dabei sein"}" aria-pressed="${d}"><svg viewBox="0 0 24 24" class="i"><path class="plus-h" d="M5 12h14"/><path class="plus-v" d="M12 5v14"/><path class="haken" d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
   </article>`;
 }
@@ -98,25 +121,32 @@ function liste(){
   const l=$("#tListe",tSeite);if(!l)return;
   let T=alleTreffen();
   if(tFilter==="heute")T=T.filter(x=>wannText(x).tag==="Heute");
-  if(tFilter==="dabei")T=T.filter(x=>TR.dabei[x.id]);
+  if(tFilter==="dabei")T=T.filter(x=>x.dabei);
   if(tOrt)T=T.filter(x=>x.ort===tOrt);
-  l.innerHTML=T.length?T.map(treffenKarte).join(""):`<p class="leer">${tFilter==="dabei"?"Noch bei nichts dabei. Tipp auf das Plus.":"Hier ist noch nichts geplant. Schlag doch was vor."}</p>`;
+  l.innerHTML=!tGeladen&&!T.length?'<div class="tk lade"></div><div class="tk lade"></div>':T.length?T.map(treffenKarte).join(""):`<p class="leer">${tFilter==="dabei"?"Noch bei nichts dabei. Tipp auf das Plus.":"Hier ist noch nichts geplant. Schlag doch was vor."}</p>`;
   staffeln($$(".tk",l),{abstand:45,dauer:260,von:"translateY(16px) scale(.97)"});
-  $$(".tk",l).forEach(k=>{$(".mit",k).onclick=e=>{e.stopPropagation();mitmachen(k)};k.onclick=()=>ortWaehlen(k.dataset.ort)});
+  $$(".tk",l).forEach(k=>{$(".mit",k).onclick=e=>{e.stopPropagation();mitmachen(k)};k.onclick=()=>ortWaehlen(k.dataset.ort);
+    const w=$(".weg",k),m=$(".melden",k);
+    if(w)w.onclick=e=>{e.stopPropagation();if(!confirm("Dein Treffen löschen?"))return;trpc("treffen_weg",{p_id:k.dataset.id,p_device:GERAET}).then(()=>{ECHT=ECHT.filter(x=>x.id!==k.dataset.id);wegAnimieren(k);toast("Gelöscht.")}).catch(()=>toast("Gerade offline."))};
+    if(m)m.onclick=e=>{e.stopPropagation();if(!confirm("Dieses Treffen melden? Ab drei Meldungen wird es ausgeblendet."))return;trpc("treffen_melden",{p_id:k.dataset.id,p_device:GERAET}).then(()=>{m.textContent="GEMELDET";m.disabled=true;toast("Danke, ist gemeldet.")}).catch(e=>toast(e.message==="offline"?"Gerade offline.":e.message))}});
   oben();
 }
 function oben(){
   const T=alleTreffen(),heute=T.filter(x=>wannText(x).tag==="Heute").reduce((a,x)=>a+x.n,0);
   const z=$("#tHeute",tSeite);if(z&&z.dataset.v!==String(heute)){z.dataset.v=heute;rollen(z,String(heute))}
-  const d=Object.keys(TR.dabei).filter(id=>T.some(x=>x.id===id)).length,b=$("#tDabeiZahl",tSeite);if(b)b.textContent=d?` ${d}`:"";
+  const d=T.filter(x=>x.dabei).length,b=$("#tDabeiZahl",tSeite);if(b)b.textContent=d?` ${d}`:"";
   tabZahl();
 }
 function mitmachen(k){
-  const id=k.dataset.id,jetzt=!TR.dabei[id];
-  if(jetzt)TR.dabei[id]=Date.now();else delete TR.dabei[id];trSpeichern();
-  const x=alleTreffen().find(t=>t.id===id),b=$(".mit",k);
+  const id=k.dataset.id,x=alleTreffen().find(t=>t.id===id);if(!x)return;
+  const jetzt=!x.dabei,b=$(".mit",k);
+  if(x.echt){const e=ECHT.find(t=>t.id===id);e.dabei=jetzt;e.n+=jetzt?1:-1;x.dabei=jetzt;x.n=e.n;
+    /* sofort zeigen, Server bestätigt die echte Zahl */
+    trpc("treffen_mit",{p_id:id,p_device:GERAET,p_an:jetzt}).then(n=>{if(typeof n==="number"&&n!==e.n){e.n=n;const z=$(".zahl",k);z&&rollen(z,String(n));markerSetzen()}})
+      .catch(err=>{e.dabei=!jetzt;e.n+=jetzt?-1:1;toast(err.message==="offline"?"Gerade offline, nicht gespeichert.":err.message);liste();markerSetzen()})}
+  else{if(jetzt)TR.dabei[id]=Date.now();else delete TR.dabei[id];trSpeichern();x.dabei=jetzt;x.n+=jetzt?1:-1}
   k.classList.toggle("dabei",jetzt);b.setAttribute("aria-pressed",jetzt);b.setAttribute("aria-label",jetzt?"Nicht mehr dabei":"Dabei sein");
-  $(".ava",k).outerHTML=avatare(x.leute,jetzt);rollen($(".zahl",k),String(x.n));
+  $(".ava",k).outerHTML=avatare(leuteVon(x),jetzt);rollen($(".zahl",k),String(x.n));
   if(jetzt){
     const r=b.getBoundingClientRect();funken(r.left+r.width/2,r.top+r.height/2);navigator.vibrate&&navigator.vibrate(12);
     $(".ava .du",k)?.animate([{transform:"scale(0) rotate(-30deg)"},{transform:"scale(1.25)",offset:.6},{transform:"none"}],{duration:leise?1:300,easing:SANFT});
@@ -159,11 +189,14 @@ function vorschlagen(ortId){
   let y0=null;s.addEventListener("touchstart",e=>{y0=s.scrollTop<=0?e.touches[0].clientY:null},{passive:true});
   s.addEventListener("touchmove",e=>{if(y0!==null){const d=Math.max(0,e.touches[0].clientY-y0);s.style.transform=`translateY(${d}px)`}},{passive:true});
   s.addEventListener("touchend",e=>{if(y0!==null){const d=e.changedTouches[0].clientY-y0;s.style.transform="";if(d>90)zu()}y0=null});
-  los.onclick=()=>{
-    const art=ARTEN.find(a=>a[0]===wahl.art)[1],id="e"+Date.now().toString(36);
-    TR.eigene.push({id,art:wahl.art,t:$("#tTitel",s).value.trim()||`${art} · ${ortVon(wahl.ort).n}`,ort:wahl.ort,tag:0,zeit:wahl.zeit,leute:[],
-      /* fester Tag, damit der Vorschlag nicht mitwandert */datum:tagStart(wahl.tag).getTime()});
-    TR.dabei[id]=Date.now();trSpeichern();zu();
+  los.onclick=async()=>{
+    const art=ARTEN.find(a=>a[0]===wahl.art)[1],titel=$("#tTitel",s).value.trim()||`${art} · ${ortVon(wahl.ort).n}`;
+    const[h,m]=wahl.zeit.split(":").map(Number),w=tagStart(wahl.tag);w.setHours(h,m);
+    if(w<istZeit()){toast("Die Uhrzeit ist heute schon vorbei.");return}
+    los.disabled=true;los.textContent="Wird gesendet …";
+    let id;try{id=await trpc("treffen_neu",{p_art:wahl.art,p_titel:titel,p_ort:wahl.ort,p_starts:vonIst(w).toISOString(),p_device:GERAET})}
+    catch(e){los.disabled=false;pruefen();toast(e.message==="offline"?"Gerade offline, bitte gleich nochmal.":e.message);return}
+    ECHT.push({id,art:wahl.art,t:titel,ort:wahl.ort,wann:w,zeit:wahl.zeit,n:1,dabei:true,mine:true,echt:1});zu();
     const r=los.getBoundingClientRect();funken(r.left+r.width/2,r.top);navigator.vibrate&&navigator.vibrate([10,40,10]);
     tFilter="alle";$$(".filter .chip",tSeite).forEach(x=>x.setAttribute("aria-pressed",x.dataset.f==="alle"));ortWaehlen(wahl.ort);
     setTimeout(()=>{const k=$(`.tk[data-id="${id}"]`,tSeite);if(k){k.scrollIntoView({behavior:"smooth",block:"center"});k.classList.add("neu")}},350);
@@ -178,12 +211,17 @@ function treffenOeffnen(von){
     <button class="vorschlag press welle-an" id="tVorschlag">${ic("plus")}<span><b>Treffen vorschlagen</b><small>Ort aussuchen, Zeit wählen, fertig</small></span></button>
     <div class="filter chips"><button class="chip press" data-f="alle" aria-pressed="true">Alle</button><button class="chip press" data-f="heute" aria-pressed="false">Heute</button><button class="chip press" data-f="dabei" aria-pressed="false">Dabei<span id="tDabeiZahl"></span></button></div>
     <div id="tListe" class="t-liste"></div>
-    <p class="fuss">Die fünf Beispiele zeigen, wie es aussieht. Deine Vorschläge und Zusagen bleiben vorerst nur auf diesem Gerät.</p>`,von,"Treffen");
+    <p class="fuss">Ohne Namen und Konto: Andere sehen nur Titel, Ort, Zeit und wie viele dabei sind. Trefft euch an belebten Orten.</p>`,von,"Treffen");
   tSeite=s;s.classList.add("treffen-seite");
   karteBauen($("#tKarte",s));liste();
+  const neuLaden=()=>treffenLaden().then(()=>{if(!s.isConnected)return;liste();tKarte&&markerSetzen()});neuLaden();
+  /* solange die Seite offen ist, alle 30 Sekunden auffrischen */
+  const uhr=setInterval(()=>{if(!s.isConnected)return clearInterval(uhr);if(!document.hidden&&!$(".blatt"))treffenLaden().then(()=>{oben();tKarte&&markerSetzen();$$(".tk[data-id]",s).forEach(k=>{const x=ECHT.find(t=>t.id===k.dataset.id),z=$(".zahl",k);if(x&&z&&z.textContent!==String(x.n))rollen(z,String(x.n))})})},3e4);
   $("#tVorschlag",s).onclick=()=>vorschlagen(tOrt);
   $$(".filter .chip",s).forEach(b=>b.onclick=()=>{$$(".filter .chip",s).forEach(x=>x.setAttribute("aria-pressed",x===b));tFilter=b.dataset.f;liste()});
   return s;
 }
 /* Zahl am Knopf in der Leiste: Treffen heute */
 function tabZahl(){const b=$("#tabTreffen .badge");if(!b)return;const n=alleTreffen().filter(x=>wannText(x).tag==="Heute").length;b.textContent=n;b.hidden=!n}
+function wegAnimieren(k){k.animate([{opacity:1,transform:"none"},{opacity:0,transform:"translateX(-40px) scale(.96)"}],{duration:leise?1:200,easing:SANFT,fill:"forwards"}).onfinish=()=>{liste();markerSetzen()}}
+treffenLaden();

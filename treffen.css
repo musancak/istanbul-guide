@@ -80,3 +80,6 @@
 .los{width:100%;height:54px;margin-top:20px;border-radius:18px;text-align:center;font-weight:700;font-size:16.5px;color:#fff;background:linear-gradient(120deg,var(--tuerkis),var(--kobalt));transition:opacity .4s,filter .4s}
 .los:disabled{opacity:.45;filter:grayscale(.6)}
 @media (prefers-reduced-motion:reduce){.leiste .mitte .rund::after,.pin.voll::before,.live{animation:none}}
+button.bsp{cursor:pointer;color:var(--fg2)}button.bsp:disabled{opacity:.6}
+.tk.lade{height:96px;cursor:default;background:linear-gradient(100deg,var(--karte) 40%,var(--fuell) 50%,var(--karte) 60%) 0 0/300% 100%;animation:lade 1.6s linear infinite}
+@keyframes lade{to{background-position:-150% 0}}
