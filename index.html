@@ -183,6 +183,7 @@ main{position:relative;z-index:2;margin-top:-30px;background:var(--bg);border-ra
 #held.ruht *,html.inaktiv *{animation-play-state:paused!important}
 .events:focus-within .band{animation-play-state:paused}
 </style>
+<link rel="stylesheet" href="entdecken.css">
 </head>
 <body>
 <header class="held" id="held">
@@ -250,6 +251,8 @@ main{position:relative;z-index:2;margin-top:-30px;background:var(--bg);border-ra
 <nav class="leiste" id="leiste" aria-label="Bereiche"><i class="blob" id="blob"></i></nav>
 
 <script src="data.js"></script>
+<script src="orte.js"></script>
+<script src="entdecken.js"></script>
 <script src="icons.js"></script>
 <script src="start.js"></script>
 <script src="treffen.js"></script>
@@ -343,15 +346,12 @@ $("#ersteK").onclick=e=>{
 
 /* ---------- Stempelheft ---------- */
 function stempelheft(neu){
-  const n=ALLE_SEITEN.filter(id=>GELESEN[id]).length;
-  $("#punkte").innerHTML=ALLE_SEITEN.map(id=>`<i class="${GELESEN[id]?"an":""}${id===neu?" neu":""}"></i>`).join("");
-  $("#stempelText").textContent=n?`${n} von ${ALLE_SEITEN.length} Seiten`:"Lies Seiten, sammle Stempel";
+  const n=IstanbulPass.anzahl();
+  $("#punkte").innerHTML=IST_ORT.map(o=>`<i class="${IstanbulPass.hat(o.id)?"an":""}${o.id===neu?" neu":""}" title="${esc(o.name)}"></i>`).join("");
+  $("#stempelText").textContent=n?`${n} von ${IST_ORT.length} Orten besucht`:"Neue Orte entdecken, Stempel sammeln";
 }
-document.addEventListener("gestempelt",e=>stempelheft(e.detail));
-$("#stempelK").onclick=e=>{
-  const s=oeffne(`<h1 class="s-gross">Stempelheft</h1><p class="s-sub">Jede gelesene Seite gibt einen Stempel.</p>${THEMEN.filter(t=>t.r.length).map(t=>`<h3>${esc(t.t)}</h3><div class="gruppe">${t.r.map(id=>`<button class="z pfeil" data-seite="${id}"><span class="mini" style="--f:${GELESEN[id]?"var(--koralle)":"#A3A3A8"}">${ic(GELESEN[id]?"check":P[id].i||"doc")}</span><span><b>${esc(P[id].t)}</b><small>${GELESEN[id]?"Gestempelt":"Noch offen"}</small></span>${ic("chev","chev")}</button>`).join("")}</div>`).join("")}`,e.currentTarget,"Stempelheft");
-  $$("[data-seite]",s).forEach(b=>b.onclick=()=>seiteOeffnen(b.dataset.seite,b));
-};
+document.addEventListener("orte-gestempelt",e=>stempelheft(e.detail));
+$("#stempelK").onclick=e=>entdeckerOeffnen(e.currentTarget);
 
 /* ---------- Preise im Wechsel ---------- */
 let preisI=0;
@@ -361,7 +361,7 @@ setInterval(()=>{if(document.hidden||leise||offen)return;preisI=(preisI+1)%PREIS
 
 /* ---------- Themen und Beliebt ---------- */
 function themen(){
-  $("#themen").innerHTML=THEMEN.map(t=>`<button class="thema" data-thema="${t.id}" style="--f:var(--${{verkehr:"kobalt",essen:"koralle",alltag:"minze",entdecken:"safran"}[t.id]})"><span class="klein-i">${ic(t.i)}</span>${ic(t.i,"i gross-i")}<b>${t.t}</b><small>${t.id==="essen"?SPOTS.length+" SPOTS":t.r.length+" SEITEN"}</small></button>`).join("");
+  $("#themen").innerHTML=THEMEN.map(t=>`<button class="thema" data-thema="${t.id}" style="--f:var(--${{verkehr:"kobalt",essen:"koralle",alltag:"minze",entdecken:"safran"}[t.id]})"><span class="klein-i">${ic(t.i)}</span>${ic(t.i,"i gross-i")}<b>${t.t}</b><small>${t.id==="essen"?SPOTS.length+" SPOTS":t.id==="entdecken"?IST_ORT.length+" ORTE":t.r.length+" SEITEN"}</small></button>`).join("");
   $("#themenZahl").textContent=`${ALLE_SEITEN.length} Seiten · ${SPOTS.length} Spots`;
   $$(".thema").forEach(b=>{kippen(b,10);b.onclick=()=>themaOeffnen(THEMEN.find(t=>t.id===b.dataset.thema),b)});
   const farbe=id=>`var(--${["kobalt","koralle","minze","safran","tuerkis"][BELIEBT.indexOf(id)%5]})`;

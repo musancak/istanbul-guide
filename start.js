@@ -16,7 +16,7 @@ const THEMEN=[
  {id:"verkehr",t:"Verkehr",s:"Istanbulkart, Taxi, Nacht",i:"train",farbe:"#3E6E9E",r:["istanbulkart","flughafen","taxi","dolmus","nacht","ausfluege","links"]},
  {id:"essen",t:"Essen",s:"Food-Spots mit Karte",i:"fork",farbe:"#B5533F",r:[]},
  {id:"alltag",t:"Alltag",s:"Die ersten Wochen",i:"bag",farbe:"#2E7A5A",r:["sim","imei","aufenthalt","wohnen","geld","einkaufen","pazar","wlan","arzt","notfall"]},
- {id:"entdecken",t:"Entdecken",s:"Sehen, Museen, Viertel",i:"compass",farbe:"#A8782A",r:["events","sehen","muzekart","viertel"]}
+ {id:"entdecken",t:"Entdecken",s:"Inseln, Lieblingsorte und dein Stempelheft",i:"compass",farbe:"#A8782A",r:["events","sehen","muzekart","viertel"]}
 ].map(t=>({...t,r:t.r.filter(id=>P[id]&&P[id].g&&P[id].g.length)}));
 
 /* Food-Spots */
@@ -89,25 +89,23 @@ addEventListener("popstate",()=>{if(ignorierePop){ignorierePop=false;return}if(o
 function themaHTML(t){
   return`<h1 class="s-gross">${esc(t.t)}</h1><p class="s-sub">${esc(t.s)}</p><div class="gruppe">${t.r.map(id=>`<button class="z pfeil" data-seite="${id}"><span class="mini" style="--f:${t.farbe}">${ic(P[id].i||"doc")}</span><span><b>${esc(P[id].t)}</b><small>${esc(P[id].s||"")}</small></span>${ic("chev","chev")}</button>`).join("")}</div>`;
 }
-/* Stempelheft: jede neu gelesene Seite gibt einen Stempel */
-let GELESEN={};try{GELESEN=JSON.parse(localStorage.getItem("ist-gelesen"))||{}}catch(e){}
+/* Seitenlesen zählt nicht als Ortsbesuch. */
 const ALLE_SEITEN=THEMEN.flatMap(t=>t.r);
-function stempeln(id){if(GELESEN[id])return false;GELESEN[id]=1;try{localStorage.setItem("ist-gelesen",JSON.stringify(GELESEN))}catch(e){}
-  document.dispatchEvent(new CustomEvent("gestempelt",{detail:id}));return true}
+function entdeckerOeffnen(von){
+  const t=THEMEN.find(t=>t.id==="entdecken");
+  const infos=`<h3>Mehr für deinen Ausflug</h3><div class="gruppe">${t.r.map(id=>`<button class="z pfeil" data-seite="${id}"><span><b>${esc(P[id].t)}</b><small>${esc(P[id].s||"")}</small></span>${ic("chev","chev")}</button>`).join("")}</div>`;
+  const s=oeffne(IstanbulPass.html()+infos,von,"Entdecken");IstanbulPass.bind(s);
+  $$("[data-seite]",s).forEach(b=>b.onclick=()=>seiteOeffnen(b.dataset.seite,b));return s;
+}
 function seiteOeffnen(id,von){
-  const neu=stempeln(id);
-  if(neu)setTimeout(()=>{const st=document.createElement("div");st.className="stempel";st.innerHTML=`<b>${Object.keys(GELESEN).length}/${ALLE_SEITEN.length}</b><span>Gestempelt</span>`;document.body.appendChild(st);
-    st.animate([{transform:"scale(2.4) rotate(-24deg)",opacity:0},{transform:"scale(.92) rotate(-10deg)",opacity:1,offset:.55},{transform:"scale(1) rotate(-12deg)",opacity:1}],{duration:leise?1:650,easing:SANFT,fill:"both"});
-    setTimeout(()=>st.animate([{opacity:1},{opacity:0,transform:"scale(.9) rotate(-12deg)"}],{duration:400,fill:"forwards"}).onfinish=()=>st.remove(),2800)},1300);
   return oeffne(`<h1 class="s-gross">${esc(P[id].t)}</h1>${P[id].s?`<p class="s-sub">${esc(P[id].s)}</p>`:""}${seiteHTML(id)}<a class="in-app press" href="app.html#${id}">In der App öffnen</a>`,von,P[id].t)}
 function themaOeffnen(t,von){
+  if(t.id==="entdecken")return entdeckerOeffnen(von);
   if(t.id==="essen")return essenOeffnen(von);
   const s=oeffne(themaHTML(t),von,t.t);
   $$("[data-seite]",s).forEach(b=>b.onclick=()=>seiteOeffnen(b.dataset.seite,b));return s;
 }
-function essenOeffnen(von){
-  location.assign("app.html#essen");
-}
+function essenOeffnen(von){location.assign("app.html#essen")}
 
 /* Animations-Werkzeuge */
 function rollen(el,text){ /* jede Ziffer rollt einzeln herein */

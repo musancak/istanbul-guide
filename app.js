@@ -85,7 +85,7 @@ const TABS=[
  {id:"verkehr",i:"train",s:{de:"Istanbulkart, Taxi, Nacht",en:"Istanbulkart, taxi, night"},g:[{r:["istanbulkart","rechner","flughafen","taxi","dolmus","nacht","ausfluege"]},{h:{de:"Planen",en:"Planning"},r:["links"]}]},
  {id:"essen",i:"fork"},
  {id:"alltag",i:"bag",s:{de:"Alles für die ersten Wochen",en:"Everything for the first weeks"},g:[{h:{de:"Ankommen",en:"Arriving"},r:["sim","imei","aufenthalt","wohnen"]},{h:{de:"Jeden Tag",en:"Every day"},r:["geld","einkaufen","pazar","wlan"]},{h:{de:"Gesundheit und Sicherheit",en:"Health and safety"},r:["arzt","notfall"]}]},
- {id:"entdecken",i:"compass",s:{de:"Sehen, Museen, Viertel",en:"Sights, museums, neighbourhoods"},g:[{r:["events","sehen","muzekart","viertel","ausfluege"]},{h:{de:"Über die Seite",en:"About"},r:["danke","datenschutz"]}]}
+ {id:"entdecken",i:"compass",s:{de:"Inseln, Lieblingsorte und dein Stempelheft",en:"Islands, favourite places and your passport"},g:[{r:["events","sehen","muzekart","viertel","ausfluege"]},{h:{de:"Über die Seite",en:"About"},r:["danke","datenschutz"]}]}
 ];
 P.meine={t:"Dein Istanbul",s:"Besuchte Orte, eigene Listen und deine Bewertungen. Besucht und Listen bleiben auf diesem Gerät.",i:"pin",c:"--c4",g:[]};
 PE.meine={t:"Your Istanbul",s:"Visited places, your lists and your ratings. Visited places and lists stay on this device."};
@@ -641,7 +641,7 @@ function bindDatenschutz(){const t=DS[LANG],$=id=>document.getElementById(id);le
 
 /* ---------- Tabs, Seiten, Navigation ---------- */
 const tabT=t=>u(t.id);
-function tabHTML(t){return`${navbar(tabT(t),"",langBtn())}<div class="wrap view"><h1 class="lt">${esc(tabT(t))}</h1><p class="sub">${esc(t.s[LANG])}</p>${t.g.map(g=>group({...g,h:g.h&&g.h[LANG]},pageRow)).join("")}<p class="foot">${u("tabFoot")}<br><a href="rechtliches.html" style="color:inherit">${LANG==="de"?"Kontakt · Datenschutz":"Contact · Privacy"}</a></p></div>`}
+function tabHTML(t){return`${navbar(tabT(t),"",langBtn())}<div class="wrap view"><h1 class="lt">${esc(tabT(t))}</h1><p class="sub">${esc(t.s[LANG])}</p>${t.id==="entdecken"?IstanbulPass.html(LANG):""}${t.g.map(g=>group({...g,h:g.h&&g.h[LANG]},pageRow)).join("")}<p class="foot">${u("tabFoot")}<br><a href="rechtliches.html" style="color:inherit">${LANG==="de"?"Kontakt · Datenschutz":"Contact · Privacy"}</a></p></div>`}
 function pageHTML(id,back){const p=PG(id);
   const special={rechner:rechnerHTML,vorschlag:vorschlagHTML,danke:dankeHTML,datenschutz:datenschutzHTML,meine:meineHTML}[id];
   const body=special?special():p.g.map(g=>group(g,rowHTML)).join("")+reportHTML();
@@ -655,6 +655,7 @@ function showTab(id,keepScroll){
   if(map&&t.id!=="essen"){map.remove();map=null}
   main.innerHTML=t.id==="start"?startHTML():t.id==="essen"?essenHTML():tabHTML(t);
   if(t.id==="start"){bindStart();loadLive()}if(t.id==="essen")bindEssen();
+  if(t.id==="entdecken")IstanbulPass.bind(main,LANG);
   drawTabbar();if(!keepScroll)window.scrollTo(0,0);navScroll();
 }
 function openPage(id){
