@@ -14,7 +14,7 @@
 .live{width:8px;height:8px;border-radius:50%;background:var(--minze);margin-right:9px;box-shadow:0 0 0 0 var(--minze);animation:live 2s ease-out infinite}
 @keyframes live{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--minze) 70%,transparent)}100%{box-shadow:0 0 0 10px transparent}}
 
-.t-karte{position:relative;isolation:isolate;border-radius:22px;overflow:hidden;box-shadow:var(--schatten);background:var(--karte)}
+.t-karte{position:relative;isolation:isolate;border-radius:22px;overflow:hidden;transform:translateZ(0);-webkit-mask-image:-webkit-radial-gradient(white,black);box-shadow:var(--schatten);background:var(--karte)}
 #tKarte{height:min(300px,38vh);background:var(--fuell)}
 .t-karte .leaflet-control-attribution{font-size:9px;background:color-mix(in srgb,var(--karte) 70%,transparent)}
 .pin-huelle{background:none;border:0}
@@ -79,6 +79,9 @@
 .titel-feld{width:100%;height:46px;margin-top:10px;padding:0 14px;border:0;border-radius:14px;background:var(--karte);box-shadow:var(--schatten);font:inherit;font-size:16px;color:var(--fg);outline:none}
 .los{width:100%;height:54px;margin-top:20px;border-radius:18px;text-align:center;font-weight:700;font-size:16.5px;color:#fff;background:linear-gradient(120deg,var(--tuerkis),var(--kobalt));transition:opacity .4s,filter .4s}
 .los:disabled{opacity:.45;filter:grayscale(.6)}
+.bewegt .pin.voll::before{animation:none;opacity:0}
+.bewegt .ort-info{backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--karte)}
+.bewegt .pin{transition:none}
 @media (prefers-reduced-motion:reduce){.leiste .mitte .rund::after,.pin.voll::before,.live{animation:none}}
 button.bsp{cursor:pointer;color:var(--fg2)}button.bsp:disabled{opacity:.6}
 .tk.lade{height:96px;cursor:default;background:linear-gradient(100deg,var(--karte) 40%,var(--fuell) 50%,var(--karte) 60%) 0 0/300% 100%;animation:lade 1.6s linear infinite}
