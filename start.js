@@ -1,10 +1,13 @@
-/* Gemeinsame Bausteine der Startseiten-Entwürfe (Prototyp, nicht verlinkt). Lädt nach ../data.js und icons.js. */
+/* Bausteine der Startseite. Lädt nach data.js und icons.js. */
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const ic=(k,c="i")=>`<svg viewBox="0 0 24 24" class="${c}" aria-hidden="true">${I[k]||""}</svg>`;
 const FEDER="linear(0,.06 2%,.24 5%,.52 9%,.79 14%,.95 19%,1.03 24%,1.05 29%,1.03 37%,1.005 48%,.998 60%,1)";
 const SANFT="cubic-bezier(.2,.8,.2,1)";
 const leise=matchMedia("(prefers-reduced-motion: reduce)").matches;
+/* Alles ruhiger: jede Web-Animation läuft LANGSAM-mal so lang wie angegeben */
+const LANGSAM=2;
+{const a=Element.prototype.animate;Element.prototype.animate=function(k,o){if(!leise)o=typeof o==="number"?o*LANGSAM:o&&{...o,duration:(o.duration||0)*LANGSAM,delay:(o.delay||0)*LANGSAM};return a.call(this,k,o)}}
 
 /* Themen wie in der App */
 const THEMEN=[
@@ -24,7 +27,7 @@ const maps=s=>`https://www.google.com/maps/search/?api=1&query=${encodeURICompon
 /* Live-Werte: Wetter, Kurs, Events (30 Minuten im Browser zwischengespeichert) */
 const WX=c=>c===0?["Klar","sun"]:c<=3?["Wolkig","cloud"]:c<=48?["Nebel","cloud"]:c<=67||c>=80&&c<=82?["Regen","rain"]:c<=77||c===85||c===86?["Schnee","cloud"]:c>=95?["Gewitter","rain"]:["Regen","rain"];
 async function live(){
-  let c=null;try{c=JSON.parse(localStorage.getItem("ist-entwurf-live"))}catch(e){}
+  let c=null;try{c=JSON.parse(localStorage.getItem("ist-start-live"))}catch(e){}
   if(c&&Date.now()-c.zeit<18e5)return c;
   const j=u=>fetch(u).then(r=>r.ok?r.json():null).catch(()=>null);
   const SB="https://tdattimvlqyljahijyoo.supabase.co/rest/v1/rpc/get_events",K="sb_publishable_GhyClAXoPp0t752Fvk1kUw_VxGZ0tuX";
@@ -37,7 +40,7 @@ async function live(){
     max:w?Math.round(w.daily.temperature_2m_max[0]):17,min:w?Math.round(w.daily.temperature_2m_min[0]):11,
     auf:w?w.daily.sunrise[0].slice(11):"07:00",unter:w?w.daily.sunset[0].slice(11):"17:56",
     kurs:f?f.rates.TRY:55.9,ev:(ev||[]).slice(0,8)};
-  try{localStorage.setItem("ist-entwurf-live",JSON.stringify(c))}catch(e){}
+  try{localStorage.setItem("ist-start-live",JSON.stringify(c))}catch(e){}
   return c;
 }
 const istZeit=()=>new Date(Date.now()+(new Date().getTimezoneOffset()+180)*6e4);
@@ -92,8 +95,8 @@ function seiteOeffnen(id,von){
   const neu=stempeln(id);
   if(neu)setTimeout(()=>{const st=document.createElement("div");st.className="stempel";st.innerHTML=`<b>${Object.keys(GELESEN).length}/${ALLE_SEITEN.length}</b><span>Gestempelt</span>`;document.body.appendChild(st);
     st.animate([{transform:"scale(2.4) rotate(-24deg)",opacity:0},{transform:"scale(.92) rotate(-10deg)",opacity:1,offset:.55},{transform:"scale(1) rotate(-12deg)",opacity:1}],{duration:leise?1:650,easing:SANFT,fill:"both"});
-    setTimeout(()=>st.animate([{opacity:1},{opacity:0,transform:"scale(.9) rotate(-12deg)"}],{duration:400,fill:"forwards"}).onfinish=()=>st.remove(),1600)},700);
-  return oeffne(`<h1 class="s-gross">${esc(P[id].t)}</h1>${P[id].s?`<p class="s-sub">${esc(P[id].s)}</p>`:""}${seiteHTML(id)}<a class="in-app press" href="../#${id}">In der App öffnen</a>`,von,P[id].t)}
+    setTimeout(()=>st.animate([{opacity:1},{opacity:0,transform:"scale(.9) rotate(-12deg)"}],{duration:400,fill:"forwards"}).onfinish=()=>st.remove(),2800)},1300);
+  return oeffne(`<h1 class="s-gross">${esc(P[id].t)}</h1>${P[id].s?`<p class="s-sub">${esc(P[id].s)}</p>`:""}${seiteHTML(id)}<a class="in-app press" href="app.html#${id}">In der App öffnen</a>`,von,P[id].t)}
 function themaOeffnen(t,von){
   if(t.id==="essen")return essenOeffnen(von);
   const s=oeffne(themaHTML(t),von,t.t);
@@ -103,7 +106,7 @@ function essenOeffnen(von){
   const kat=Object.keys(F);
   const s=oeffne(`<h1 class="s-gross">Essen</h1><p class="s-sub">${SPOTS.length} Spots aus der Gruppe</p>
    <div class="kats">${kat.map((k,i)=>`<button class="kat press" aria-pressed="${i===0}" data-k="${k}">${esc(F[k].t)}</button>`).join("")}</div><div class="gruppe" id="spotliste"></div>
-   <a class="in-app press" href="../#essen">Karte und Bewertungen in der App</a>`,von,"Essen");
+   <a class="in-app press" href="app.html#essen">Karte und Bewertungen in der App</a>`,von,"Essen");
   const zeig=k=>{const l=$("#spotliste",s);l.innerHTML=SPOTS.filter(x=>x.k===k).slice(0,40).map(x=>`<a class="z link" href="${maps(x)}" target="_blank" rel="noopener"><span><b>${esc(x.n)}${x.top?' <i class="stern"></i>':""}</b><small>${esc([x.d,x.note].filter(Boolean).join(" · "))}</small></span>${ic("ext")}</a>`).join("");
     $$(".z",l).forEach((el,i)=>el.animate([{opacity:0,transform:"translateX(24px)"},{opacity:1,transform:"none"}],{duration:leise?1:420,delay:i*18,easing:FEDER,fill:"backwards"}))};
   $$(".kat",s).forEach(b=>b.onclick=()=>{$$(".kat",s).forEach(x=>x.setAttribute("aria-pressed",x===b));zeig(b.dataset.k)});zeig(kat[0]);return s;
@@ -112,17 +115,17 @@ function essenOeffnen(von){
 /* Animations-Werkzeuge */
 function rollen(el,text){ /* jede Ziffer rollt einzeln herein */
   const alt=el.dataset.v||"";el.dataset.v=text;el.classList.add("roll");
-  el.innerHTML=[...text].map((ch,i)=>`<span class="${leise||ch===alt[i]?"":"neu"}" style="animation-delay:${i*45}ms">${ch===" "?"&nbsp;":esc(ch)}</span>`).join("");
+  el.innerHTML=[...text].map((ch,i)=>`<span class="${leise||ch===alt[i]?"":"neu"}" style="animation-delay:${i*90}ms">${ch===" "?"&nbsp;":esc(ch)}</span>`).join("");
 }
 function zaehlen(el,ziel,d=0,dauer=1100){ /* Zahl zählt hoch */
   if(leise){el.textContent=zahl(ziel,d);return}
   const t0=performance.now();const f=t=>{const p=Math.min(1,(t-t0)/dauer),e=1-Math.pow(1-p,4);el.textContent=zahl(ziel*e,d);if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f);
 }
 function unscharfRein(el,start=0){ /* Wörter erscheinen aus der Unschärfe */
-  const w=el.textContent.split(" ");el.innerHTML=w.map((x,i)=>`<span class="w" style="transition-delay:${start+i*70}ms">${esc(x)}</span>`).join(" ");
+  const w=el.textContent.split(" ");el.innerHTML=w.map((x,i)=>`<span class="w" style="transition-delay:${start+i*140}ms">${esc(x)}</span>`).join(" ");
   requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add("da")));
 }
-function wirbeln(el,ziel,dauer=900){ /* Buchstaben-Scramble */
+function wirbeln(el,ziel,dauer=1800){ /* Buchstaben-Scramble */
   if(leise){el.textContent=ziel;return}
   const Z="ABCDEFGHIJKLMNOPRSTUVYZÇĞİÖŞÜ";const t0=performance.now();
   const f=t=>{const p=Math.min(1,(t-t0)/dauer),n=Math.floor(p*ziel.length);
@@ -135,7 +138,7 @@ function staffeln(els,{dauer=560,abstand=45,von="translateY(22px) scale(.96)",st
 function kippen(el,staerke=8){ /* 3D-Neigung unter dem Finger */
   if(leise)return;
   el.addEventListener("pointermove",e=>{const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;el.style.transform=`perspective(700px) rotateX(${-y*staerke}deg) rotateY(${x*staerke}deg) scale(.985)`;el.style.setProperty("--gx",(x+.5)*100+"%");el.style.setProperty("--gy",(y+.5)*100+"%")});
-  const weg=()=>{el.style.transition="transform .6s "+FEDER;el.style.transform="";setTimeout(()=>el.style.transition="",600)};
+  const weg=()=>{el.style.transition="transform 1.2s "+FEDER;el.style.transform="";setTimeout(()=>el.style.transition="",1200)};
   el.addEventListener("pointerleave",weg);el.addEventListener("pointerup",weg);el.addEventListener("pointercancel",weg);
 }
 function wellen(el,e){ /* Welle beim Antippen */
