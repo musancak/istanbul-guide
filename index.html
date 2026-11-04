@@ -275,6 +275,43 @@ html{background:var(--bg)} body{background:transparent}
 .tab[aria-current="page"] svg{transform:translateY(-1px)}
 #toast{background:var(--ink);color:var(--on-ink);border-radius:18px}
 .done .chk,.switch:checked{background:var(--accent);border-color:var(--accent)}
+
+/* Dein Istanbul: Merken-Knopf, Besucht-Stempel, Listen-Blatt */
+:root{--been:#C08A2E}
+.keep{width:34px;height:40px;display:grid;place-items:center;border-radius:9px;color:var(--fg3);flex:none;transition:color .15s,transform .3s var(--spring)}
+.keep:active{transform:scale(.85);background:var(--press)}
+.keep svg{width:19px;height:19px;stroke:currentColor;stroke-width:2.2;fill:none;stroke-linejoin:round}
+.keep.on{color:var(--accent)} .keep.on svg{fill:currentColor}
+.been{display:inline-grid;place-items:center;width:17px;height:17px;border-radius:50%;background:var(--been);margin-right:6px;vertical-align:-2px}
+.been svg{width:11px;height:11px;stroke:#fff;stroke-width:3.4;fill:none}
+.row.tip{padding-left:16px;gap:12px}
+.d.k{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;margin:0 0 1px}
+.bar{height:5px;border-radius:3px;background:var(--fill);margin-top:7px;overflow:hidden}
+.bar i{display:block;height:100%;min-width:5px;background:var(--been);border-radius:inherit;transition:width .6s var(--ease)}
+#smap{height:clamp(200px,30vh,320px);width:100%}
+#smap.nomap{height:0}
+.stamps{display:flex;flex-wrap:wrap;gap:7px}
+.stamp{display:inline-flex;align-items:center;gap:5px;height:30px;padding:0 11px;border-radius:15px;background:var(--card);color:var(--fg2);font-size:13.5px;box-shadow:var(--shadow)}
+.stamp.on{background:var(--been);color:#fff}
+.stamp svg{width:12px;height:12px;stroke:#fff;stroke-width:3.4;fill:none}
+.gh.lh{display:flex;justify-content:space-between;align-items:baseline}
+.gh.lh button{font-family:var(--font);font-size:13px;text-transform:none;letter-spacing:0;color:var(--red)}
+.pop-keep{color:var(--accent);font-weight:600;font-size:14px}
+.sheet-bg{position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.32);opacity:0;transition:opacity .3s}
+.sheet-bg.on{opacity:1}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:91;max-height:85vh;overflow-y:auto;overscroll-behavior:contain;background:var(--studio),var(--bg);border-radius:20px 20px 0 0;
+  padding:8px 0 calc(22px + env(safe-area-inset-bottom,0px));box-shadow:0 -10px 40px rgba(0,0,0,.2);transform:translateY(105%);transition:transform .45s var(--ease)}
+.sheet.on{transform:none}
+.sheet .grab{width:36px;height:5px;border-radius:3px;background:var(--fg3);opacity:.5;margin:0 auto 12px}
+.sh-h{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:0 4px}
+.sh-h h2{font:700 21px/1.2 var(--font-d);letter-spacing:-.02em;margin:0 0 2px}
+.sh-h .sub{margin:0 0 14px}
+.sh-x{color:var(--accent);font-weight:600;font-size:16px;padding:4px 2px;flex:none}
+.sel .chk{background:var(--accent);border-color:var(--accent)} .sel .chk svg{opacity:1;transform:none}
+.row.nl{gap:8px}
+.row.nl input{flex:1;min-width:0;border:0;background:none;font:inherit;font-size:16px;color:var(--fg);outline:none}
+.row.nl input::placeholder{color:var(--fg3)}
+.mini{flex:none;height:30px;padding:0 12px;border-radius:9px;background:var(--ink);color:var(--on-ink);font-size:14px;font-weight:600}
 </style>
 <script data-goatcounter="https://musancak.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script><script>addEventListener("hashchange",()=>{if(window.goatcounter&&goatcounter.count)goatcounter.count({path:location.pathname+location.hash})})</script><script>function zaehl(n){var i=0;(function f(){if(window.goatcounter&&goatcounter.count){try{goatcounter.count({path:n,title:n,event:true})}catch(e){}}else if(i++<20)setTimeout(f,500)})()}addEventListener("appinstalled",function(){zaehl("app-installiert")});if(matchMedia("(display-mode: standalone)").matches||navigator.standalone)zaehl("als-app-geoeffnet")</script>
 </head>

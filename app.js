@@ -33,7 +33,8 @@ cal:'<rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10h16M9 3v4M15
 up:'<path d="m6 15 6-6 6 6"/>', down:'<path d="m6 9 6 6 6-6"/>',
 sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
 chev:'<path d="m9 5 7 7-7 7"/>', backc:'<path d="m15 5-7 7 7 7"/>', ext:'<path d="M7 17 17 7M9 7h8v8"/>',
-search:'<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>', check:'<path d="m5 12.5 4.5 4.5L19 7.5"/>'
+search:'<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>', check:'<path d="m5 12.5 4.5 4.5L19 7.5"/>',
+mark:'<path d="M7 4h10v17l-5-4-5 4z"/>'
 };
 const svg=(k,c="")=>`<svg viewBox="0 0 24 24" class="${c}" aria-hidden="true">${I[k]}</svg>`;
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -51,14 +52,24 @@ de:{start:"Start",verkehr:"Verkehr",essen:"Essen",alltag:"Alltag",entdecken:"Ent
  steps:[["s1","Istanbulkart am Flughafen holen","flughafen"],["s2","SIM-Karte kaufen, Pass mitnehmen","sim"],["s3","e-İkamet rechtzeitig beantragen","aufenthalt"],["s4","Studenten-Istanbulkart beantragen","istanbulkart"],["s5","Handy-Frist von 120 Tagen notieren","imei"],["s6","Notrufnummern speichern","notfall"]],
  days:["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"],monMarket:"Kleine Märkte in vielen Bezirken",marketToday:"Wochenmarkt heute",nightYes:"Heute Nacht fährt die Nachtmetro",nightNo:"Nachts fahren heute nur Metrobüs und Nachtbusse",ramadan:"",
  calcRides:"Fahrten pro Tag",calcDays:"Tage im Monat",calcStudent:"Studentenkarte",single:"Einzelfahrten",pass:"Monatskarte",verdictPass:d=>`Monatskarte lohnt sich, du sparst ${d} TL.`,verdictSingle:d=>`Einzelfahrten sind ${d} TL günstiger.`,calcNote:"Monatskarte: 653 TL Student (200 Fahrten) oder 3.628 TL voll (180 Fahrten). Fahrten über dem Limit kosten den Einzelpreis.",
- fName:"Name des Ladens",fArea:"Bezirk",fKind:"Art",fNote:"Kurze Notiz (optional)",fNoteP:"z. B. bester Lahmacun, günstig",fSend:"Vorschlag senden",fThanks:"Danke! Der Spot erscheint, sobald er geprüft ist.",fErr:"Senden hat nicht geklappt. Bitte später nochmal.",fOther:"Anderer Bezirk",fIntro:"Neue Spots werden kurz geprüft und erscheinen dann für alle in der Liste.",lang:"English"},
+ fName:"Name des Ladens",fArea:"Bezirk",fKind:"Art",fNote:"Kurze Notiz (optional)",fNoteP:"z. B. bester Lahmacun, günstig",fSend:"Vorschlag senden",fThanks:"Danke! Der Spot erscheint, sobald er geprüft ist.",fErr:"Senden hat nicht geklappt. Bitte später nochmal.",fOther:"Anderer Bezirk",fIntro:"Neue Spots werden kurz geprüft und erscheinen dann für alle in der Liste.",lang:"English",
+ mine:"Dein Istanbul",mineEmpty:"Markiere Orte als besucht, dann füllt sich deine Karte.",mineStat:(b,a,A)=>`${b} ${b===1?"Ort":"Orte"} besucht · ${a} von ${A} Bezirken`,rated:n=>`${n} bewertet`,
+ saved:"Gemerkt",been:"War ich schon",keepL:"Merken oder als besucht markieren",lists:"Listen",newList:"Neue Liste",newListP:"Neue Liste, z. B. Mit Familie",create:"Anlegen",doneB:"Fertig",
+ beenToast:"Als besucht markiert",stampNew:a=>`Neuer Stempel: ${a}`,statBeen:"Besucht",statAreas:"Bezirke",statRated:"Bewertet",statSaved:"Gemerkt",
+ areas:"Bezirks-Stempel",beenList:"Besucht",ratedList:"Von dir empfohlen",ratedNote:"Deine Stimmen zählen für alle: Sie sortieren die Liste „Beliebt“ und den Tipp für heute.",delList:"Löschen",delSure:"Wirklich löschen?",emptyList:"Noch leer. Tippe bei einem Spot auf das Lesezeichen.",
+ tipD:"Tipp für heute",tipM:"Frühstück heute",tipN:"Noch hungrig?",tipW:"Bei Regen ins Café",tipGood:n=>`${n} ${n===1?"Stimme":"Stimmen"} aus der Gruppe`},
 en:{start:"Home",verkehr:"Transport",essen:"Food",alltag:"Daily life",entdecken:"Explore",sub:"For students · 2026",search:"Search: taxi, ramen, e-İkamet …",clear:"Clear",sos:"Emergency",sosAll:"All services",police:"Police",fire:"Fire",tourist:"Foreigners",sosMore:"Numbers to dial. More under",first:"First days",firstNote:"Checkmarks are saved on this device only.",prices:"Prices at a glance",popular:"Popular",today:"Today",spots:"Food spots",spotsSub:n=>`${n} places, with map and ratings`,foot:"Written by us from official sources (İBB, Metro İstanbul, Istanbulkart, migration authority), plus tips from the Istanbul group chats and the group’s food spot list. Not an official service. Prices change fast, double-check on site.",tabFoot:"Based on official sources, as of November 2026.",nothing:v=>`Nothing found for “${v}”.`,topics:"Topics",infos:"Info",
  essenSub:"Food spots from the group. Tap to open Google Maps, arrows to rate. Map pins are placed automatically and may be slightly off.",list500:"List with 500 spots",list500d:"Google Maps, from the WiSe 26/27 group",orig:"Original list",origd:"Google Doc by district",all:"All",byArea:"District",byTop:"Top rated",byNear:"Near me",fq:"Burger, mantı, Moda …",places:n=>`${n} ${n===1?"place":"places"}`,none:"No spot matches. Try another district or word.",onMap:n=>`${n} on the map`,openMaps:"Open in Google Maps",noGeo:"Location not available. Allow access in your browser or pick a district.",locating:"Finding your location …",suggest:"Suggest a spot",suggestD:"Missing your favourite place?",fresh:"New",offline:"Ratings are not reachable right now.",
  t1:"Ride with student card",t2:"Student monthly pass",t3:"Taxi minimum fare",t4:"Full single ride",
  steps:[["s1","Get an Istanbulkart at the airport","flughafen"],["s2","Buy a SIM card, bring your passport","sim"],["s3","Apply for e-İkamet in time","aufenthalt"],["s4","Apply for the student Istanbulkart","istanbulkart"],["s5","Note the 120-day phone deadline","imei"],["s6","Save the emergency numbers","notfall"]],
  days:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],monMarket:"Small markets in many districts",marketToday:"Market today",nightYes:"The night metro runs tonight",nightNo:"Tonight only Metrobüs and night buses run",
  calcRides:"Rides per day",calcDays:"Days per month",calcStudent:"Student card",single:"Single rides",pass:"Monthly pass",verdictPass:d=>`The monthly pass pays off, you save ${d} TL.`,verdictSingle:d=>`Single rides are ${d} TL cheaper.`,calcNote:"Monthly pass: 653 TL student (200 rides) or 3,628 TL full (180 rides). Rides above the limit cost the single fare.",
- fName:"Name of the place",fArea:"District",fKind:"Type",fNote:"Short note (optional)",fNoteP:"e.g. best lahmacun, cheap",fSend:"Send suggestion",fThanks:"Thanks! The spot shows up once it’s checked.",fErr:"Sending failed. Please try again later.",fOther:"Other district",fIntro:"New spots get a quick check and then show up for everyone.",lang:"Deutsch"}
+ fName:"Name of the place",fArea:"District",fKind:"Type",fNote:"Short note (optional)",fNoteP:"e.g. best lahmacun, cheap",fSend:"Send suggestion",fThanks:"Thanks! The spot shows up once it’s checked.",fErr:"Sending failed. Please try again later.",fOther:"Other district",fIntro:"New spots get a quick check and then show up for everyone.",lang:"Deutsch",
+ mine:"Your Istanbul",mineEmpty:"Mark places as visited and your map fills up.",mineStat:(b,a,A)=>`${b} ${b===1?"place":"places"} visited · ${a} of ${A} districts`,rated:n=>`${n} rated`,
+ saved:"Saved",been:"I’ve been here",keepL:"Save or mark as visited",lists:"Lists",newList:"New list",newListP:"New list, e.g. With family",create:"Create",doneB:"Done",
+ beenToast:"Marked as visited",stampNew:a=>`New stamp: ${a}`,statBeen:"Visited",statAreas:"Districts",statRated:"Rated",statSaved:"Saved",
+ areas:"District stamps",beenList:"Visited",ratedList:"Recommended by you",ratedNote:"Your votes count for everyone: they sort the “Top rated” list and today’s tip.",delList:"Delete",delSure:"Really delete?",emptyList:"Still empty. Tap the bookmark on any spot.",
+ tipD:"Tip for today",tipM:"Breakfast today",tipN:"Still hungry?",tipW:"Rainy day café",tipGood:n=>`${n} ${n===1?"vote":"votes"} from the group`}
 };
 const u=k=>UI[LANG][k];
 const KIND_EN={r:"Food",c:"Cafés",s:"Shisha",g:"Upscale",t:"Group"};
@@ -76,11 +87,14 @@ const TABS=[
  {id:"alltag",i:"bag",s:{de:"Alles für die ersten Wochen",en:"Everything for the first weeks"},g:[{h:{de:"Ankommen",en:"Arriving"},r:["sim","imei","aufenthalt","wohnen"]},{h:{de:"Jeden Tag",en:"Every day"},r:["geld","einkaufen","pazar","wlan"]},{h:{de:"Gesundheit und Sicherheit",en:"Health and safety"},r:["arzt","notfall"]}]},
  {id:"entdecken",i:"compass",s:{de:"Sehen, Museen, Viertel",en:"Sights, museums, neighbourhoods"},g:[{r:["events","sehen","muzekart","viertel","ausfluege"]},{h:{de:"Über die Seite",en:"About"},r:["danke","datenschutz"]}]}
 ];
+P.meine={t:"Dein Istanbul",s:"Besuchte Orte, eigene Listen und deine Bewertungen. Besucht und Listen bleiben auf diesem Gerät.",i:"pin",c:"--c4",g:[]};
+PE.meine={t:"Your Istanbul",s:"Visited places, your lists and your ratings. Visited places and lists stay on this device."};
 
 /* ---------- Food-Spots, Bewertungen ---------- */
 const FOOD_LIST="https://maps.app.goo.gl/n9GjDf6zoVrzDhsGA";
 const FOOD_DOC="https://docs.google.com/document/d/1-fcHRWwjJJ3iX50wu4ELeeuZCtuZmyi87PVhlJMdGvg/edit?usp=sharing";
 const GROUP_AREAS=new Set(Object.keys(F.t.d));
+const AREAS=[...new Set(Object.values(F).flatMap(c=>Object.keys(c.d)).filter(d=>!GROUP_AREAS.has(d)))].sort((a,b)=>a.localeCompare(b,"tr"));
 let SPOTS=[],COORDS={};
 const mapsUrl=(n,area)=>`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${n} ${area||""} Istanbul`)}`;
 function buildSpots(extra=[]){
@@ -106,7 +120,7 @@ async function loadRemote(){
     SCORES={};sc.forEach(r=>SCORES[r.spot]=r.score);MINE={};mine.forEach(r=>MINE[r.spot]=r.value);
     store.set("ist-scores",SCORES);store.set("ist-mine",MINE);buildSpots(sug||[]);online=true;
   }catch(e){online=false}
-  if(tab==="essen")list();
+  refreshMine();
 }
 function vote(id,dir){
   zaehl("bewertet");
@@ -118,6 +132,85 @@ function vote(id,dir){
 }
 function paintVote(el){const id=el.dataset.id,m=MINE[id]||0;el.querySelector(".up").setAttribute("aria-pressed",m===1);el.querySelector(".dn").setAttribute("aria-pressed",m===-1);
   const s=el.querySelector("b");s.textContent=SCORES[id]||0;s.className=m===1?"pos":m===-1?"neg":"";s.animate&&s.animate([{transform:"scale(1.35)"},{transform:"none"}],{duration:260,easing:"cubic-bezier(.32,.72,0,1)"})}
+
+/* ---------- Dein Istanbul: besucht, Listen, eigene Bewertungen. Besucht und Listen bleiben nur auf dem Gerät. ---------- */
+let BEEN=store.get("ist-been",{}),LISTS=store.get("ist-lists",[]),sheetId=null,smap=null;
+const saveMine=()=>{store.set("ist-been",BEEN);store.set("ist-lists",LISTS)};
+const listName=l=>l.name||u("saved");
+const inList=id=>LISTS.some(l=>l.items.includes(id));
+const spotArea=s=>GROUP_AREAS.has(s.d)?s.note.split(",")[0].trim():s.d;
+const BEEN_C="#C08A2E";
+function mineStats(){const b=SPOTS.filter(s=>BEEN[s.id]),areas=new Set(b.map(spotArea).filter(a=>AREAS.includes(a)));
+  return{b:b.length,a:areas.size,A:AREAS.length,areas,r:Object.values(MINE).filter(Boolean).length,k:new Set(LISTS.flatMap(l=>l.items)).size}}
+const keepBtn=s=>`<button class="keep${inList(s.id)?" on":""}" data-spot="${esc(s.id)}" aria-label="${esc(u("keepL"))}">${svg("mark")}</button>`;
+function openSheet(id){
+  if(!SPOTS.some(x=>x.id===id))return;sheetId=id;
+  let bg=document.getElementById("sheetbg"),sh=document.getElementById("sheet");
+  if(!sh){bg=document.createElement("div");bg.id="sheetbg";bg.className="sheet-bg";sh=document.createElement("div");sh.id="sheet";sh.className="sheet";
+    sh.setAttribute("role","dialog");sh.setAttribute("aria-modal","true");document.body.append(bg,sh);bg.onclick=closeSheet}
+  drawSheet();bg.hidden=sh.hidden=false;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{bg.classList.add("on");sh.classList.add("on")}));
+  sh.querySelector("[data-sx]").focus({preventScroll:true});
+}
+function closeSheet(){const bg=document.getElementById("sheetbg"),sh=document.getElementById("sheet");if(!sh||!sheetId)return;sheetId=null;
+  bg.classList.remove("on");sh.classList.remove("on");setTimeout(()=>{if(!sheetId)bg.hidden=sh.hidden=true},450);refreshMine()}
+function drawSheet(){
+  const s=SPOTS.find(x=>x.id===sheetId),sh=document.getElementById("sheet"),ls=LISTS.length?LISTS:[{id:"m",name:"",items:[]}];
+  sh.innerHTML=`<div class="wrap"><div class="grab"></div><div class="sh-h"><div><h2>${esc(s.n)}</h2><p class="sub">${esc(areaL(spotArea(s)))}</p></div><button class="sh-x" data-sx>${u("doneB")}</button></div>
+  <div class="grp"><label class="row"><div class="l t">${u("been")}</div><input type="checkbox" class="switch" id="shb" ${BEEN[s.id]?"checked":""}></label></div>
+  <div class="gh">${u("lists")}</div><div class="grp">${ls.map(l=>`<button class="row${l.items.includes(s.id)?" sel":""}" data-ls="${esc(l.id)}" aria-pressed="${l.items.includes(s.id)}"><span class="chk">${svg("check")}</span><div class="l t">${esc(listName(l))}</div><span class="mut">${l.items.length||""}</span></button>`).join("")}
+   <form class="row nl" id="shn"><input id="shi" maxlength="40" placeholder="${esc(u("newListP"))}" aria-label="${esc(u("newList"))}" autocomplete="off"><button class="mini">${u("create")}</button></form></div>
+  <div class="grp" style="margin-top:14px"><a class="row" href="${s.u}" target="_blank" rel="noopener"><div class="l t">${u("openMaps")}</div>${svg("ext","ext")}</a></div></div>`;
+  sh.querySelector("[data-sx]").onclick=closeSheet;
+  sh.querySelector("#shb").onchange=()=>{
+    if(BEEN[s.id])delete BEEN[s.id];
+    else{const had=mineStats().areas,a=spotArea(s);BEEN[s.id]=Date.now();zaehl("besucht");toast(AREAS.includes(a)&&!had.has(a)?u("stampNew")(a):u("beenToast"))}
+    saveMine()};
+  sh.querySelectorAll("[data-ls]").forEach(b=>b.onclick=()=>{
+    let l=LISTS.find(x=>x.id===b.dataset.ls);if(!l){l={id:b.dataset.ls,name:"",items:[]};LISTS.push(l)}
+    const i=l.items.indexOf(s.id);if(i<0){l.items.unshift(s.id);zaehl("gemerkt")}else l.items.splice(i,1);
+    saveMine();drawSheet()});
+  sh.querySelector("#shn").onsubmit=e=>{e.preventDefault();const n=sh.querySelector("#shi").value.trim();if(!n)return;
+    LISTS.push({id:"l"+Date.now().toString(36),name:n,items:[s.id]});zaehl("liste");saveMine();drawSheet()};
+}
+addEventListener("keydown",e=>{if(e.key==="Escape"&&sheetId)closeSheet()});
+function refreshMine(){
+  if(tab==="essen")list(false);
+  if(tab==="start"){const m=document.getElementById("meins"),hd=document.getElementById("heute"),q=document.getElementById("q");
+    if(m)m.outerHTML=meinsHTML();if(hd)hd.outerHTML=heuteHTML();if(q&&q.value.trim())q.oninput()}
+  if(page==="meine"){const y=pane.scrollTop;pane.innerHTML=pageHTML("meine",tabT(TABS.find(x=>x.id===tab)||TABS[0]));bindMeine();pane.scrollTop=y;paneScroll()}
+}
+function meinsHTML(){
+  const st=mineStats(),chev=svg("chev","chev");
+  const d=st.b?esc(u("mineStat")(st.b,st.a,st.A))+(st.r?" · "+u("rated")(st.r):""):esc(u("mineEmpty"));
+  const rows=[`<button class="row ic" data-go="meine">${ico("pin","--c4")}<div class="l"><div class="t">${u("mine")}</div><div class="d">${d}</div><div class="bar"><i style="width:${st.a/st.A*100}%"></i></div></div>${chev}</button>`];
+  LISTS.filter(l=>l.items.length).slice(0,3).forEach(l=>rows.push(`<button class="row ic" data-go="meine">${ico("mark","--c3")}<div class="l"><div class="t">${esc(listName(l))}</div><div class="d">${u("places")(l.items.length)}</div></div>${chev}</button>`));
+  return`<div id="meins"><div class="gh">${u("mine")}</div><div class="grp">${rows.join("")}</div></div>`;
+}
+function meineHTML(){
+  const st=mineStats(),rows=ids=>ids.map(id=>SPOTS.find(s=>s.id===id)).filter(Boolean).map(spotRow).join("");
+  const been=Object.keys(BEEN).sort((a,b)=>BEEN[b]-BEEN[a]),good=Object.keys(MINE).filter(id=>MINE[id]===1);
+  const tile=(b,t)=>`<div class="tile"><b>${b}</b><span>${t}</span></div>`;
+  return`<div class="mapbox"><div id="smap" role="img" aria-label="${esc(u("mine"))}"></div><span class="mapcount">${esc(u("mineStat")(st.b,st.a,st.A))}</span></div>
+  <div class="tiles">${tile(st.b,u("statBeen"))}${tile(`${st.a}<small>/${st.A}</small>`,u("statAreas"))}${tile(st.r,u("statRated"))}${tile(st.k,u("statSaved"))}</div>
+  <div class="gh">${u("areas")}</div><div class="stamps">${AREAS.map(a=>`<span class="stamp${st.areas.has(a)?" on":""}">${st.areas.has(a)?svg("check"):""}${esc(a)}</span>`).join("")}</div>
+  ${LISTS.map(l=>`<div class="gh lh"><span>${esc(listName(l))}</span><button data-dellist="${esc(l.id)}">${u("delList")}</button></div>${l.items.length?`<div class="grp">${rows(l.items)}</div>`:`<div class="gf">${u("emptyList")}</div>`}`).join("")}
+  <div class="gh">${u("beenList")}</div>${been.length?`<div class="grp">${rows(been)}</div>`:`<div class="gf">${u("mineEmpty")}</div>`}
+  <div class="gh">${u("ratedList")}</div>${good.length?`<div class="grp">${rows(good)}</div>`:""}<div class="gf">${u("ratedNote")}</div>`;
+}
+function bindMeine(){
+  if(smap){smap.remove();smap=null}
+  const el=document.getElementById("smap");
+  if(el&&window.L){smap=L.map(el,{zoomControl:false}).setView([41.03,29.0],10);addTiles(smap);
+    const pts=SPOTS.filter(s=>s.ll).sort((a,b)=>!!BEEN[a.id]-!!BEEN[b.id]);
+    pts.forEach(s=>L.circleMarker(s.ll,BEEN[s.id]?{radius:7,color:"#fff",weight:2,fillColor:BEEN_C,fillOpacity:1}:{radius:3,stroke:false,fillColor:"#8a8a90",fillOpacity:.45}).addTo(smap));
+    const b=pts.filter(s=>BEEN[s.id]);if(b.length)smap.fitBounds(L.latLngBounds(b.map(s=>s.ll)).pad(.4),{maxZoom:14})}
+  else if(el)el.classList.add("nomap");
+  pane.querySelectorAll("[data-dellist]").forEach(b=>b.onclick=()=>{
+    if(!b.dataset.armed){b.dataset.armed=1;b.textContent=u("delSure");return}
+    LISTS=LISTS.filter(l=>l.id!==b.dataset.dellist);saveMine();refreshMine()});
+}
+
 let toastT;function toast(t){let el=document.getElementById("toast");if(!el){el=document.createElement("div");el.id="toast";el.setAttribute("role","status");document.body.appendChild(el)}
   el.textContent=t;el.classList.add("on");clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove("on"),2600)}
 
@@ -158,6 +251,7 @@ const HOL={"2026-01-01":["Neujahr","New Year"],"2026-03-20":["Ramazan Bayramı",
  "2027-01-01":["Neujahr","New Year"],"2027-03-09":["Ramazan Bayramı","Ramadan Feast"],"2027-03-10":["Ramazan Bayramı","Ramadan Feast"],"2027-03-11":["Ramazan Bayramı","Ramadan Feast"],"2027-04-23":["Tag der Kinder","Children’s Day"],"2027-05-01":["Tag der Arbeit","Labour Day"],"2027-05-16":["Kurban Bayramı","Feast of Sacrifice"],"2027-05-17":["Kurban Bayramı","Feast of Sacrifice"],"2027-05-18":["Kurban Bayramı","Feast of Sacrifice"],"2027-05-19":["Kurban Bayramı, Tag der Jugend","Feast of Sacrifice, Youth Day"],"2027-07-15":["Tag der Demokratie","Democracy Day"],"2027-08-30":["Tag des Sieges","Victory Day"],"2027-10-29":["Tag der Republik","Republic Day"]};
 function istDate(off=0){try{return new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Istanbul"}).format(new Date(Date.now()+off*864e5))}catch(e){return new Date(Date.now()+off*864e5).toISOString().slice(0,10)}}
 function istDay(){return new Date(istDate()+"T12:00:00Z").getUTCDay()}
+const istHour=()=>(new Date().toLocaleString("en-US",{timeZone:"Europe/Istanbul",hour:"numeric",hour12:false})|0)%24;
 const num=(x,d)=>x.toLocaleString(LANG==="de"?"de-DE":"en-GB",{minimumFractionDigits:d,maximumFractionDigits:d});
 const fmtD=s=>{const [y,m,d]=s.split("-").map(Number);return`${d}${LANG==="de"?".":""} ${h("mons")[m-1]}`};
 
@@ -176,7 +270,7 @@ const wxIdx=c=>c===0?0:c<=1?1:c===2?2:c===3?3:c<=48?4:c<=57?5:c<=67?6:c<=77?7:c<
 const wxIco=c=>{const i=wxIdx(c);return i<=1?["sun","--c4"]:i<=4?["cloud","--c7"]:["rain","--c1"]};
 function wxRows(){
   const w=LIVE.wx&&LIVE.wx.d;if(!w||w.day!==istDate())return"";
-  const [ic,col]=wxIco(w.c),hr=new Date().toLocaleString("en-US",{timeZone:"Europe/Istanbul",hour:"numeric",hour12:false})|0;
+  const [ic,col]=wxIco(w.c),hr=istHour();
   const wet=w.hr.find(([t,p])=>+t.slice(11,13)>=hr&&p>=50);
   const tip=wet?h("rainAt")(+wet[0].slice(11,13)):w.pp[1]>=50?h("rainTom"):`${h("tomorrow")}: ${h("wx")[wxIdx(w.wc[1])]}, ${Math.round(w.mn[1])}–${Math.round(w.mx[1])}°`;
   const ss=w.ss[0].slice(11,16);
@@ -210,11 +304,26 @@ function evHTML(){
   }).join("");
   return`<div class="gh">${h("ev")}</div><div class="grp">${rows}${more}</div>${rows?`<div class="gf">${esc(h("evNote"))}</div>`:""}`;
 }
+/* Tipp für heute: wechselt täglich und nach Tageszeit, bevorzugt noch nicht besuchte und gut bewertete Spots. */
+const seed=s=>{let x=0;for(const c of s)x=(x*31+c.charCodeAt(0))|0;return Math.abs(x)};
+function tipSpot(){
+  const hr=istHour(),w=LIVE.wx&&LIVE.wx.d,wet=w&&w.day===istDate()&&w.hr.some(([t,p])=>+t.slice(11,13)===hr&&p>=50);
+  const slot=hr<4||hr>=21?"N":hr<11?"M":wet?"W":"D";
+  let pool=SPOTS.filter(s=>slot==="M"?s.d==="Frühstück"||/Frühstück/.test(s.note):slot==="N"?s.d==="Spät in Kadıköy"||/nachts/.test(s.note):slot==="W"?s.k==="c":s.k==="r");
+  const fresh=pool.filter(s=>!BEEN[s.id]);if(fresh.length)pool=fresh;
+  const good=pool.filter(s=>s.top||(SCORES[s.id]||0)>0);if(good.length>=3)pool=good;
+  return pool.length?{s:pool[seed(istDate()+slot)%pool.length],slot}:null;
+}
+function tipRow(){
+  const t=tipSpot();if(!t)return"";const s=t.s,sc=SCORES[s.id]||0;
+  const sub=[GROUP_AREAS.has(s.d)?noteL(s.note):[s.d,noteL(s.note)].filter(Boolean).join(" · "),sc>0?u("tipGood")(sc):""].filter(Boolean).join(" · ");
+  return`<div class="row ic spot tip">${ico("fork","--c2")}<a class="l" href="${s.u}" target="_blank" rel="noopener"><div class="d k">${u("tip"+t.slot)}</div><div class="t">${esc(s.n)}</div>${sub?`<div class="d">${esc(sub)}</div>`:""}</a>${keepBtn(s)}</div>`;
+}
 function heuteHTML(){
   const d=istDay(),rows=PG("pazar").g[0].r,market=(rows.find(r=>r[0]===u("days")[d]||r[0]===["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][d])||[])[1]||u("monMarket");
   const night=d===5||d===6||!!HOL[istDate(1)];
   return`<div id="heute"><div class="gh">${u("today")} · ${u("days")[d]}</div><div class="grp">
-   ${wxRows()}${hintRows(d)}${fxRow()}
+   ${wxRows()}${tipRow()}${hintRows(d)}${fxRow()}
    <button class="row ic" data-go="pazar">${ico("market","--c8")}<div class="l"><div class="t">${esc(u("marketToday"))}</div><div class="d">${esc(market)}</div></div>${svg("chev","chev")}</button>
    <button class="row ic" data-go="nacht">${ico("moon","--c5")}<div class="l"><div class="t">${esc(night?u("nightYes"):u("nightNo"))}</div></div>${svg("chev","chev")}</button></div>
    ${evHTML()}</div>`;
@@ -232,6 +341,7 @@ function startHTML(){
   <div class="sos"><a class="main" href="tel:112"><b>112</b><span>${u("sosAll")}</span></a><a href="tel:155"><b>155</b><span>${u("police")}</span></a><a href="tel:110"><b>110</b><span>${u("fire")}</span></a><a href="tel:157"><b>157</b><span>${u("tourist")}</span></a></div>
   <div class="gf">${u("sosMore")} <button data-go="notfall" style="color:var(--accent)">${esc(PG("notfall").t)}</button>.</div>
   ${heuteHTML()}
+  ${meinsHTML()}
   <div class="gh">${u("first")}</div>
   <div class="grp">${u("steps").map(([k,t,p])=>`<div class="row${done[k]?" done":""}"><button class="chk-btn" data-chk="${k}" aria-label="${esc(t)}" aria-pressed="${!!done[k]}"><span class="chk">${svg("check")}</span></button><button class="l t" data-go="${p}" style="text-align:left">${esc(t)}</button>${svg("chev","chev")}</div>`).join("")}</div>
   <div class="gf">${u("firstNote")}</div>
@@ -279,7 +389,7 @@ const fmtKm=d=>d<1?`${Math.round(d*1000/10)*10} m`:`${d.toFixed(1).replace(".",L
 const voteHTML=s=>`<div class="vote" data-id="${esc(s.id)}"><button class="up" aria-label="Gut" aria-pressed="${MINE[s.id]===1}">${svg("up")}</button><b class="${MINE[s.id]===1?"pos":MINE[s.id]===-1?"neg":""}">${SCORES[s.id]||0}</b><button class="dn" aria-label="Schlecht" aria-pressed="${MINE[s.id]===-1}">${svg("down")}</button></div>`;
 function spotRow(s){
   const note=noteL(s.note)||(s.k==="t"?areaL(s.d):""),dist=me&&s.ll?fmtKm(km(me,s.ll)):"";
-  return`<div class="row spot"><a class="l" href="${s.u}" target="_blank" rel="noopener"><div class="t">${esc(s.n)}${s.top?'<span class="pill">Top</span>':""}${s.fresh?`<span class="pill">${u("fresh")}</span>`:""}</div>${note||dist?`<div class="d">${esc(note)}${note&&dist?" · ":""}${dist}</div>`:""}</a>${voteHTML(s)}</div>`;
+  return`<div class="row spot"><a class="l" href="${s.u}" target="_blank" rel="noopener"><div class="t">${BEEN[s.id]?`<span class="been">${svg("check")}</span>`:""}${esc(s.n)}${s.top?'<span class="pill">Top</span>':""}${s.fresh?`<span class="pill">${u("fresh")}</span>`:""}</div>${note||dist?`<div class="d">${esc(note)}${note&&dist?" · ":""}${dist}</div>`:""}</a>${keepBtn(s)}${voteHTML(s)}</div>`;
 }
 function essenHTML(){
   return`${navbar(u("essen"),"",langBtn())}<div class="wrap view">
@@ -325,7 +435,6 @@ function list(fit){
     h=`<div class="count">${u("places")(s.length)}${online===false?" · "+u("offline"):""}</div>`+Object.keys(by).map(d=>`<div class="gh">${esc(areaL(d))}</div><div class="grp">${by[d].map(spotRow).join("")}</div>`).join("")}
   else h=`<div class="count">${u("places")(s.length)}</div><div class="grp" style="margin-top:8px">${s.map(spotRow).join("")}</div>`;
   el.innerHTML=h;
-  el.querySelectorAll(".vote").forEach(v=>{v.querySelector(".up").onclick=()=>vote(v.dataset.id,1);v.querySelector(".dn").onclick=()=>vote(v.dataset.id,-1)});
   drawMarkers(s,fit);
 }
 function locate(){
@@ -337,14 +446,18 @@ function locate(){
   },()=>toast(u("noGeo")),{enableHighAccuracy:true,timeout:10000,maximumAge:60000});
 }
 const dark=()=>{const t=document.documentElement.dataset.theme;return t?t==="dark":matchMedia("(prefers-color-scheme: dark)").matches};
+function addTiles(m){
+  const tone=dark()?"Dark":"Light",esri=t=>`https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_${tone}_Gray_${t}/MapServer/tile/{z}/{y}/{x}`;
+  L.tileLayer(esri("Base"),{maxZoom:16,attribution:'Esri, HERE, Garmin, &copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'}).addTo(m);
+  L.tileLayer(esri("Reference"),{maxZoom:16}).addTo(m);
+}
 function initMap(){
   if(map){map.remove();map=null;meLayer=null}
   if(!window.L){document.getElementById("map").classList.add("nomap");return}
   map=L.map("map",{zoomControl:false,attributionControl:true,tap:true}).setView([41.03,29.0],11);
-  const tone=dark()?"Dark":"Light",esri=t=>`https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_${tone}_Gray_${t}/MapServer/tile/{z}/{y}/{x}`;
-  L.tileLayer(esri("Base"),{maxZoom:16,attribution:'Esri, HERE, Garmin, &copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'}).addTo(map);
-  L.tileLayer(esri("Reference"),{maxZoom:16}).addTo(map);
+  addTiles(map);
   layer=L.layerGroup().addTo(map);
+  map.on("popupopen",e=>{const b=e.popup.getElement().querySelector("[data-spot]");if(b)b.onclick=()=>{map.closePopup();openSheet(b.dataset.spot)}});
   if(me)meLayer=L.circleMarker(me,{radius:8,color:"#fff",weight:3,fillColor:"#2F6FD6",fillOpacity:1}).addTo(map);
 }
 function drawMarkers(s,fit){
@@ -354,8 +467,8 @@ function drawMarkers(s,fit){
   layer.clearLayers();
   const accent=getComputedStyle(document.documentElement).getPropertyValue("--accent").trim()||"#1C58B5";
   pts.forEach(x=>{
-    const m=L.circleMarker(x.ll,{radius:x.top?8:6.5,color:"#fff",weight:2,fillColor:x.top?"#E0533B":accent,fillOpacity:.95});
-    m.bindPopup(`<b>${esc(x.n)}</b>${x.note?`<br><span>${esc(noteL(x.note))}</span>`:""}<br><a href="${x.u}" target="_blank" rel="noopener">${u("openMaps")}</a>`,{closeButton:false,offset:[0,-4]});
+    const m=L.circleMarker(x.ll,{radius:x.top||BEEN[x.id]?8:6.5,color:"#fff",weight:2,fillColor:BEEN[x.id]?BEEN_C:x.top?"#E0533B":accent,fillOpacity:.95});
+    m.bindPopup(`<b>${esc(x.n)}</b>${x.note?`<br><span>${esc(noteL(x.note))}</span>`:""}<br><a href="${x.u}" target="_blank" rel="noopener">${u("openMaps")}</a> · <button class="pop-keep" data-spot="${esc(x.id)}">${u(BEEN[x.id]?"beenList":"keepL").split(" ")[0]}</button>`,{closeButton:false,offset:[0,-4]});
     layer.addLayer(m);
   });
   if(fit&&pts.length){const b=L.latLngBounds(pts.map(x=>x.ll));map.flyToBounds(b.pad(.15),{maxZoom:15,duration:.7})}
@@ -383,7 +496,7 @@ function bindRechner(){
 
 /* ---------- Vorschlag ---------- */
 function vorschlagHTML(){
-  const areas=[...new Set(Object.values(F).flatMap(c=>Object.keys(c.d)).filter(d=>!GROUP_AREAS.has(d)))].sort((a,b)=>a.localeCompare(b,"tr"));
+  const areas=AREAS;
   return`<p class="gf" style="margin:4px 16px 14px">${u("fIntro")}</p><form id="sf" class="grp form" autocomplete="off">
   <label class="row"><span class="fl">${u("fName")}</span><input id="sn" name="n" required minlength="2" maxlength="80"></label>
   <label class="row"><span class="fl">${u("fArea")}</span><select id="sd" name="d">${areas.map(a=>`<option>${esc(a)}</option>`).join("")}<option value="_">${u("fOther")}</option></select></label>
@@ -432,7 +545,7 @@ de:{intro:"Diese Seite ist ein privates, nicht kommerzielles Projekt. Hier steht
   ["Hosting (GitHub Pages)",["Die Seite liegt bei GitHub (GitHub Inc., USA). Beim Aufruf verarbeitet GitHub technisch nötige Daten wie IP-Adresse und Zeitpunkt, um die Seite auszuliefern und vor Angriffen zu schützen. Rechtsgrundlage: berechtigtes Interesse (Art. 6 Abs. 1 lit. f DSGVO)."]],
   ["Karte und Programmbibliothek",["Die Karte lädt Kartenbilder von Esri (Esri Inc., USA), die Kartenfunktion Leaflet liegt auf dieser Seite selbst. Beim Laden der Karte wird deine IP-Adresse an Esri übertragen. Ohne diesen Abruf funktioniert die Karte nicht. Rechtsgrundlage: berechtigtes Interesse."]],
   ["Bewertungen, Vorschläge, Meldungen",["Damit jede Person pro Spot nur einmal abstimmen kann, erzeugt die Seite eine zufällige Geräte-Kennung und speichert sie in deinem Browser. Sie enthält keinen Namen und keine Gerätedaten.","Zusammen mit deinen Stimmen, Vorschlägen, Fehlermeldungen und Nachrichten wird sie bei Supabase gespeichert (Server in Frankfurt, Supabase Inc., USA). Kontaktdaten aus dem Kontaktformular sind nicht öffentlich und werden nur zur Antwort genutzt.","Rechtsgrundlage: deine Einwilligung durch das aktive Abstimmen oder Absenden (Art. 6 Abs. 1 lit. a DSGVO)."]],
-  ["Im Browser gespeichert",["Sprache, abgehakte Schritte, Rechner-Einstellungen und die Geräte-Kennung liegen nur in deinem Browser (Local Storage). Für den Offline-Modus legt die Seite Dateien im Browser-Cache ab. Das ist alles löschbar, siehe unten."]],
+  ["Im Browser gespeichert",["Sprache, abgehakte Schritte, besuchte Orte, eigene Listen, Rechner-Einstellungen und die Geräte-Kennung liegen nur in deinem Browser (Local Storage). Für den Offline-Modus legt die Seite Dateien im Browser-Cache ab. Das ist alles löschbar, siehe unten."]],
   ["Standort",["Nur wenn du „In der Nähe“ antippst, fragt der Browser nach deinem Standort. Er wird nur auf deinem Gerät zum Sortieren genutzt und nirgends gespeichert oder gesendet."]],
   ["Wetter, Wechselkurs, Events",["Die Startseite lädt das Wetter von Open-Meteo (Schweiz) und den Euro-Kurs der EZB über Frankfurter (frankfurter.dev). Dabei wird deine IP-Adresse an diese Dienste übertragen, sonst nichts. Die Event-Liste kommt von Supabase, ohne Geräte-Kennung. Die Werte werden im Browser zwischengespeichert. Rechtsgrundlage: berechtigtes Interesse."]],
   ["Links nach außen",["Links zu Google Maps, Google Docs, Instagram und anderen Seiten öffnen fremde Angebote. Dort gelten deren Datenschutzregeln."]],
@@ -446,7 +559,7 @@ en:{intro:"This site is a private, non-commercial project. Here’s what data is
   ["Hosting (GitHub Pages)",["The site is hosted by GitHub (GitHub Inc., USA). When you visit, GitHub processes technically necessary data such as your IP address and time of access to deliver the site and protect it from attacks. Legal basis: legitimate interest (Art. 6(1)(f) GDPR)."]],
   ["Map and library",["The map loads map images from Esri (Esri Inc., USA); the Leaflet map library is hosted on this site. Loading the map sends your IP address to Esri. The map can’t work without it. Legal basis: legitimate interest."]],
   ["Ratings, suggestions, reports",["So that everyone can vote only once per spot, the site creates a random device ID and stores it in your browser. It contains no name and no device data.","It is stored together with your votes, suggestions, reports and messages at Supabase (servers in Frankfurt, Supabase Inc., USA). Contact details from the credit or contact form are not public and only used to reply.","Legal basis: your consent by actively voting or sending (Art. 6(1)(a) GDPR)."]],
-  ["Stored in your browser",["Language, checked steps, calculator settings and the device ID live only in your browser (local storage). For offline mode the site keeps files in the browser cache. You can delete all of it, see below."]],
+  ["Stored in your browser",["Language, checked steps, visited places, your lists, calculator settings and the device ID live only in your browser (local storage). For offline mode the site keeps files in the browser cache. You can delete all of it, see below."]],
   ["Location",["Only when you tap “Near me” does the browser ask for your location. It’s used on your device to sort the list and is never stored or sent."]],
   ["Weather, exchange rate, events",["The home page loads the weather from Open-Meteo (Switzerland) and the ECB euro rate via Frankfurter (frankfurter.dev). Your IP address is sent to these services, nothing else. The event list comes from Supabase, without the device ID. Values are cached in your browser. Legal basis: legitimate interest."]],
   ["External links",["Links to Google Maps, Google Docs, Instagram and other sites open third-party services with their own privacy rules."]],
@@ -467,7 +580,7 @@ function datenschutzHTML(){const t=DS[LANG];
 function bindDatenschutz(){const t=DS[LANG],$=id=>document.getElementById(id);let armed=false;
   $("forget").onclick=async()=>{if(!armed){armed=true;$("forget").querySelector(".d").textContent=t.forgetConfirm;return}
     try{await rpc("forget_me",{p_device:DEVICE})}catch(e){}
-    try{["ist-device","ist-scores","ist-mine","ist-done","ist-calc","ist-lang"].forEach(k=>localStorage.removeItem(k))}catch(e){}
+    try{["ist-device","ist-scores","ist-mine","ist-done","ist-calc","ist-lang","ist-been","ist-lists"].forEach(k=>localStorage.removeItem(k))}catch(e){}
     try{(await caches.keys()).forEach(k=>caches.delete(k))}catch(e){}
     $("forget").querySelector(".d").textContent=t.forgetOk;toast(t.forgetOk);setTimeout(()=>location.reload(),1600)};
   $("kf").onsubmit=async e=>{e.preventDefault();const b=$("ks");b.disabled=true;
@@ -479,7 +592,7 @@ function bindDatenschutz(){const t=DS[LANG],$=id=>document.getElementById(id);le
 const tabT=t=>u(t.id);
 function tabHTML(t){return`${navbar(tabT(t),"",langBtn())}<div class="wrap view"><h1 class="lt">${esc(tabT(t))}</h1><p class="sub">${esc(t.s[LANG])}</p>${t.g.map(g=>group({...g,h:g.h&&g.h[LANG]},pageRow)).join("")}<p class="foot">${u("tabFoot")}<br><a href="rechtliches.html" style="color:inherit">${LANG==="de"?"Kontakt · Datenschutz":"Contact · Privacy"}</a></p></div>`}
 function pageHTML(id,back){const p=PG(id);
-  const special={rechner:rechnerHTML,vorschlag:vorschlagHTML,danke:dankeHTML,datenschutz:datenschutzHTML}[id];
+  const special={rechner:rechnerHTML,vorschlag:vorschlagHTML,danke:dankeHTML,datenschutz:datenschutzHTML,meine:meineHTML}[id];
   const body=special?special():p.g.map(g=>group(g,rowHTML)).join("")+reportHTML();
   return`${navbar(p.t,back)}<div class="wrap body"><h1 class="lt">${esc(p.t)}</h1>${p.s?`<p class="sub">${esc(p.s)}</p>`:""}${body}</div>`}
 
@@ -496,7 +609,7 @@ function showTab(id,keepScroll){
 function openPage(id){
   if(!P[id])return;page=id;
   pane.innerHTML=pageHTML(id,tabT(TABS.find(x=>x.id===tab)||TABS[0]));pane.scrollTop=0;
-  const binds={rechner:bindRechner,vorschlag:bindVorschlag,datenschutz:bindDatenschutz};(binds[id]||bindReport)(id);
+  const binds={rechner:bindRechner,vorschlag:bindVorschlag,datenschutz:bindDatenschutz,meine:bindMeine};(binds[id]||bindReport)(id);
   requestAnimationFrame(()=>{pane.classList.add("open");main.classList.add("pushed")});
   paneScroll();
   pane.inert=false;main.inert=true;
@@ -514,6 +627,9 @@ function route(){
   else{if(page)closePage();if(tab!=="start"||!main.innerHTML)showTab("start")}
 }
 document.addEventListener("click",e=>{
+  const vb=e.target.closest(".vote button"),sp=e.target.closest("[data-spot]");
+  if(vb){vote(vb.closest(".vote").dataset.id,vb.classList.contains("up")?1:-1);return}
+  if(sp){e.preventDefault();openSheet(sp.dataset.spot);return}
   const g=e.target.closest("[data-go]"),t=e.target.closest("[data-tab]"),b=e.target.closest("[data-back]"),l=e.target.closest("[data-lang]");
   if(l){const currentPage=page;LANG=LANG==="de"?"en":"de";store.set("ist-lang",LANG);document.documentElement.lang=LANG;showTab(tab,true);if(currentPage)openPage(currentPage);return}
   if(b){e.preventDefault();if(history.state!==undefined&&history.length>1&&location.hash.slice(1)===page)history.back();else{closePage();setHash(tab)}return}
