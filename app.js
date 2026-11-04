@@ -215,7 +215,7 @@ let toastT;function toast(t){let el=document.getElementById("toast");if(!el){el=
   el.textContent=t;el.classList.add("on");clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove("on"),2600)}
 
 /* ---------- Bausteine ---------- */
-const ico=(k,c)=>`<span class="ico" style="background:var(${c})">${svg(k)}</span>`;
+const ico=(k,c)=>`<span class="ico" style="--f:var(${c})">${svg(k)}</span>`;
 function rowHTML(r){
   if(typeof r==="string")return`<div class="row txt">${esc(r)}</div>`;
   if(Array.isArray(r))return`<div class="row kv"><div class="l t">${esc(r[0])}</div><div class="v">${esc(r[1])}</div></div>`;
@@ -598,7 +598,7 @@ function pageHTML(id,back){const p=PG(id);
 
 const main=document.getElementById("main"),pane=document.getElementById("pane"),tabsEl=document.getElementById("tabs");
 let tab="start",page=null;
-function drawTabbar(){tabsEl.innerHTML=TABS.map(t=>`<button class="tab" data-tab="${t.id}" aria-current="${t.id===tab?"page":"false"}">${svg(t.i)}<span>${tabT(t)}</span></button>`).join("")}
+function drawTabbar(){tabsEl.innerHTML=TABS.map(t=>`<button class="tab" data-tab="${t.id}" aria-label="${esc(tabT(t))}" aria-current="${t.id===tab?"page":"false"}">${svg(t.i)}<span>${tabT(t)}</span></button>`).join("")}
 function showTab(id,keepScroll){
   const t=TABS.find(x=>x.id===id)||TABS[0];tab=t.id;
   if(map&&t.id!=="essen"){map.remove();map=null}
